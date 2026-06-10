@@ -2,6 +2,21 @@
 
 import { motion } from "framer-motion";
 
+declare global {
+  interface Window {
+    dataLayer: Record<string, unknown>[];
+  }
+}
+
+function handleWhatsAppClick() {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "whatsapp_click",
+    event_category: "iletisim",
+    event_label: "whatsapp_butonu",
+  });
+}
+
 export default function WhatsAppButton() {
   return (
     <motion.a
@@ -9,6 +24,7 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="WhatsApp ile iletişime geç"
+      onClick={handleWhatsAppClick}
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ delay: 1, type: "spring", stiffness: 260, damping: 20 }}
