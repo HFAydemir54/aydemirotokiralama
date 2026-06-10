@@ -36,7 +36,7 @@ export default function Contact() {
           className="mx-auto mb-16 max-w-2xl text-center"
         >
           <span className="text-sm font-semibold uppercase tracking-widest text-accent">
-            İletişimm
+            İletişim
           </span>
           <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
             Bize Ulaşın
