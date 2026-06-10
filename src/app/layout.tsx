@@ -19,6 +19,42 @@ export const metadata: Metadata = {
     "istanbul araç kiralama",
     "aydemir oto kiralama",
   ],
+  metadataBase: new URL("https://www.aydemirotokiralama.com"),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "tr_TR",
+    url: "https://www.aydemirotokiralama.com",
+    siteName: "Aydemir Oto Kiralama",
+    title: "Aydemir Oto Kiralama | Pendik Araç Kiralama",
+    description:
+      "Pendik/İstanbul'da 7/24 güvenilir araç kiralama hizmeti. Ekonomik, konforlu ve lüks araç seçenekleri.",
+    images: [
+      {
+        url: "/hero-bg.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Aydemir Oto Kiralama",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Aydemir Oto Kiralama | Pendik Araç Kiralama",
+    description:
+      "Pendik/İstanbul'da 7/24 güvenilir araç kiralama hizmeti. Ekonomik, konforlu ve lüks araç seçenekleri.",
+    images: ["/hero-bg.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
 };
 
 export default function RootLayout({
