@@ -51,8 +51,8 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-[3.5rem] lg:leading-[1.1]"
           >
-            Güvenilir Araç
-            <span className="block text-accent">Kiralama Hizmeti</span>
+            Pendik | İstanbul
+            <span className="block text-accent">Araç Kiralama Hizmeti</span>
           </motion.h1>
 
           <motion.p

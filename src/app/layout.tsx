@@ -65,6 +65,40 @@ export default function RootLayout({
   return (
     <html lang="tr" className={`${geistSans.variable} scroll-smooth`}>
       <head>
+        {/* Schema.org LocalBusiness */}
+        <Script
+          id="schema-local-business"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              name: "Aydemir Oto Kiralama",
+              image: "https://www.aydemirotokiralama.com/hero-bg.jpg",
+              url: "https://www.aydemirotokiralama.com",
+              telephone: "+905330703654",
+              priceRange: "₺₺",
+              openingHours: "Mo-Su 00:00-23:59",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "Çamçeşme, Katip Çelebi Cd No:6/A",
+                addressLocality: "Pendik",
+                addressRegion: "İstanbul",
+                postalCode: "34899",
+                addressCountry: "TR",
+              },
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: 40.8764,
+                longitude: 29.2552,
+              },
+              sameAs: [
+                "https://wa.me/905330703654",
+                "https://www.instagram.com/aydemirotokiralama/",
+              ],
+            }),
+          }}
+        />
         {/* Google Tag Manager */}
         <Script
           id="gtm-script"
