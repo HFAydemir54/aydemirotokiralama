@@ -34,7 +34,7 @@ export const metadata: Metadata = {
       "Pendik ve Sabiha Gökçen Havalimanı'nda 7/24 araç kiralama. Günlük, haftalık ve aylık kiralama seçenekleri.",
     images: [
       {
-        url: "/hero-bg.jpg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: SITE.name,
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     title: "Pendik Araç Kiralama | Aydemir Oto Kiralama",
     description:
       "Pendik ve Sabiha Gökçen Havalimanı'nda 7/24 araç kiralama. WhatsApp'tan hızlı rezervasyon.",
-    images: ["/hero-bg.jpg"],
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,

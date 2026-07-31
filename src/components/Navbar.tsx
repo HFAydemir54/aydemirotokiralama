@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Car, Phone } from "lucide-react";
+import Image from "next/image";
+import { Menu, X, Phone } from "lucide-react";
 import { track } from "@/lib/analytics";
 import { SITE } from "@/lib/site";
 
@@ -41,30 +42,20 @@ export default function Navbar() {
       }`}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="/" className="group flex items-center gap-2.5">
-          <div
-            className={`flex h-10 w-10 items-center justify-center rounded-lg transition-all group-hover:scale-105 ${
-              solid ? "bg-primary text-white" : "bg-white/15 text-white backdrop-blur-sm"
-            }`}
-          >
-            <Car className="h-5 w-5" />
-          </div>
-          <div>
-            <span
-              className={`block text-lg font-bold leading-tight tracking-tight ${
-                solid ? "text-primary" : "text-white"
-              }`}
-            >
-              Aydemir
-            </span>
-            <span
-              className={`block text-[11px] font-medium uppercase tracking-widest ${
-                solid ? "text-muted" : "text-white/60"
-              }`}
-            >
-              Oto Kiralama
-            </span>
-          </div>
+        {/*
+          Logo, arka plana göre değişir: hero üzerindeyken (şeffaf navbar)
+          beyaz varyant, kaydırınca (beyaz navbar) koyu varyant. İki dosya da
+          şeffaf zeminlidir.
+        */}
+        <Link href="/" className="flex items-center" aria-label="Aydemir Oto Kiralama — Ana sayfa">
+          <Image
+            src={solid ? "/logo/logo-on-light.png" : "/logo/logo-on-dark.png"}
+            alt="Aydemir Oto Kiralama"
+            width={190}
+            height={118}
+            priority
+            className="h-14 w-auto"
+          />
         </Link>
 
         <ul className="hidden items-center gap-6 lg:flex">

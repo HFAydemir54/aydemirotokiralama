@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Car, MapPin, Phone } from "lucide-react";
+import Image from "next/image";
+import { MapPin, Phone } from "lucide-react";
 import { SITE } from "@/lib/site";
 import { locations } from "@/data/locations";
 
@@ -14,12 +15,13 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
           <div>
-            <div className="flex items-center gap-2.5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-white">
-                <Car className="h-4 w-4" />
-              </div>
-              <span className="text-sm font-bold text-primary">{SITE.name}</span>
-            </div>
+            <Image
+              src="/logo/logo-on-light.png"
+              alt={SITE.name}
+              width={190}
+              height={118}
+              className="h-16 w-auto"
+            />
 
             <address className="mt-5 space-y-3 text-sm not-italic text-muted">
               <p className="flex gap-2">
