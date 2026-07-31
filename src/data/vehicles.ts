@@ -5,9 +5,8 @@
  * otomatik olarak "Araç Filomuz Yakında" durumuna döner.
  *
  * MEVCUT DURUM: 4 araç girili, fotoğraflar henüz yok (placeholder gösteriliyor).
- * Eksik alanlar: yakıt tipi, kişi kapasitesi, bagaj, haftalık/aylık fiyat.
- * Bu alanlar boş oldukları için sitede hiç görünmüyorlar — uydurma değer
- * yazılmadı. Bilgi netleştikçe ilgili alanı doldurmanız yeterli.
+ * Girilmemiş alanlar: bagaj hacmi, haftalık/aylık fiyat — sitede hiç
+ * görünmüyorlar, uydurma değer yazılmadı.
  *
  * ARAÇ EKLEMEK İÇİN: aşağıdaki diziye bir nesne ekleyin. Başka hiçbir yeri
  * değiştirmeniz gerekmez — ana sayfa filo bölümü, /araclar listesi, araç
@@ -56,6 +55,8 @@ export type Vehicle = {
   monthlyPrice?: number | null;
   transmission?: string;
   fuel?: string;
+  /** Motor hacmi, örn. "1.0" */
+  engine?: string;
   seats?: number;
   luggage?: number;
   /** false ise sitede hiç listelenmez. */
@@ -74,6 +75,9 @@ export const vehicles: Vehicle[] = [
     model: "Clio",
     year: 2024,
     transmission: "Otomatik",
+    fuel: "Benzin",
+    engine: "1.0",
+    seats: 5,
     dailyPrice: 2500,
     // Haftalık ve aylık fiyatlar araca ve süreye göre değişiyor →
     // null bırakıldı, sitede "Fiyat için iletişime geçin" gösterilir.
@@ -89,6 +93,9 @@ export const vehicles: Vehicle[] = [
     model: "Egea",
     year: 2022,
     transmission: "Otomatik",
+    fuel: "Dizel",
+    engine: "1.6",
+    seats: 5,
     dailyPrice: 2500,
     weeklyPrice: null,
     monthlyPrice: null,
@@ -102,6 +109,9 @@ export const vehicles: Vehicle[] = [
     model: "Taliant",
     year: 2022,
     transmission: "Otomatik",
+    fuel: "Benzin",
+    engine: "1.0",
+    seats: 5,
     dailyPrice: 2500,
     weeklyPrice: null,
     monthlyPrice: null,
@@ -115,6 +125,9 @@ export const vehicles: Vehicle[] = [
     model: "301",
     year: 2018,
     transmission: "Manuel",
+    fuel: "Dizel",
+    engine: "1.5",
+    seats: 5,
     dailyPrice: 2000,
     weeklyPrice: null,
     monthlyPrice: null,

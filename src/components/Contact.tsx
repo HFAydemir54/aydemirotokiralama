@@ -76,7 +76,9 @@ export default function Contact() {
           <div className="overflow-hidden rounded-2xl border border-white/10">
             <iframe
               title="Aydemir Oto Kiralama Konum"
-              src="https://maps.google.com/maps?q=%C3%87am%C3%A7e%C5%9Fme,+Katip+%C3%87elebi+Cd+No:6/A,+34899+Pendik/%C4%B0stanbul&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              src={`https://maps.google.com/maps?q=${encodeURIComponent(
+                `${SITE.address.street}, ${SITE.address.postalCode} ${SITE.address.district}/${SITE.address.city}`
+              )}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
               width="100%"
               height="100%"
               style={{ border: 0, minHeight: 380 }}

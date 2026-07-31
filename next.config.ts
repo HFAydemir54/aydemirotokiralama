@@ -19,6 +19,18 @@ const nextConfig: NextConfig = {
   // URL formatı: slash'sız. Next varsayılan olarak /araclar/ → /araclar
   // yönlendirmesi yapar; canonical ve sitemap de slash'sız yazılmıştır.
   trailingSlash: false,
+
+  async redirects() {
+    return [
+      {
+        // Kadıköy'e araç götürülmediği için sayfa kaldırıldı.
+        // 404 yerine en yakın anlamlı sayfaya kalıcı yönlendirme.
+        source: "/kadikoy-arac-kiralama",
+        destination: "/istanbul-arac-kiralama",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

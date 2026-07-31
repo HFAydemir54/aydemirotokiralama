@@ -21,11 +21,16 @@ export const SITE = {
   },
   geo: { lat: 40.8764, lng: 29.2552 },
   instagram: "https://www.instagram.com/aydemirotokiralama/",
-  // TODO: Google Business Profile'ın kısa linkini buraya ekleyin (Maps > Paylaş).
+  /**
+   * Google Business Profile Place ID — işletmenin Google'daki benzersiz
+   * kimliği. Maps bağlantısı bundan üretilir, adres aramasından daha
+   * güvenilirdir (yanlış konumu göstermez).
+   */
+  placeId: "ChIJkbgF8QLdyhQRh2Yln7VeizY",
   googleMaps:
-    "https://maps.google.com/?q=Çamçeşme,+Katip+Çelebi+Cd+No:6/A,+34899+Pendik/İstanbul",
-  // TODO: GBP'den "Yorum yaz" kısa linkini alıp buraya ekleyin.
-  googleReviewUrl: "",
+    "https://www.google.com/maps/place/?q=place_id:ChIJkbgF8QLdyhQRh2Yln7VeizY",
+  /** GBP "yorum yaz" kısa linki — tıklandığında doğrudan yıldız verme ekranı açılır. */
+  googleReviewUrl: "https://g.page/r/CYdmJZ-1Xos2EBM/review",
 } as const;
 
 export const ADDRESS_ONE_LINE =`${SITE.address.street}, ${SITE.address.postalCode} ${SITE.address.district}/${SITE.address.city}`;

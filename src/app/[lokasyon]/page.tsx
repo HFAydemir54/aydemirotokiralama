@@ -3,18 +3,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Clock, MapPin, Plane } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import FaqSection from "@/components/FaqSection";
 import JsonLd from "@/components/JsonLd";
 import FleetEmptyState from "@/components/FleetEmptyState";
 import VehicleCard from "@/components/VehicleCard";
 import WhatsAppCta from "@/components/WhatsAppCta";
-import {
-  breadcrumbSchema,
-  faqSchema,
-  localServiceSchema,
-} from "@/lib/schema";
+import { breadcrumbSchema, localServiceSchema } from "@/lib/schema";
 
-import { homeFaqs } from "@/data/faq";
 import { getLocation, locations } from "@/data/locations";
 import { featuredVehicles, hasVehicles } from "@/data/vehicles";
 
@@ -65,7 +59,6 @@ export default async function LocationPage(props: PageProps<"/[lokasyon]">) {
       <JsonLd
         data={[
           localServiceSchema(location.name, location.description),
-          faqSchema(homeFaqs),
           breadcrumbSchema(crumbs),
         ]}
       />
@@ -82,7 +75,7 @@ export default async function LocationPage(props: PageProps<"/[lokasyon]">) {
             {location.intro}
           </p>
           <p className="mt-4 text-sm text-white/60">
-            Günlük, haftalık ve aylık kiralama · {location.deliveryTime}
+            Günlük, haftalık ve aylık kiralama · {location.distance}
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">
@@ -113,47 +106,64 @@ export default async function LocationPage(props: PageProps<"/[lokasyon]">) {
             <p className="mt-5 leading-relaxed text-muted">{location.useCase}</p>
 
             <div className="mt-8 space-y-4">
-              <InfoRow icon={Clock} title="Teslimat süresi">
-                {location.deliveryTime}
+              <InfoRow icon={MapPin} title="Ofisimize ulaşım">
+                {location.access}
               </InfoRow>
-              <InfoRow icon={Plane} title="Havalimanına mesafe">
-                {location.airport}
+              <InfoRow icon={Clock} title="Çalışma saatleri">
+                Ofisimiz 7/24 açıktır; teslim ve iade saatini kendinize göre
+                belirleyebilirsiniz.
               </InfoRow>
-              <InfoRow icon={MapPin} title="Teslimat yaptığımız noktalar">
-                {location.neighborhoods.join(", ")}
+              <InfoRow icon={Plane} title="Havalimanı teslimi">
+                Sabiha Gökçen Havalimanı&apos;na araç getiriyoruz. Ayrıntılar için{" "}
+                <Link
+                  href="/sabiha-gokcen-arac-kiralama"
+                  className="text-accent hover:underline"
+                >
+                  havalimanı sayfamıza
+                </Link>{" "}
+                bakabilirsiniz.
               </InfoRow>
             </div>
           </div>
 
           <div className="rounded-2xl border border-border bg-surface p-8">
             <h2 className="text-lg font-semibold text-primary">
-              Teslimat ve kiralama
+              Kiralama bilgileri
             </h2>
             <dl className="mt-5 space-y-4 text-sm">
               <div>
+                <dt className="font-medium text-primary">Teslim noktası</dt>
+                <dd className="mt-1 text-muted">
+                  Araç teslimi Pendik Çamçeşme&apos;deki ofisimizden yapılır.
+                  Sabiha Gökçen Havalimanı&apos;na araç getiriyoruz.
+                </dd>
+              </div>
+              <div>
                 <dt className="font-medium text-primary">Kiralama süreleri</dt>
                 <dd className="mt-1 text-muted">
-                  Günlük, haftalık ve aylık kiralama yapabilirsiniz.
+                  Minimum 1 gün; günlük, haftalık ve aylık kiralama.
                 </dd>
               </div>
               <div>
-                <dt className="font-medium text-primary">Teslim noktaları</dt>
+                <dt className="font-medium text-primary">Şartlar</dt>
                 <dd className="mt-1 text-muted">
-                  Pendik&apos;teki ofisimiz, {location.name} içindeki adresiniz veya
-                  Sabiha Gökçen Havalimanı.
+                  En az 2 yıllık ehliyet yeterli, yaş sınırı yok. Depozito
+                  alınmıyor. Günlük 200 km sınırı uygulanır.
                 </dd>
               </div>
               <div>
-                <dt className="font-medium text-primary">Çalışma saatleri</dt>
-                <dd className="mt-1 text-muted">7/24 açık.</dd>
+                <dt className="font-medium text-primary">Ödeme</dt>
+                <dd className="mt-1 text-muted">
+                  Nakit veya havale. Kredi kartı geçmemektedir.
+                </dd>
               </div>
             </dl>
             <p className="mt-6 text-sm text-muted">
-              Güncel araç ve fiyat bilgisi için{" "}
-              <Link href="/iletisim" className="text-accent hover:underline">
-                bize ulaşın
-              </Link>
-              .
+              Tüm koşullar için{" "}
+              <Link href="/kiralama-kosullari" className="text-accent hover:underline">
+                kiralama koşulları
+              </Link>{" "}
+              sayfamıza bakabilirsiniz.
             </p>
           </div>
         </div>
@@ -186,12 +196,6 @@ export default async function LocationPage(props: PageProps<"/[lokasyon]">) {
           )}
         </div>
       </section>
-
-      <FaqSection
-        faqs={homeFaqs}
-        title={`${location.name} Araç Kiralama SSS`}
-        className="bg-background"
-      />
 
       {/* Yakın bölgeler + havalimanı: internal linking */}
       <section className="border-t border-border bg-surface py-14">

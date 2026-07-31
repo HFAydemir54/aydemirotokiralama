@@ -8,18 +8,18 @@ import { Banknote, CalendarRange, Clock, MessageCircle, Plane, Sparkles } from "
 const reasons = [
   {
     icon: Clock,
-    title: "7/24 araç teslimatı",
-    text: "Gece yarısı inen uçuşta da, sabah 06:00'daki çıkışta da teslim yapıyoruz. Ofisimiz kesintisiz açık.",
+    title: "7/24 açık ofis",
+    text: "Gece geç saatte de, sabah erkenden de araç teslim alabilirsiniz. Ofisimiz kesintisiz açık.",
   },
   {
     icon: Plane,
-    title: "Sabiha Gökçen Havalimanı teslimatı",
-    text: "Uçuş numaranızı gönderin, uçuşunuzu takip edelim. Siz çıkışa geldiğinizde aracınız hazır olsun.",
+    title: "Sabiha Gökçen'e araç getiriyoruz",
+    text: "Ofisimiz havalimanına 15 dakika mesafede. Teslim saatini önceden birlikte belirliyoruz.",
   },
   {
     icon: CalendarRange,
     title: "Günlük, haftalık, aylık kiralama",
-    text: "1 günlük şehir içi kullanımdan aylık kurumsal kiralamaya kadar süreye göre fiyat avantajı.",
+    text: "Minimum 1 günden başlayan kiralama. Uzun süreli kiralamalarda fiyatı birlikte belirliyoruz.",
   },
   {
     icon: MessageCircle,
@@ -29,12 +29,12 @@ const reasons = [
   {
     icon: Sparkles,
     title: "Temiz ve bakımlı araçlar",
-    text: "Her teslim öncesi iç-dış temizlik ve periyodik bakım kontrolü yapılır. Araçlarımız sigortalı ve kaskoludur.",
+    text: "Araçlarımız her teslim öncesi temizlenir, periyodik bakımları düzenli yapılır. Tüm araçlarımız sigortalı ve kaskoludur.",
   },
   {
     icon: Banknote,
-    title: "Şeffaf fiyatlandırma",
-    text: "Teslim öncesi toplam tutarı yazılı olarak paylaşıyoruz. Sözleşmede olmayan hiçbir ücret çıkmaz.",
+    title: "Depozito yok",
+    text: "Depozito almıyoruz. Yalnızca aracı ileri bir tarih için ayırtmak isterseniz kapora alınır.",
   },
 ];
 

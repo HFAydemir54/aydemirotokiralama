@@ -17,7 +17,7 @@ import { airportFaqs } from "@/data/faq";
 import { featuredVehicles, hasVehicles } from "@/data/vehicles";
 
 const DESCRIPTION =
-  "Sabiha Gökçen Havalimanı'nda araç kiralama. Uçuş takipli karşılama, 7/24 araç teslimi, gece inen uçuşlarda da hizmet. WhatsApp'tan hızlı rezervasyon.";
+  "Sabiha Gökçen Havalimanı araç kiralama. Pendik ofisimiz havalimanına 15 dakika mesafede; havalimanına araç getiriyoruz. 7/24 açık, WhatsApp'tan rezervasyon.";
 
 export const metadata: Metadata = {
   // absolute: marka soneki eklenmesin, başlık SERP'te kesilmesin.
@@ -57,11 +57,11 @@ export default function AirportPage() {
             Sabiha Gökçen Havalimanı Araç Kiralama
           </h1>
           <p className="mt-6 max-w-3xl leading-relaxed text-white/75">
-            Sabiha Gökçen Havalimanı&apos;na indiğinizde aracınız sizi bekliyor
-            olsun. Pendik&apos;teki ofisimiz havalimanına yaklaşık 8 km mesafede
-            olduğu için teslimatı hızlı yapıyor, uçuşunuzu takip ederek rötar
-            durumunda teslim saatini kendimiz güncelliyoruz. Uçuş bilginizi
-            yazın, uygun araçları ve fiyatı hemen paylaşalım.
+            Pendik Çamçeşme&apos;deki ofisimiz Sabiha Gökçen Havalimanı&apos;na
+            yaklaşık 15 dakikalık mesafededir. Havalimanına araç getiriyoruz;
+            teslim saatini WhatsApp&apos;tan konuşarak birlikte belirliyoruz.
+            Ofisimiz 7/24 açık olduğu için gece saatlerinde de teslim
+            yapabiliyoruz.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">
@@ -81,14 +81,14 @@ export default function AirportPage() {
           </div>
 
           <ul className="mt-10 grid gap-4 sm:grid-cols-3">
-            <Highlight icon={MapPin} title="8 km mesafe">
-              Ofisimiz havalimanına 15–20 dakika uzaklıkta.
+            <Highlight icon={MapPin} title="15 dakika mesafe">
+              Pendik ofisimiz havalimanına yaklaşık 15 dakika uzaklıkta.
             </Highlight>
-            <Highlight icon={Clock} title="7/24 teslimat">
-              Gece inen uçuşlarda da araç teslimi yapıyoruz.
+            <Highlight icon={Plane} title="Havalimanına araç getiriyoruz">
+              Teslim saatini önceden birlikte belirliyoruz.
             </Highlight>
-            <Highlight icon={Plane} title="Uçuş takibi">
-              Rötar olursa teslim saatini biz güncelliyoruz.
+            <Highlight icon={Clock} title="7/24 açık">
+              Gece saatlerinde de araç teslimi yapabiliyoruz.
             </Highlight>
           </ul>
         </div>
@@ -98,29 +98,25 @@ export default function AirportPage() {
       <section className="bg-background py-16">
         <div className="mx-auto max-w-3xl px-6">
           <h2 className="text-2xl font-bold tracking-tight text-primary sm:text-3xl">
-            Havalimanında Araç Teslimi Nasıl İşliyor?
+            Havalimanı Araç Kiralama Nasıl İşliyor?
           </h2>
           <ol className="mt-8 space-y-6">
             {[
               {
-                t: "WhatsApp'tan uçuş bilginizi gönderin",
-                d: "Uçuş numarası, iniş saati, kiralama süresi ve tercih ettiğiniz araç. Fiyatı ve müsaitliği hemen teyit ediyoruz.",
+                t: "WhatsApp'tan yazın",
+                d: "Kiralama tarihlerinizi, havalimanına varış saatinizi ve tercih ettiğiniz aracı iletin.",
               },
               {
-                t: "Uçuşunuzu takip ediyoruz",
-                d: "İniş saatiniz değişirse teslim planını biz güncelliyoruz; bunun için ek ücret talep etmiyoruz.",
+                t: "Müsaitlik ve fiyatı teyit edelim",
+                d: "Uygun araçları ve toplam tutarı paylaşıyoruz. Sorunuz varsa teslimden önce netleştiriyoruz.",
               },
               {
-                t: "Çıkışta buluşuyoruz",
-                d: "Bagajınızı aldıktan sonra buluşma noktasında sizi karşılıyoruz. Ofis kuyruğunda beklemeniz gerekmiyor.",
+                t: "Teslim saatini belirleyelim",
+                d: "Havalimanına aracı ne zaman getireceğimizi birlikte kararlaştırıyoruz. Ofisimiz 7/24 açık olduğu için gece saatleri de dahil.",
               },
               {
-                t: "Sözleşme ve teslim",
-                d: "Ehliyet ve kimliğinizle sözleşme birkaç dakikada tamamlanıyor, aracı teslim alıp yola çıkıyorsunuz.",
-              },
-              {
-                t: "İade",
-                d: "Aracı dönüşte yine havalimanında teslim edebilirsiniz. Uçuş saatinizden önce haber vermeniz yeterli.",
+                t: "Aracı teslim alın",
+                d: "Belirlediğimiz noktada, en az 2 yıllık ehliyetiniz ve kimliğinizle sözleşmeyi tamamlayıp yola çıkıyorsunuz.",
               },
             ].map((s, i) => (
               <li key={s.t} className="flex gap-5">
@@ -137,15 +133,23 @@ export default function AirportPage() {
 
           <div className="mt-10 rounded-2xl border border-border bg-surface p-6">
             <h3 className="font-semibold text-primary">
-              Havalimanından çıkarken bilmeniz gerekenler
+              Kiralama öncesi bilmeniz gerekenler
             </h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted">
-              Sabiha Gökçen çıkışında otoyol bağlantısı için HGS gereklidir;
-              araçlarımızda HGS mevcuttur ve geçiş ücretleri teslim sonrası
-              hesaplanır. Havalimanından İstanbul Anadolu Yakası&apos;na ulaşım
-              trafiğe göre 20–50 dakika sürer. Kiralama öncesi ehliyet ve kimlik
-              belgenizi yanınızda bulundurun; yabancı misafirlerimizde pasaport
-              ve uluslararası ehliyet aranır.
+            <ul className="mt-3 space-y-2 text-sm leading-relaxed text-muted">
+              <li>Yaş sınırı yok; sürücü belgenizin en az 2 yıllık olması yeterli.</li>
+              <li>Depozito almıyoruz. Aracı önceden ayırtmak isterseniz kapora alınır.</li>
+              <li>Ödeme nakit veya havale ile yapılır; kredi kartı geçmemektedir.</li>
+              <li>Günlük 200 km kilometre sınırı uygulanır.</li>
+            </ul>
+            <p className="mt-3 text-sm leading-relaxed text-muted">
+              Tüm koşulların ayrıntısı için{" "}
+              <Link
+                href="/kiralama-kosullari"
+                className="font-medium text-accent hover:underline"
+              >
+                kiralama koşulları
+              </Link>{" "}
+              sayfamıza bakabilirsiniz.
             </p>
           </div>
         </div>

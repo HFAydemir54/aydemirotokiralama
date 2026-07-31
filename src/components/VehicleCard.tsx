@@ -68,9 +68,14 @@ export function VehicleImage({
 }) {
   if (!vehicle.image) {
     return (
-      <div className="flex aspect-[4/3] w-full flex-col items-center justify-center gap-2 bg-gradient-to-br from-primary/5 to-primary/10 text-muted">
-        <Car className="h-10 w-10 opacity-40" />
-        <span className="text-xs">{vehicleTitle(vehicle)}</span>
+      <div className="flex aspect-[4/3] w-full flex-col items-center justify-center gap-3 border-b border-border bg-gradient-to-br from-primary/[0.04] to-primary/[0.09]">
+        <Car className="h-11 w-11 text-primary/25" />
+        <span className="text-sm font-semibold text-primary/70">
+          {vehicleTitle(vehicle)}
+        </span>
+        <span className="rounded-full bg-white/70 px-3 py-1 text-[11px] font-medium tracking-wide text-muted">
+          Fotoğraf yakında
+        </span>
       </div>
     );
   }

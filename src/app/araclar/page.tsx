@@ -33,10 +33,27 @@ export default function VehiclesPage() {
             Kiralık Araçlarımız
           </h1>
           <p className="mt-5 max-w-3xl leading-relaxed text-muted">
-            Pendik merkez ofisimizden ve Sabiha Gökçen Havalimanı&apos;ndan araç
-            teslimi yapıyoruz. Günlük, haftalık ve aylık kiralama seçenekleri
-            mevcuttur. İhtiyacınıza uygun aracı birlikte belirleyelim.
+            Filomuzdaki araçların tamamı otomatik ve manuel vites seçenekleriyle
+            günlük, haftalık veya aylık kiralanabilir. Araç teslimi Pendik
+            Çamçeşme&apos;deki ofisimizden yapılır; Sabiha Gökçen
+            Havalimanı&apos;na ise araç getiriyoruz.
           </p>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              ["Yaş sınırı yok", "En az 2 yıllık ehliyet yeterli"],
+              ["Depozito yok", "Önceden ayırtmak isterseniz kapora alınır"],
+              ["Günlük 200 km", "Uzun yol planınızı önceden konuşalım"],
+              ["7/24 açık", "Teslim saatini siz belirleyin"],
+            ].map(([t, d]) => (
+              <div
+                key={t}
+                className="rounded-xl border border-border bg-surface p-5"
+              >
+                <p className="font-semibold text-primary">{t}</p>
+                <p className="mt-1 text-sm text-muted">{d}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

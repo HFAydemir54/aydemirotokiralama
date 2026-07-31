@@ -32,17 +32,17 @@ export default function ContactPage() {
           </h1>
           <p className="mt-5 leading-relaxed text-muted">
             Ofisimiz Pendik Çamçeşme&apos;de, Katip Çelebi Caddesi üzerindedir ve
-            7/24 açıktır. Araç kiralama talepleriniz için telefonla arayabilir
-            veya WhatsApp&apos;tan yazabilirsiniz; dakikalar içinde dönüş
-            yapıyoruz.
+            7/24 açıktır. Araç teslimlerimiz buradan yapılır; Sabiha Gökçen
+            Havalimanı&apos;na ise araç getiriyoruz. Kiralama talepleriniz için
+            telefonla arayabilir veya WhatsApp&apos;tan yazabilirsiniz.
           </p>
         </div>
       </section>
 
       <Contact />
       <LocationsGrid
-        title="Teslimat Yaptığımız Bölgeler"
-        description="Ofisimize gelmenize gerek yok — aşağıdaki bölgelerde aracınızı adresinize getiriyoruz."
+        title="Hizmet Verdiğimiz Bölgeler"
+        description="Aşağıdaki bölgelerden misafirlerimiz araçlarını Pendik Çamçeşme'deki ofisimizden teslim alıyor."
       />
     </>
   );

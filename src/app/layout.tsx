@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s | Aydemir Oto Kiralama",
   },
   description:
-    "Pendik ve Sabiha Gökçen Havalimanı'nda 7/24 araç kiralama. Günlük, haftalık ve aylık kiralama, adrese teslim, WhatsApp'tan hızlı rezervasyon.",
+    "Pendik Çamçeşme'deki ofisimizden araç kiralama. Sabiha Gökçen Havalimanı'na araç getiriyoruz. Depozito yok, 7/24 açık, WhatsApp'tan rezervasyon.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     title: "Pendik Araç Kiralama | Aydemir Oto Kiralama",
     description:
-      "Pendik ve Sabiha Gökçen Havalimanı'nda 7/24 araç kiralama. Günlük, haftalık ve aylık kiralama seçenekleri.",
+      "Pendik'te araç kiralama. Sabiha Gökçen Havalimanı'na araç getiriyoruz. Günlük, haftalık ve aylık kiralama, depozito yok.",
     images: [
       {
         url: "/og-image.png",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Pendik Araç Kiralama | Aydemir Oto Kiralama",
     description:
-      "Pendik ve Sabiha Gökçen Havalimanı'nda 7/24 araç kiralama. WhatsApp'tan hızlı rezervasyon.",
+      "Pendik'te araç kiralama. Sabiha Gökçen Havalimanı'na araç getiriyoruz. Depozito yok, 7/24 açık.",
     images: ["/og-image.png"],
   },
   robots: {

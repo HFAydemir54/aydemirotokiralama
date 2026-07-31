@@ -16,7 +16,10 @@ export default function VehicleSpecs({
   const specs = [
     vehicle.year && { icon: CalendarDays, text: `${vehicle.year} Model` },
     vehicle.transmission && { icon: Gauge, text: vehicle.transmission },
-    vehicle.fuel && { icon: Fuel, text: vehicle.fuel },
+    vehicle.fuel && {
+      icon: Fuel,
+      text: vehicle.engine ? `${vehicle.fuel} · ${vehicle.engine}` : vehicle.fuel,
+    },
     vehicle.seats && { icon: Users, text: `${vehicle.seats} Kişilik` },
     vehicle.luggage && { icon: Briefcase, text: `${vehicle.luggage} Valiz` },
   ].filter(Boolean) as { icon: React.ElementType; text: string }[];

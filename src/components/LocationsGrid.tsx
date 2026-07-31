@@ -10,7 +10,7 @@ import { locations, type Location } from "@/data/locations";
 export default function LocationsGrid({
   items = locations,
   title = "Hizmet Verdiğimiz Bölgeler",
-  description = "Pendik merkez ofisimizden İstanbul Anadolu Yakası'nın tamamına araç teslimatı yapıyoruz.",
+  description = "Aşağıdaki bölgelerden misafirlerimize Pendik Çamçeşme'deki ofisimizden araç veriyoruz.",
   className = "bg-surface",
 }: {
   items?: Location[];
@@ -43,7 +43,7 @@ export default function LocationsGrid({
                   {l.name} Araç Kiralama
                 </span>
                 <span className="text-xs leading-relaxed text-muted">
-                  {l.deliveryTime}
+                  {l.distance}
                 </span>
               </Link>
             </li>

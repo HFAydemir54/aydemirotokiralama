@@ -40,7 +40,7 @@ export default function Hero({
       <div className="relative mx-auto w-full max-w-6xl px-6 py-16 lg:px-10 lg:py-24">
         <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-white/80 backdrop-blur-sm">
           <Clock className="h-4 w-4 text-accent" />
-          7/24 Açık — Sabiha Gökçen&apos;e Araç Teslimatı
+          7/24 Açık — Sabiha Gökçen&apos;e 15 Dakika
         </div>
 
         <h1 className="max-w-3xl text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-[3.5rem] lg:leading-[1.1]">
@@ -68,9 +68,9 @@ export default function Hero({
 
         <ul className="mt-10 flex flex-wrap gap-x-10 gap-y-4">
           {[
-            { icon: Plane, label: "Sabiha Gökçen teslimat" },
-            { icon: ShieldCheck, label: "Sigortalı araçlar" },
-            { icon: Clock, label: "7/24 teslim ve iade" },
+            { icon: Plane, label: "Sabiha Gökçen'e araç getiriyoruz" },
+            { icon: ShieldCheck, label: "Depozito yok" },
+            { icon: Clock, label: "7/24 açık" },
             { icon: MapPin, label: "Pendik merkez ofis" },
           ].map(({ icon: Icon, label }) => (
             <li key={label} className="flex items-center gap-2.5 text-white/70">

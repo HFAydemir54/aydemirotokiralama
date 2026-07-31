@@ -5,18 +5,18 @@ import WhatsAppCta from "./WhatsAppCta";
 const steps = [
   {
     n: "1",
-    title: "Uçuş bilginizi gönderin",
-    text: "WhatsApp'tan uçuş numaranızı, iniş saatinizi ve kiralama sürenizi yazın.",
+    title: "WhatsApp'tan yazın",
+    text: "Kiralama tarihlerinizi ve havalimanına varış saatinizi iletin.",
   },
   {
     n: "2",
-    title: "Uçuşunuzu takip edelim",
-    text: "Rötar olsa bile teslim saatini biz güncelleriz; ek ücret çıkmaz.",
+    title: "Teslim saatini belirleyelim",
+    text: "Uygun araçları ve fiyatı paylaşıp aracı havalimanına ne zaman getireceğimizi kararlaştıralım.",
   },
   {
     n: "3",
-    title: "Çıkışta aracınızı teslim alın",
-    text: "Bagajınızı aldıktan sonra sözleşme birkaç dakikada tamamlanır, yola çıkarsınız.",
+    title: "Aracınızı teslim alın",
+    text: "Ehliyet ve kimliğinizle sözleşmeyi tamamlayıp yola çıkarsınız.",
   },
 ];
 
@@ -34,11 +34,10 @@ export default function SabihaSection() {
               Sabiha Gökçen Havalimanı Araç Kiralama
             </h2>
             <p className="mt-6 leading-relaxed text-white/70">
-              Pendik&apos;teki ofisimiz Sabiha Gökçen Havalimanı&apos;na yaklaşık 8 km
-              mesafede. Bu yakınlık sayesinde havalimanına hızlı teslimat yapabiliyor,
-              gece inen uçuşlarda dahi aracınızı zamanında hazır edebiliyoruz.
-              Havalimanı ofis kuyruğunda beklemeden, doğrudan çıkışta aracınızı
-              teslim alırsınız.
+              Pendik Çamçeşme&apos;deki ofisimiz Sabiha Gökçen Havalimanı&apos;na
+              yaklaşık 15 dakikalık mesafede. Havalimanına araç getiriyoruz;
+              teslim saatini önceden birlikte belirliyoruz. Ofisimiz 7/24 açık
+              olduğu için gece saatlerinde de teslim yapabiliyoruz.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">

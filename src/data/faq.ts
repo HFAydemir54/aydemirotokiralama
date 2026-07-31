@@ -1,10 +1,20 @@
 /**
  * SSS içerikleri.
  *
- * ⚠️ Cevaplardaki yaş, depozito, kilometre ve belge şartları ÖRNEK değerlerdir.
- * Kendi kiralama koşullarınıza göre güncelleyin — bu metinler hem sayfada
- * görünür hem de FAQPage schema'sına gider. Schema ile sayfadaki metin
- * birebir aynı olmak zorundadır.
+ * Buradaki cevaplar işletme sahibinin bildirdiği GERÇEK kiralama koşullarına
+ * göre yazılmıştır (1 Ağustos 2026). Koşullar değişirse burayı güncelleyin —
+ * metinler hem sayfada görünür hem de FAQPage schema'sına gider, ikisi
+ * birbiriyle birebir aynı olmak zorundadır.
+ *
+ * Doğrulanmış koşullar:
+ *   - Yaş sınırı YOK; ehliyetin en az 2 yıllık olması yeterli
+ *   - Depozito ALINMIYOR; yalnızca önceden araç ayırtmak isteyenlerden kapora
+ *   - Kredi kartı GEÇMİYOR; nakit veya havale
+ *   - Günlük 200 km kilometre sınırı
+ *   - İptalde kapora iade edilmiyor
+ *   - Havalimanına araç getiriliyor; diğer bölgelerde teslim ofisten yapılıyor
+ *   - Ofis Sabiha Gökçen'e 15 dakika mesafede, 7/24 açık
+ *   - Tüm araçlar sigortalı ve kaskolu
  */
 
 export type Faq = { q: string; a: string };
@@ -12,32 +22,32 @@ export type Faq = { q: string; a: string };
 /** Ana sayfada gösterilen SSS */
 export const homeFaqs: Faq[] = [
   {
-    q: "Araç kiralamak için kaç yaşında olmak gerekir?",
-    a: "Ekonomik segment araçlarımız için minimum 21 yaş, orta sınıf araçlar için 23 yaş, SUV ve üst segment araçlar için 25 yaş şartı aranmaktadır. Yaş şartı her aracın kendi sayfasında ayrıca belirtilmiştir.",
-  },
-  {
-    q: "Minimum kiralama süresi nedir?",
-    a: "Minimum kiralama süresi 1 gündür (24 saat). Haftalık ve aylık kiralamalarda günlük fiyat üzerinden indirim uygulanır.",
-  },
-  {
-    q: "Depozito alınıyor mu?",
-    a: "Evet, araç segmentine göre değişen bir depozito alınır; tutarı rezervasyon sırasında size net olarak bildiriyoruz. Depozito, araç sorunsuz teslim edildikten sonra iade edilir. Trafik cezası ve HGS geçişleri depozitodan mahsup edilebilir.",
-  },
-  {
-    q: "Kredi kartı gerekiyor mu?",
-    a: "Kredi kartı zorunlu değildir; depozitoyu nakit veya banka havalesi ile de karşılayabilirsiniz. Kredi kartı ile provizyon yöntemini tercih eden misafirlerimiz için bu seçenek de mevcuttur.",
+    q: "Araç kiralamak için yaş sınırı var mı?",
+    a: "Yaş sınırımız bulunmuyor. Aradığımız tek şart, sürücü belgenizin en az 2 yıllık olmasıdır.",
   },
   {
     q: "Ehliyet süresi kaç yıl olmalı?",
-    a: "Ehliyetinizin en az 2 yıllık olması gerekir. Üst segment ve SUV araçlarda bu şart 3 yıla çıkmaktadır.",
+    a: "Sürücü belgenizin en az 2 yıllık olması gerekir. Bu şart tüm araçlarımız için aynıdır.",
+  },
+  {
+    q: "Depozito alıyor musunuz?",
+    a: "Hayır, depozito almıyoruz. Yalnızca aracı ileri bir tarih için önceden ayırtmak isterseniz kapora alıyoruz.",
+  },
+  {
+    q: "Ödemeyi nasıl yapabilirim?",
+    a: "Nakit veya banka havalesi ile ödeme kabul ediyoruz. Kredi kartı geçmemektedir.",
+  },
+  {
+    q: "Günlük kilometre sınırı var mı?",
+    a: "Evet, günlük 200 km kilometre sınırı uygulanmaktadır. Daha fazla yol yapmayı planlıyorsanız rezervasyon sırasında bize belirtin.",
   },
   {
     q: "Sabiha Gökçen Havalimanı'ndan araç teslim alabilir miyim?",
-    a: "Evet. Sabiha Gökçen Havalimanı'na araç teslimatı yapıyoruz. Uçuş numaranızı ve iniş saatinizi WhatsApp'tan iletmeniz yeterli; aracınız siz çıkışa geldiğinizde hazır olur. Gece inen uçuşlarda da teslimat yapıyoruz.",
+    a: "Evet. Ofisimiz Sabiha Gökçen Havalimanı'na 15 dakikalık mesafededir ve havalimanına araç getiriyoruz. Teslim saatini WhatsApp'tan konuşarak belirliyoruz.",
   },
   {
-    q: "Aracı farklı bir noktaya bırakabilir miyim?",
-    a: "Evet, farklı noktaya teslim (tek yön) mümkündür. Mesafeye göre ek ücret uygulanabilir; rezervasyon sırasında net tutarı önceden bildiriyoruz.",
+    q: "Araç teslimi nerede yapılıyor?",
+    a: "Havalimanı dışındaki teslimlerde araç, Pendik Çamçeşme'deki ofisimizden teslim edilmektedir. Sabiha Gökçen Havalimanı'na ise araç getiriyoruz.",
   },
 ];
 
@@ -45,35 +55,35 @@ export const homeFaqs: Faq[] = [
 export const extraFaqs: Faq[] = [
   {
     q: "Araç kiralamak için hangi belgeler gerekli?",
-    a: "Geçerli sürücü belgesi (ehliyet), T.C. kimlik kartı veya pasaport ve kiralama sözleşmesi için iletişim bilgileriniz yeterlidir. Yabancı misafirlerimizde pasaport ve uluslararası geçerliliği olan ehliyet aranır.",
+    a: "En az 2 yıllık geçerli sürücü belgesi ve kimlik belgeniz yeterlidir.",
   },
   {
-    q: "Günlük kilometre limiti var mı?",
-    a: "Evet, standart olarak günde 250 km (SUV araçlarda 300 km) kilometre limiti uygulanır. Limit aşımında kilometre başına ücretlendirme yapılır. Şehirlerarası planınız varsa rezervasyon sırasında belirtin, ek kilometre paketi tanımlayalım.",
+    q: "Kapora nedir, ne zaman alınıyor?",
+    a: "Kapora, aracı ileri bir tarih için önceden ayırtmak isteyen misafirlerimizden alınan ön ödemedir. Aracı hemen teslim alacaksanız kapora gerekmez.",
   },
   {
-    q: "Yakıt politikanız nedir?",
-    a: "Araç size hangi yakıt seviyesiyle teslim edildiyse aynı seviyede iade edilmelidir. Eksik yakıtla iade durumunda güncel pompa fiyatı üzerinden ücretlendirme yapılır.",
+    q: "Rezervasyonumu iptal edersem kapora iade ediliyor mu?",
+    a: "Kapora vererek araç ayırttıysanız ve rezervasyonu iptal ederseniz kapora iade edilmemektedir.",
   },
   {
-    q: "HGS ve trafik cezaları nasıl işliyor?",
-    a: "Araçlarımızda HGS mevcuttur. Kiralama süresince yapılan köprü ve otoyol geçişleri ile kesilen trafik cezaları kiracıya aittir ve teslim sonrası faturalandırılır.",
+    q: "Minimum kiralama süresi nedir?",
+    a: "Minimum kiralama süresi 1 gündür. Haftalık ve aylık kiralama da yapıyoruz; bu sürelerdeki fiyatlar için bize yazabilirsiniz.",
   },
   {
-    q: "Rezervasyonumu iptal edebilir miyim?",
-    a: "Kiralama başlangıcından 24 saat öncesine kadar yapılan iptallerde herhangi bir ücret alınmaz.",
+    q: "Kilometre sınırını aşarsam ne oluyor?",
+    a: "Günlük 200 km sınırı aşılırsa ek ücret uygulanır. Uzun yol planınız varsa rezervasyon sırasında belirtin, koşulları önceden netleştirelim.",
   },
   {
     q: "Araçlar sigortalı mı?",
-    a: "Tüm araçlarımız trafik sigortası ve kaskoludur. Kaza durumunda uygulanacak muafiyet tutarı sözleşmede açıkça belirtilir.",
+    a: "Evet, tüm araçlarımız sigortalı ve kaskoludur.",
   },
   {
-    q: "Aylık (uzun dönem) kiralama yapıyor musunuz?",
-    a: "Evet. 30 gün ve üzeri kiralamalarda günlük fiyatlara göre önemli bir indirim uyguluyoruz. Kurumsal müşterilerimiz için faturalı ve çoklu araç seçenekleri mevcuttur.",
+    q: "Çalışma saatleriniz nedir?",
+    a: "Ofisimiz 7/24 açıktır. Gece geç saatlerde veya sabah erkenden de araç teslim alabilirsiniz.",
   },
   {
-    q: "Ödeme seçenekleriniz neler?",
-    a: "Nakit, banka havalesi/EFT ve kredi kartı ile ödeme kabul ediyoruz. Kurumsal kiralamalarda fatura düzenlenmektedir.",
+    q: "Haftalık ve aylık kiralama yapıyor musunuz?",
+    a: "Evet, günlük kiralamanın yanında haftalık ve aylık kiralama da yapıyoruz. Bu sürelerdeki fiyatlar kiralama süresine göre değiştiği için WhatsApp'tan bilgi verebiliriz.",
   },
 ];
 
@@ -82,41 +92,41 @@ export const allFaqs: Faq[] = [...homeFaqs, ...extraFaqs];
 /** Sabiha Gökçen sayfasına özel SSS */
 export const airportFaqs: Faq[] = [
   {
-    q: "Sabiha Gökçen'de araç teslimi nasıl yapılıyor?",
-    a: "Uçuş numaranızı ve iniş saatinizi WhatsApp'tan bize iletiyorsunuz. Uçuşunuzu takip ediyor, siz bagajınızı alıp çıkışa geldiğinizde aracınızı teslim ediyoruz. Sözleşme işlemleri yerinde, birkaç dakika içinde tamamlanıyor.",
+    q: "Sabiha Gökçen Havalimanı'na araç getiriyor musunuz?",
+    a: "Evet. Ofisimiz havalimanına 15 dakikalık mesafede olduğu için Sabiha Gökçen'e araç getiriyoruz. Teslim saatini önceden WhatsApp'tan konuşuyoruz.",
   },
   {
-    q: "Havalimanı teslimatı ücretli mi?",
-    a: "Teslimat koşullarını rezervasyon sırasında net olarak bildiriyoruz; sürpriz ücret çıkarmıyoruz. Güncel durum için WhatsApp'tan bize yazabilirsiniz.",
+    q: "Havalimanı teslimi için ne yapmam gerekiyor?",
+    a: "WhatsApp'tan kiralama tarihlerinizi ve havalimanına varış saatinizi yazmanız yeterli. Müsaitlik ve fiyat bilgisini paylaşıp teslim detaylarını birlikte belirliyoruz.",
   },
   {
-    q: "Gece inen uçuşlarda da araç teslim alabilir miyim?",
-    a: "Evet. 7/24 hizmet verdiğimiz için gece yarısı inen uçuşlarda da teslimat yapıyoruz. Yeter ki uçuş bilginizi önceden paylaşın.",
+    q: "Gece saatlerinde de araç teslim alabilir miyim?",
+    a: "Ofisimiz 7/24 açıktır, gece saatlerinde de araç teslimi yapabiliyoruz. Saatini önceden bildirmeniz yeterli.",
   },
   {
-    q: "Uçağım rötar yaparsa ne olur?",
-    a: "Uçuşunuzu takip ettiğimiz için rötar durumunda teslim saatini otomatik olarak güncelliyoruz. Ek ücret talep etmiyoruz.",
+    q: "Aracı havalimanında teslim edebilir miyim?",
+    a: "İade planınızı rezervasyon sırasında konuşalım; havalimanı teslimi için önceden bilgi vermeniz yeterli.",
   },
   {
-    q: "Aracı havalimanına geri bırakabilir miyim?",
-    a: "Evet, aracı Sabiha Gökçen'de teslim edebilirsiniz. Uçuş saatinizden yeterli süre önce bize haber vermeniz yeterli.",
+    q: "Ofisiniz havalimanına ne kadar uzaklıkta?",
+    a: "Pendik Çamçeşme'deki ofisimiz Sabiha Gökçen Havalimanı'na yaklaşık 15 dakikalık mesafededir.",
   },
 ];
 
-/** Araç detay sayfalarında gösterilen ortak sorular */
-export function vehicleFaqs(vehicleName: string, minAge: number): Faq[] {
+/** Araç detay sayfalarında gösterilen, araca özel sorular */
+export function vehicleFaqs(vehicleName: string): Faq[] {
   return [
     {
-      q: `${vehicleName} kiralamak için yaş şartı nedir?`,
-      a: `${vehicleName} kiralayabilmek için en az ${minAge} yaşında olmanız gerekmektedir.`,
+      q: `${vehicleName} kiralamak için hangi şartlar gerekiyor?`,
+      a: `${vehicleName} kiralamak için en az 2 yıllık sürücü belgesi yeterlidir. Yaş sınırı uygulamıyoruz ve depozito almıyoruz.`,
     },
     {
-      q: `${vehicleName} için depozito ne kadar?`,
-      a: `${vehicleName} için segmentine uygun bir depozito alınır ve araç sorunsuz teslim edildiğinde iade edilir. Güncel tutarı rezervasyon sırasında bildiriyoruz.`,
+      q: `${vehicleName} için kilometre sınırı var mı?`,
+      a: "Tüm araçlarımızda olduğu gibi günlük 200 km kilometre sınırı uygulanmaktadır.",
     },
     {
-      q: `${vehicleName} aracını Sabiha Gökçen Havalimanı'ndan teslim alabilir miyim?`,
-      a: `Evet. Uçuş bilginizi paylaşmanız halinde ${vehicleName} aracını Sabiha Gökçen Havalimanı'nda size teslim ediyoruz.`,
+      q: `${vehicleName} aracını Sabiha Gökçen Havalimanı'nda teslim alabilir miyim?`,
+      a: `Evet. Ofisimiz havalimanına 15 dakikalık mesafede olduğu için ${vehicleName} aracını Sabiha Gökçen'e getirebiliyoruz.`,
     },
   ];
 }

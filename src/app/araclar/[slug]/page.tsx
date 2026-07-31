@@ -7,7 +7,10 @@ import PriceDisplay from "@/components/PriceDisplay";
 import VehicleCard, { VehicleImage } from "@/components/VehicleCard";
 import VehicleSpecs from "@/components/VehicleSpecs";
 import WhatsAppCta from "@/components/WhatsAppCta";
-import { breadcrumbSchema, vehicleSchema } from "@/lib/schema";
+import FaqSection from "@/components/FaqSection";
+import { breadcrumbSchema, faqSchema, vehicleSchema } from "@/lib/schema";
+import { vehicleFaqs } from "@/data/faq";
+import { locations } from "@/data/locations";
 import {
   availableVehicles,
   getVehicle,
@@ -67,10 +70,13 @@ export default async function VehiclePage(props: PageProps<"/araclar/[slug]">) {
   ];
   const waMessage = `Merhaba, ${name} kiralamak istiyorum. Müsaitlik ve fiyat bilgisi alabilir miyim?`;
   const similar = similarVehicles(vehicle);
+  const faqs = vehicleFaqs(name);
 
   return (
     <>
-      <JsonLd data={[vehicleSchema(vehicle), breadcrumbSchema(crumbs)]} />
+      <JsonLd
+        data={[vehicleSchema(vehicle), faqSchema(faqs), breadcrumbSchema(crumbs)]}
+      />
       <div className="pt-20">
         <Breadcrumbs items={crumbs} />
       </div>
@@ -160,6 +166,71 @@ export default async function VehiclePage(props: PageProps<"/araclar/[slug]">) {
           </div>
         </div>
       </section>
+
+      {/* Kiralama koşulları özeti */}
+      <section className="border-t border-border bg-surface py-14">
+        <div className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-2">
+          <div>
+            <h2 className="text-2xl font-bold tracking-tight text-primary">
+              {name} Kiralama Koşulları
+            </h2>
+            <dl className="mt-6 space-y-4 text-sm">
+              {[
+                ["Yaş şartı", "Yaş sınırı uygulanmıyor"],
+                ["Ehliyet", "En az 2 yıllık sürücü belgesi"],
+                ["Depozito", "Alınmıyor; önceden ayırtmak isterseniz kapora"],
+                ["Kilometre", "Günlük 200 km"],
+                ["Ödeme", "Nakit veya havale (kredi kartı geçmiyor)"],
+              ].map(([k, v]) => (
+                <div key={k} className="flex gap-4 border-b border-border pb-3">
+                  <dt className="w-32 shrink-0 font-medium text-primary">{k}</dt>
+                  <dd className="text-muted">{v}</dd>
+                </div>
+              ))}
+            </dl>
+            <p className="mt-5 text-sm text-muted">
+              Ayrıntılar için{" "}
+              <Link
+                href="/kiralama-kosullari"
+                className="font-medium text-accent hover:underline"
+              >
+                kiralama koşulları
+              </Link>{" "}
+              sayfamıza bakabilirsiniz.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-bold tracking-tight text-primary">
+              {name} Nereden Teslim Alınır?
+            </h2>
+            <p className="mt-5 leading-relaxed text-muted">
+              Araç teslimi Pendik Çamçeşme&apos;deki ofisimizden yapılır.
+              Sabiha Gökçen Havalimanı&apos;na araç getiriyoruz; ofisimiz
+              havalimanına yaklaşık 15 dakikalık mesafededir. Ofisimiz 7/24
+              açık olduğu için teslim saatini kendinize göre belirleyebilirsiniz.
+            </p>
+            <ul className="mt-6 flex flex-wrap gap-2">
+              {locations.map((l) => (
+                <li key={l.slug}>
+                  <Link
+                    href={`/${l.slug}`}
+                    className="inline-block rounded-lg border border-border bg-background px-3 py-1.5 text-sm text-primary-light transition-colors hover:border-accent/40 hover:text-accent"
+                  >
+                    {l.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <FaqSection
+        faqs={faqs}
+        title={`${name} Kiralama Hakkında Sık Sorulanlar`}
+        className="bg-background"
+      />
 
       {similar.length > 0 && (
         <section className="border-t border-border bg-surface py-16">

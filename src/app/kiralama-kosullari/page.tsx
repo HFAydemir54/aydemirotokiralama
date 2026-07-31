@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
 import WhatsAppCta from "@/components/WhatsAppCta";
 import { breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Kiralama Koşulları | Yaş, Ehliyet, Depozito",
+  title: "Kiralama Koşulları",
   description:
-    "Aydemir Oto Kiralama kiralama koşulları: yaş sınırı, ehliyet süresi, depozito tutarları, gerekli belgeler, kilometre limiti, yakıt politikası ve iptal şartları.",
+    "Aydemir Oto Kiralama kiralama koşulları: yaş sınırı yok, 2 yıllık ehliyet yeterli, depozito alınmıyor. Gerekli belgeler, kilometre sınırı, ödeme ve teslim koşulları.",
   alternates: { canonical: "/kiralama-kosullari" },
 };
 
@@ -30,81 +31,95 @@ export default function TermsPage() {
             Kiralama Koşulları
           </h1>
           <p className="mt-5 leading-relaxed text-muted">
-            Aşağıdaki koşullar tüm kiralamalarımız için geçerlidir. Araç bazında
-            değişen yaş ve depozito şartlarını tabloda bulabilirsiniz. Sözleşmede
-            yer almayan hiçbir ücret sonradan talep edilmez.
+            Aşağıdaki koşullar tüm kiralamalarımız için geçerlidir. Kiralama
+            öncesi aklınıza takılan bir konu olursa WhatsApp&apos;tan sorabilir,
+            her şeyi baştan netleştirebilirsiniz.
           </p>
 
           <Section title="Gerekli belgeler">
             <ul className="ml-5 list-disc space-y-2">
-              <li>Geçerli sürücü belgesi (ehliyet)</li>
-              <li>T.C. kimlik kartı veya pasaport</li>
-              <li>
-                Yabancı misafirler için pasaport ve uluslararası geçerliliği olan
-                sürücü belgesi
-              </li>
+              <li>En az 2 yıllık geçerli sürücü belgesi (ehliyet)</li>
+              <li>Kimlik belgesi</li>
             </ul>
           </Section>
 
           <Section title="Yaş ve ehliyet şartı">
             <p>
-              Yaş ve ehliyet şartı araç segmentine göre değişir. Ekonomik
-              segmentte 21 yaş ve 2 yıllık ehliyet yeterliyken, SUV ve üst
-              segment araçlarda 25 yaş ve 3 yıllık ehliyet aranır.
+              Yaş sınırı uygulamıyoruz. Aradığımız tek şart sürücü belgenizin
+              en az <strong className="font-semibold text-primary">2 yıllık</strong>{" "}
+              olmasıdır. Bu koşul tüm araçlarımız için aynıdır.
             </p>
           </Section>
 
-          <Section title="Depozito">
+          <Section title="Depozito ve kapora">
             <p>
-              Depozito, araç tesliminde alınır ve araç sorunsuz iade edildiğinde
-              geri ödenir. Tutarı araç segmentine göre değişir ve rezervasyon
-              sırasında size net olarak bildirilir. Trafik cezası, HGS geçişi veya hasar bedeli varsa
-              depozitodan mahsup edilir. Depozitoyu nakit, havale veya kredi
-              kartı provizyonu ile karşılayabilirsiniz — kredi kartı zorunlu
-              değildir.
+              <strong className="font-semibold text-primary">Depozito almıyoruz.</strong>{" "}
+              Aracı hemen teslim alacaksanız herhangi bir ön ödeme gerekmez.
+            </p>
+            <p>
+              Yalnızca aracı ileri bir tarih için önceden ayırtmak isterseniz
+              kapora alıyoruz. Kapora, aracın sizin adınıza rezerve edilmesini
+              sağlar.
             </p>
           </Section>
 
-          <Section title="Kilometre limiti">
+          <Section title="Ödeme">
             <p>
-              Standart olarak günde 250 km (SUV araçlarda 300 km) kilometre limiti
-              uygulanır. Şehirlerarası bir planınız varsa rezervasyon sırasında
-              belirtin; ek kilometre paketini önceden fiyatlandıralım.
-            </p>
-          </Section>
-
-          <Section title="Yakıt politikası">
-            <p>
-              Araç size hangi yakıt seviyesiyle teslim edildiyse aynı seviyede
-              iade edilmelidir. Eksik yakıtla iade halinde güncel pompa fiyatı
-              üzerinden ücretlendirme yapılır.
+              Nakit veya banka havalesi ile ödeme kabul ediyoruz.{" "}
+              <strong className="font-semibold text-primary">
+                Kredi kartı geçmemektedir.
+              </strong>
             </p>
           </Section>
 
           <Section title="Sigorta">
             <p>
-              Tüm araçlarımız trafik sigortası ve kaskoludur. Kaza durumunda
-              uygulanacak muafiyet tutarı sözleşmede açıkça belirtilir. Alkollü
-              araç kullanımı, ehliyetsiz kullanım ve sözleşmede adı geçmeyen
-              kişinin araç kullanması sigorta kapsamı dışındadır.
+              Tüm araçlarımız sigortalı ve kaskoludur.
             </p>
           </Section>
 
-          <Section title="HGS ve trafik cezaları">
+          <Section title="Kilometre sınırı">
             <p>
-              Araçlarımızda HGS mevcuttur. Kiralama süresince yapılan köprü ve
-              otoyol geçişleri ile kesilen trafik cezaları kiracıya aittir ve
-              teslim sonrası faturalandırılır.
+              Günlük{" "}
+              <strong className="font-semibold text-primary">200 km</strong>{" "}
+              kilometre sınırı uygulanmaktadır. Sınırın aşılması durumunda ek
+              ücret uygulanır. Uzun yol planınız varsa rezervasyon sırasında
+              belirtin; koşulları önceden konuşalım.
             </p>
           </Section>
 
-          <Section title="Teslim, iade ve iptal">
+          <Section title="İptal">
             <p>
-              Aracı ofisimizden, adresinizden veya Sabiha Gökçen
-              Havalimanı&apos;ndan teslim alabilirsiniz. Farklı noktaya teslim
-              (tek yön) mümkündür; mesafeye göre ek ücret uygulanabilir ve tutar
-              önceden bildirilir. Kiralama başlangıcından 24 saat öncesine kadar
-              yapılan iptallerde ücret alınmaz.
+              Kapora vererek araç ayırttıysanız ve rezervasyonu iptal ederseniz
+              kapora iade edilmemektedir.
+            </p>
+          </Section>
+
+          <Section title="Teslim ve iade">
+            <p>
+              Araç teslimi Pendik Çamçeşme&apos;deki ofisimizden yapılmaktadır.
+              Sabiha Gökçen Havalimanı&apos;na ise araç getiriyoruz; ofisimiz
+              havalimanına yaklaşık 15 dakikalık mesafededir. Ayrıntılar için{" "}
+              <Link
+                href="/sabiha-gokcen-arac-kiralama"
+                className="font-medium text-accent hover:underline"
+              >
+                Sabiha Gökçen araç kiralama
+              </Link>{" "}
+              sayfamıza bakabilirsiniz.
+            </p>
+            <p>
+              Ofisimiz 7/24 açıktır; gece geç saatlerde veya sabah erkenden de
+              teslim ve iade yapabilirsiniz.
+            </p>
+          </Section>
+
+          <Section title="Kiralama süresi">
+            <p>
+              Minimum kiralama süresi 1 gündür. Günlük kiralamanın yanında
+              haftalık ve aylık kiralama da yapıyoruz. Haftalık ve aylık
+              fiyatlar kiralama süresine göre değiştiği için tarihlerinizi
+              yazmanız yeterli, toplam tutarı paylaşalım.
             </p>
           </Section>
 
