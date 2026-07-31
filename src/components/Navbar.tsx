@@ -41,7 +41,7 @@ export default function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-4">
         {/*
           Logo, arka plana göre değişir: hero üzerindeyken (şeffaf navbar)
           beyaz varyant, kaydırınca (beyaz navbar) koyu varyant. İki dosya da
@@ -54,7 +54,7 @@ export default function Navbar() {
             width={300}
             height={186}
             priority
-            className="h-14 w-auto"
+            className="h-10 w-auto sm:h-12 lg:h-14"
           />
         </Link>
 

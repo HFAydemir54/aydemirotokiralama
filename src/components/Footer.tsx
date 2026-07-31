@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { MapPin, Phone } from "lucide-react";
 import { SITE } from "@/lib/site";
+import { durations } from "@/data/durations";
 import { locations } from "@/data/locations";
 
 /**
@@ -20,7 +21,7 @@ export default function Footer() {
               alt={SITE.name}
               width={300}
               height={186}
-              className="h-16 w-auto"
+              className="h-14 w-auto sm:h-16"
             />
 
             <address className="mt-5 space-y-3 text-sm not-italic text-muted">
@@ -65,6 +66,11 @@ export default function Footer() {
 
           <FooterCol title="Kurumsal">
             <FooterLink href="/araclar">Araç Filomuz</FooterLink>
+            {durations.map((d) => (
+              <FooterLink key={d.slug} href={`/${d.slug}`}>
+                {d.name} Araç Kiralama
+              </FooterLink>
+            ))}
             <FooterLink href="/sabiha-gokcen-arac-kiralama">
               Sabiha Gökçen Araç Kiralama
             </FooterLink>

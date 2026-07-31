@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Clock, MapPin, Plane, ShieldCheck } from "lucide-react";
 import ReservationForm from "./ReservationForm";
 import WhatsAppCta from "./WhatsAppCta";
@@ -22,17 +21,24 @@ export default function Hero({
 }) {
   return (
     <section id="rezervasyon" className="relative overflow-hidden pt-20">
-      <div className="absolute inset-0">
-        <Image
+      {/*
+        Vercel görsel optimizasyonu kapalı (kota) olduğu için responsive
+        kaynak seçimini <picture> ile kendimiz yapıyoruz: mobilde 900px/40 KB,
+        masaüstünde 1920px/192 KB. next/image bu modda srcSet üretmiyordu.
+        fetchPriority="high" LCP görselini erken sıraya alır.
+      */}
+      <picture className="absolute inset-0">
+        <source media="(max-width: 768px)" srcSet="/hero-bg-mobile.jpg" />
+        <img
           src="/hero-bg.jpg"
           alt=""
-          fill
-          preload
-          quality={70}
-          className="object-cover object-center"
-          sizes="100vw"
+          width={1920}
+          height={1280}
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover object-center"
         />
-      </div>
+      </picture>
 
       <div className="absolute inset-0 bg-primary/85" />
       <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/50" />

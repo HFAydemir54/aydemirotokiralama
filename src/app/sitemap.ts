@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { durations } from "@/data/durations";
 import { locations } from "@/data/locations";
 import { posts } from "@/data/posts";
 import { availableVehicles } from "@/data/vehicles";
@@ -60,6 +61,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
+  const durationPages: MetadataRoute.Sitemap = durations.map((d) => ({
+    url: `${SITE.url}/${d.slug}`,
+    lastModified: d.updatedAt,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
   const postPages: MetadataRoute.Sitemap = posts.map((p) => ({
     url: `${SITE.url}/blog/${p.slug}`,
     lastModified: p.updatedAt,
@@ -83,5 +91,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: l.priority,
   }));
 
-  return [...staticPages, ...vehiclePages, ...locationPages, ...postPages];
+  return [
+    ...staticPages,
+    ...vehiclePages,
+    ...locationPages,
+    ...durationPages,
+    ...postPages,
+  ];
 }

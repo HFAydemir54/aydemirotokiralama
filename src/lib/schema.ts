@@ -154,6 +154,18 @@ export function vehicleSchema(v: Vehicle) {
   };
 }
 
+/** Süre bazlı sayfalar için hizmet tanımı. */
+export function durationServiceSchema(durationName: string, description: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: `${durationName} Araç Kiralama`,
+    provider: { "@id": BUSINESS_ID },
+    areaServed: { "@type": "City", name: "İstanbul" },
+    description,
+  };
+}
+
 /**
  * Blog yazıları için BlogPosting.
  * author ve publisher işletme kimliğine bağlanır — içeriğin kim tarafından

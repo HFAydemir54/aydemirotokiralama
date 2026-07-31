@@ -1,21 +1,21 @@
 /**
- * ⚠️ ŞU ANDA YAYINDA DEĞİL.
- *
- * Süre bazlı sayfalar (/gunluk-, /haftalik-, /aylik-arac-kiralama) kaldırıldı;
- * içerikte doğrulanmamış koşullar (kilometre limiti, gecikme ücreti, araç
- * değişimi taahhüdü) yer aldığı için. Rotalar git geçmişinde mevcut
- * (commit b0e0cab).
- */
-
-/**
  * Süre bazlı kiralama sayfaları: /gunluk-, /haftalik-, /aylik-arac-kiralama
  *
  * Bu sayfalar lokasyon sayfalarından farklı bir arama niyetini karşılar:
- * kullanıcı "nerede" değil "ne kadar süre" sorusuyla arıyor. İçerik bu yüzden
- * fiyat mantığı, kilometre limiti ve süreye özgü koşullar üzerine kuruludur.
+ * kullanıcı "nerede" değil "ne kadar süre" sorusuyla arıyor.
  *
- * Her sayfanın `benefits`, `bestFor` ve `notes` alanları birbirinden farklı
- * olmalıdır — aksi halde üç sayfa da kopya içerik sayılır.
+ * ⚠️ İçerik yalnızca DOĞRULANMIŞ koşullara dayanır:
+ *   - Minimum kiralama süresi 1 gün
+ *   - Günlük fiyatlar sabit; haftalık ve aylık fiyatlar süreye göre değişiyor
+ *   - Günlük 200 km sınırı
+ *   - Depozito yok; ön rezervasyonda kapora
+ *   - Nakit veya havale; kredi kartı geçmiyor
+ *   - Teslim Pendik ofisinden, Sabiha Gökçen'e araç getiriliyor
+ *   - Ofis 7/24 açık, araçlar sigortalı ve kaskolu
+ *
+ * Kurumsal fatura, taksitli ödeme, ücretsiz araç değişimi gibi doğrulanmamış
+ * hiçbir hizmet yazılmaz. Üç sayfanın `benefits`, `bestFor` ve `notes`
+ * alanları birbirinden farklı olmalıdır.
  */
 
 export type Duration = {
@@ -26,11 +26,8 @@ export type Duration = {
   description: string;
   h1: string;
   intro: string;
-  /** Fiyatlandırmanın hangi alana göre gösterileceği */
-  priceKey: "daily" | "weekly" | "monthly";
-  priceLabel: string;
-  /** Kaç güne bölünerek "günlüğe denk gelen" hesaplanacak */
-  divisor: number;
+  /** Bu sürede fiyatın nasıl belirlendiği */
+  pricing: string;
   benefits: { title: string; text: string }[];
   bestFor: string[];
   notes: { title: string; text: string }[];
@@ -43,41 +40,40 @@ export const durations: Duration[] = [
     name: "Günlük",
     title: "Günlük Araç Kiralama | 1 Günden İtibaren",
     description:
-      "Günlük araç kiralama — 1 günden itibaren kiralama, adrese ve havalimanına teslim, 7/24 hizmet. Güncel günlük fiyatlar ve koşullar.",
+      "Günlük araç kiralama — 1 günden itibaren, Pendik ofisimizden teslim. Depozito yok, günlük 200 km, 7/24 açık. Güncel günlük fiyatlar.",
     h1: "Günlük Araç Kiralama",
     intro:
-      "Minimum kiralama süremiz 1 gündür (24 saat). Günlük kiralama, kendi aracı serviste olanlar, şehir dışından bir günlüğüne gelenler ve gün içinde birden fazla noktaya gitmesi gereken iş seyahatleri için en esnek seçenektir. Aracı sabah teslim alıp ertesi sabah aynı saatte iade edersiniz.",
-    priceKey: "daily",
-    priceLabel: "Günlük fiyat",
-    divisor: 1,
+      "Minimum kiralama süremiz 1 gündür. Günlük kiralama; kendi aracı serviste olanlar, şehir dışından kısa süreliğine gelenler ve gün içinde birden fazla noktaya gitmesi gereken iş seyahatleri için en esnek seçenek. Aracı teslim aldığınız saatte, ertesi gün aynı saatte iade edersiniz.",
+    pricing:
+      "Günlük fiyatlarımız araca göre sabittir ve aşağıdaki tabloda yer alıyor. Toplam tutarı teslim öncesi yazılı olarak paylaşıyoruz.",
     benefits: [
       {
         title: "Taahhüt yok",
-        text: "Tek gün için kiralayıp uzatmak isterseniz süreyi telefonla uzatabilirsiniz; yeni sözleşme gerekmez.",
+        text: "Tek gün için kiralayıp süreyi uzatmak isterseniz bize haber vermeniz yeterli.",
       },
       {
         title: "7/24 teslim ve iade",
-        text: "Sabah erken çıkış veya gece geç iade fark etmez, ofisimiz kesintisiz açık.",
+        text: "Ofisimiz kesintisiz açık; sabah erken çıkış veya gece geç iade fark etmiyor.",
       },
       {
-        title: "Aynı gün teslimat",
-        text: "Anadolu Yakası'nda çoğu adrese aynı gün içinde araç ulaştırıyoruz.",
+        title: "Depozito yok",
+        text: "Aracı hemen teslim alacaksanız ön ödeme gerekmiyor.",
       },
     ],
     bestFor: [
       "Kendi aracı serviste olanlar",
-      "Şehir dışından 1 günlüğüne gelenler",
+      "Şehir dışından bir günlüğüne gelenler",
       "Gün içinde çok noktaya gitmesi gereken iş seyahatleri",
-      "Havalimanı transferi + gün içi kullanım",
+      "Sabiha Gökçen'e inip şehir içinde araca ihtiyaç duyanlar",
     ],
     notes: [
       {
-        title: "Kilometre limiti",
-        text: "Günlük 250 km (SUV araçlarda 300 km) limit uygulanır. Şehir içi kullanım için fazlasıyla yeterlidir; şehirlerarası çıkış planlıyorsanız ek paket tanımlayalım.",
+        title: "Kilometre sınırı",
+        text: "Günlük 200 km sınırı uygulanır. Şehir içi kullanım için fazlasıyla yeterlidir; şehir dışına çıkacaksanız rezervasyon sırasında konuşalım.",
       },
       {
-        title: "Gecikme",
-        text: "İade saatini 1 saatten fazla aşan gecikmeler tam gün olarak ücretlendirilir. Gecikeceğinizi biliyorsanız haber verin, çoğu durumda çözüm buluyoruz.",
+        title: "Önceden ayırtma",
+        text: "Aracı ileri bir tarih için ayırtmak isterseniz kapora alıyoruz. Yoğun dönemlerde önceden yazmanızda fayda var.",
       },
     ],
     updatedAt: "2026-08-01",
@@ -85,43 +81,42 @@ export const durations: Duration[] = [
   {
     slug: "haftalik-arac-kiralama",
     name: "Haftalık",
-    title: "Haftalık Araç Kiralama | 7 Günlük",
+    title: "Haftalık Araç Kiralama | 7 Gün ve Üzeri",
     description:
-      "Haftalık araç kiralama fiyatları. 7 günlük kiralamada günlük maliyet düşer. Pendik ve Sabiha Gökçen teslim, sınırsız destek.",
+      "Haftalık araç kiralama. Pendik ofisimizden teslim, depozito yok, 7/24 açık. Haftalık fiyat için WhatsApp'tan yazın.",
     h1: "Haftalık Araç Kiralama",
     intro:
-      "7 gün ve üzeri kiralamalarda günlük fiyat, tek gün kiralamaya göre belirgin şekilde düşer. Haftalık kiralama; tatil, uzun iş seyahati veya misafirlik dönemleri için en dengeli seçenektir. Süre sonunda uzatmak isterseniz aylık tarifeye geçiş yapabilirsiniz.",
-    priceKey: "weekly",
-    priceLabel: "Haftalık fiyat (7 gün)",
-    divisor: 7,
+      "Bir hafta ve üzeri kiralamalarda süreye göre fiyat belirliyoruz. Haftalık kiralama; tatil, uzun iş seyahati veya misafirlik dönemleri için dengeli bir seçenek. Tek sözleşmeyle, aracı hafta boyunca kesintisiz kullanırsınız.",
+    pricing:
+      "Haftalık fiyatlar kiralama süresine ve araca göre değiştiği için sabit liste yayınlamıyoruz. Tarihlerinizi yazmanız yeterli, toplam tutarı hemen paylaşıyoruz.",
     benefits: [
       {
-        title: "Günlük maliyet düşer",
-        text: "Aynı aracı 7 gün kiraladığınızda günlüğe denk gelen tutar tek gün fiyatının altına iner.",
-      },
-      {
         title: "Tek sözleşme",
-        text: "Hafta boyunca tek sözleşme, tek ödeme. Her gün yeniden işlem yapmanız gerekmez.",
+        text: "Hafta boyunca tek sözleşme ve tek ödeme; her gün yeniden işlem yapmanız gerekmiyor.",
       },
       {
-        title: "Aylığa geçiş",
-        text: "Süre uzarsa haftalık kiralamayı aylık tarifeye çevirip fiyat avantajından yararlanabilirsiniz.",
+        title: "Süreye göre fiyat",
+        text: "Kiralama uzadıkça fiyatı birlikte belirliyoruz. Tarihlerinizi yazın, teklifi paylaşalım.",
+      },
+      {
+        title: "Depozito yok",
+        text: "Uzun süreli kiralamada da depozito almıyoruz.",
       },
     ],
     bestFor: [
       "Tatil ve şehir dışı seyahatler",
       "Bir haftalık iş seyahati veya proje süresi",
-      "Yurt dışından gelen misafirlerin İstanbul ziyareti",
+      "Şehir dışından gelip bir hafta kalacak misafirler",
       "Kendi aracı uzun süreli onarımda olanlar",
     ],
     notes: [
       {
-        title: "Kilometre limiti",
-        text: "Haftalık kiralamada kilometre limiti gün sayısıyla çarpılarak hesaplanır; günleri ayrı ayrı değil toplam üzerinden değerlendiriyoruz. Bu, bazı günler çok yol yapıp bazı günler az yapan kullanıcılara esneklik sağlar.",
+        title: "Kilometre sınırı",
+        text: "Günlük 200 km sınırı haftalık kiralamalarda da geçerlidir. Uzun yol planınız varsa baştan konuşalım.",
       },
       {
-        title: "Araç değişimi",
-        text: "Uzun süreli kiralamalarda periyodik bakım zamanı gelirse aracı muadili ile ücretsiz değiştiriyoruz.",
+        title: "Araç müsaitliği",
+        text: "Filomuzda dört araç bulunuyor. Uzun süreli kiralamalarda müsaitlik sınırlı olabildiği için önceden yazmanızı öneririz.",
       },
     ],
     updatedAt: "2026-08-01",
@@ -131,49 +126,40 @@ export const durations: Duration[] = [
     name: "Aylık",
     title: "Aylık Araç Kiralama | Uzun Dönem",
     description:
-      "Aylık (uzun dönem) araç kiralama. 30 gün ve üzeri kiralamalarda en düşük günlük maliyet, kurumsal faturalı seçenek, bakım dahil.",
-    h1: "Aylık Araç Kiralama (Uzun Dönem)",
+      "Aylık (uzun dönem) araç kiralama. Sigorta, kasko ve bakım dahil; depozito yok. Aylık fiyat için WhatsApp'tan bilgi alın.",
+    h1: "Aylık Araç Kiralama",
     intro:
-      "30 gün ve üzeri kiralamalarda günlük maliyet en düşük seviyeye iner. Aylık kiralama, araç satın almadan araç sahibi olmanın esnek yoludur: sigorta, kasko ve periyodik bakım bize aittir, siz sadece yakıt ve kullanım maliyetini üstlenirsiniz. Kurumsal müşterilerimiz için faturalı ve çoklu araç seçenekleri mevcuttur.",
-    priceKey: "monthly",
-    priceLabel: "Aylık fiyat (30 gün)",
-    divisor: 30,
+      "Bir ay ve üzeri kiralamalarda fiyatı süreye göre belirliyoruz. Aylık kiralama, araç satın almadan araç kullanmanın esnek yolu: sigorta, kasko ve periyodik bakım bize ait, siz yalnızca yakıt ve kullanım masrafını üstlenirsiniz.",
+    pricing:
+      "Aylık fiyatlar kiralama süresine ve araca göre belirlenir. Ne kadar süreyle ihtiyacınız olduğunu yazın, size özel teklifi paylaşalım.",
     benefits: [
       {
-        title: "En düşük günlük maliyet",
-        text: "Aylık tarifede günlüğe denk gelen tutar, tek gün fiyatının belirgin şekilde altındadır.",
+        title: "Bakım ve sigorta bize ait",
+        text: "Periyodik bakım, sigorta ve kasko bizim sorumluluğumuzda. Takip etmeniz gereken bir şey kalmıyor.",
       },
       {
-        title: "Bakım ve sigorta dahil",
-        text: "Periyodik bakım, sigorta ve kasko bize ait. Lastik ve muayene takibiyle uğraşmazsınız.",
+        title: "Süreye göre fiyat",
+        text: "Uzun dönemde fiyatı birlikte belirliyoruz. İhtiyaç süresini yazmanız yeterli.",
       },
       {
-        title: "Kurumsal fatura",
-        text: "Şirketler için faturalı kiralama; birden fazla araç ihtiyacında toplu fiyatlandırma yapıyoruz.",
-      },
-      {
-        title: "Amortisman riski yok",
-        text: "Aracın değer kaybı, satış süreci ve beklenmedik arıza maliyetleri sizi ilgilendirmez.",
+        title: "Amortisman derdi yok",
+        text: "Aracın değer kaybı, satış süreci ve beklenmedik arıza maliyetleri sizi ilgilendirmiyor.",
       },
     ],
     bestFor: [
-      "Tuzla Teknopark ve organize sanayide uzun süreli görevlendirmeler",
-      "Şirketlerin filo ihtiyacı ve personel araçları",
-      "Araç satın almadan önce modeli uzun süre denemek isteyenler",
-      "Şehir değiştiren veya geçici olarak İstanbul'da bulunanlar",
+      "Geçici olarak İstanbul'da bulunanlar",
+      "Uzun süreli görevlendirmeyle şehre gelenler",
+      "Araç satın almadan önce uzun süre denemek isteyenler",
+      "Kendi aracı uzun süre kullanılamayacak olanlar",
     ],
     notes: [
       {
-        title: "Kilometre paketi",
-        text: "Aylık kiralamalarda kilometre limiti kullanım profilinize göre belirlenir. Günlük ortalama kaç km yapacağınızı baştan konuşalım; sonradan aşım ücreti sürpriz olmasın.",
+        title: "Kilometre planı",
+        text: "Günlük 200 km sınırı uzun dönem kiralamalarda da geçerli. Aylık ortalama kaç km yapacağınızı baştan konuşmakta fayda var.",
       },
       {
         title: "Ödeme",
-        text: "Aylık ödemeler peşin veya taksitli olarak planlanabilir. Kurumsal kiralamalarda fatura kesilir.",
-      },
-      {
-        title: "Sözleşme uzatma",
-        text: "Süre sonunda devam etmek isterseniz aynı araçla sözleşmeyi uzatıyoruz; araç değiştirmek zorunda kalmazsınız.",
+        text: "Ödeme nakit veya banka havalesiyle yapılır; kredi kartı geçmemektedir.",
       },
     ],
     updatedAt: "2026-08-01",
