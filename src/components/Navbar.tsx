@@ -12,7 +12,7 @@ const navLinks = [
   { href: "/sabiha-gokcen-arac-kiralama", label: "Sabiha Gökçen" },
   { href: "/pendik-arac-kiralama", label: "Pendik" },
   { href: "/kiralama-kosullari", label: "Koşullar" },
-  { href: "/blog", label: "Blog" },
+  { href: "/sss", label: "SSS" },
   { href: "/iletisim", label: "İletişim" },
 ];
 

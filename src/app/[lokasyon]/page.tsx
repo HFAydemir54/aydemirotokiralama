@@ -5,8 +5,7 @@ import { Clock, MapPin, Plane } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FaqSection from "@/components/FaqSection";
 import JsonLd from "@/components/JsonLd";
-import PriceOnRequest from "@/components/PriceOnRequest";
-import RelatedPosts from "@/components/RelatedPosts";
+import FleetEmptyState from "@/components/FleetEmptyState";
 import VehicleCard from "@/components/VehicleCard";
 import WhatsAppCta from "@/components/WhatsAppCta";
 import {
@@ -14,10 +13,10 @@ import {
   faqSchema,
   localServiceSchema,
 } from "@/lib/schema";
-import { SHOW_PRICES, formatPrice } from "@/lib/site";
+
 import { homeFaqs } from "@/data/faq";
 import { getLocation, locations } from "@/data/locations";
-import { minDailyPrice, popularVehicles, vehicles } from "@/data/vehicles";
+import { featuredVehicles, hasVehicles } from "@/data/vehicles";
 
 /**
  * Lokasyon (ilçe) sayfaları: /pendik-arac-kiralama, /kartal-arac-kiralama ...
@@ -83,10 +82,7 @@ export default async function LocationPage(props: PageProps<"/[lokasyon]">) {
             {location.intro}
           </p>
           <p className="mt-4 text-sm text-white/60">
-            {SHOW_PRICES
-              ? `Günlük kiralama ${formatPrice(minDailyPrice)}'den başlayan fiyatlarla · `
-              : "Günlük, haftalık ve aylık kiralama · "}
-            {location.deliveryTime}
+            Günlük, haftalık ve aylık kiralama · {location.deliveryTime}
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">
@@ -131,58 +127,33 @@ export default async function LocationPage(props: PageProps<"/[lokasyon]">) {
 
           <div className="rounded-2xl border border-border bg-surface p-8">
             <h2 className="text-lg font-semibold text-primary">
-              {location.name}&apos;e teslim ettiğimiz araçlar
+              Teslimat ve kiralama
             </h2>
-            <table className="mt-5 w-full text-sm">
-              <thead>
-                <tr className="border-b border-border text-left text-xs uppercase tracking-wide text-muted">
-                  <th scope="col" className="pb-2 font-medium">
-                    Araç
-                  </th>
-                  <th scope="col" className="pb-2 text-right font-medium">
-                    {SHOW_PRICES ? "Günlük" : "Vites / Yakıt"}
-                  </th>
-                  <th scope="col" className="pb-2 text-right font-medium">
-                    {SHOW_PRICES ? "Aylık" : "Fiyat"}
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border">
-                {vehicles.map((v) => (
-                  <tr key={v.slug}>
-                    <th scope="row" className="py-3 text-left font-medium">
-                      <Link
-                        href={`/araclar/${v.slug}`}
-                        className="text-primary transition-colors hover:text-accent"
-                      >
-                        {v.brand} {v.model}
-                      </Link>
-                    </th>
-                    <td className="py-3 text-right text-muted">
-                      {SHOW_PRICES
-                        ? formatPrice(v.prices.daily)
-                        : `${v.transmission} · ${v.fuel}`}
-                    </td>
-                    <td className="py-3 text-right">
-                      {SHOW_PRICES ? (
-                        <span className="text-muted">
-                          {formatPrice(v.prices.monthly)}
-                        </span>
-                      ) : (
-                        <PriceOnRequest
-                          size="sm"
-                          label={`fiyat_lokasyon_${v.slug}`}
-                          message={`Merhaba, ${location.locative} ${v.brand} ${v.model} kiralamak istiyorum. Fiyat bilgisi alabilir miyim?`}
-                        />
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <p className="mt-4 text-xs text-muted">
-              Fiyatlara sigorta ve bakım dahildir. Güncel fiyat ve müsaitlik için
-              WhatsApp&apos;tan yazabilirsiniz.
+            <dl className="mt-5 space-y-4 text-sm">
+              <div>
+                <dt className="font-medium text-primary">Kiralama süreleri</dt>
+                <dd className="mt-1 text-muted">
+                  Günlük, haftalık ve aylık kiralama yapabilirsiniz.
+                </dd>
+              </div>
+              <div>
+                <dt className="font-medium text-primary">Teslim noktaları</dt>
+                <dd className="mt-1 text-muted">
+                  Pendik&apos;teki ofisimiz, {location.name} içindeki adresiniz veya
+                  Sabiha Gökçen Havalimanı.
+                </dd>
+              </div>
+              <div>
+                <dt className="font-medium text-primary">Çalışma saatleri</dt>
+                <dd className="mt-1 text-muted">7/24 açık.</dd>
+              </div>
+            </dl>
+            <p className="mt-6 text-sm text-muted">
+              Güncel araç ve fiyat bilgisi için{" "}
+              <Link href="/iletisim" className="text-accent hover:underline">
+                bize ulaşın
+              </Link>
+              .
             </p>
           </div>
         </div>
@@ -194,19 +165,25 @@ export default async function LocationPage(props: PageProps<"/[lokasyon]">) {
           <h2 className="mb-8 text-2xl font-bold tracking-tight text-primary">
             {location.name}&apos;e Teslim Edebileceğimiz Araçlar
           </h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {popularVehicles.slice(0, 3).map((v) => (
-              <VehicleCard key={v.slug} vehicle={v} />
-            ))}
-          </div>
-          <div className="mt-8">
-            <Link
-              href="/araclar"
-              className="text-sm font-semibold text-accent hover:underline"
-            >
-              Tüm araçları ve fiyatları görüntüle →
-            </Link>
-          </div>
+          {hasVehicles ? (
+            <>
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {featuredVehicles.slice(0, 3).map((v) => (
+                  <VehicleCard key={v.slug} vehicle={v} />
+                ))}
+              </div>
+              <div className="mt-8">
+                <Link
+                  href="/araclar"
+                  className="text-sm font-semibold text-accent hover:underline"
+                >
+                  Tüm araçları görüntüle →
+                </Link>
+              </div>
+            </>
+          ) : (
+            <FleetEmptyState />
+          )}
         </div>
       </section>
 
@@ -214,15 +191,6 @@ export default async function LocationPage(props: PageProps<"/[lokasyon]">) {
         faqs={homeFaqs}
         title={`${location.name} Araç Kiralama SSS`}
         className="bg-background"
-      />
-
-      <RelatedPosts
-        slugs={[
-          "pendik-arac-kiralama-fiyatlari",
-          "istanbul-gunluk-arac-kiralama",
-          "arac-kiralama-icin-gerekli-belgeler",
-        ]}
-        className="bg-surface"
       />
 
       {/* Yakın bölgeler + havalimanı: internal linking */}

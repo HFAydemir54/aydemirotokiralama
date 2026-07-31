@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
 import WhatsAppCta from "@/components/WhatsAppCta";
 import { breadcrumbSchema } from "@/lib/schema";
-import { SHOW_PRICES, formatPrice } from "@/lib/site";
-import { SEGMENT_LABELS, vehicles, vehicleTitle } from "@/data/vehicles";
 
 export const metadata: Metadata = {
   title: "Kiralama Koşulları | Yaş, Ehliyet, Depozito",
@@ -55,50 +52,6 @@ export default function TermsPage() {
               segmentte 21 yaş ve 2 yıllık ehliyet yeterliyken, SUV ve üst
               segment araçlarda 25 yaş ve 3 yıllık ehliyet aranır.
             </p>
-          </Section>
-
-          <Section title="Araç bazında koşullar">
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[520px] text-sm">
-                <thead>
-                  <tr className="border-b border-border text-left text-xs uppercase tracking-wide text-muted">
-                    <th scope="col" className="pb-2 font-medium">Araç</th>
-                    <th scope="col" className="pb-2 font-medium">Segment</th>
-                    <th scope="col" className="pb-2 text-right font-medium">Min. yaş</th>
-                    <th scope="col" className="pb-2 text-right font-medium">Ehliyet</th>
-                    {SHOW_PRICES && (
-                      <th scope="col" className="pb-2 text-right font-medium">
-                        Depozito
-                      </th>
-                    )}
-                    <th scope="col" className="pb-2 text-right font-medium">Km/gün</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border">
-                  {vehicles.map((v) => (
-                    <tr key={v.slug}>
-                      <th scope="row" className="py-3 text-left font-medium">
-                        <Link
-                          href={`/araclar/${v.slug}`}
-                          className="text-primary transition-colors hover:text-accent"
-                        >
-                          {vehicleTitle(v)}
-                        </Link>
-                      </th>
-                      <td className="py-3 text-muted">{SEGMENT_LABELS[v.segment]}</td>
-                      <td className="py-3 text-right">{v.minAge}</td>
-                      <td className="py-3 text-right">{v.minLicenseYears} yıl</td>
-                      {SHOW_PRICES && (
-                        <td className="py-3 text-right">
-                          {formatPrice(v.deposit)}
-                        </td>
-                      )}
-                      <td className="py-3 text-right">{v.kmLimitDaily}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
           </Section>
 
           <Section title="Depozito">

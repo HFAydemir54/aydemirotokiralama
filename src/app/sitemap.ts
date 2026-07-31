@@ -1,8 +1,6 @@
 import type { MetadataRoute } from "next";
-import { durations } from "@/data/durations";
 import { locations } from "@/data/locations";
-import { posts } from "@/data/posts";
-import { vehicles } from "@/data/vehicles";
+import { availableVehicles } from "@/data/vehicles";
 import { SITE } from "@/lib/site";
 
 /**
@@ -53,31 +51,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.5,
     },
-    {
-      url: `${SITE.url}/blog`,
-      lastModified: STATIC_UPDATED,
-      changeFrequency: "weekly",
-      priority: 0.6,
-    },
   ];
 
-  const durationPages: MetadataRoute.Sitemap = durations.map((d) => ({
-    url: `${SITE.url}/${d.slug}`,
-    lastModified: d.updatedAt,
-    changeFrequency: "monthly",
-    priority: 0.7,
-  }));
 
-  const postPages: MetadataRoute.Sitemap = posts.map((p) => ({
-    url: `${SITE.url}/blog/${p.slug}`,
-    lastModified: p.updatedAt,
-    changeFrequency: "monthly",
-    priority: 0.6,
-  }));
-
-  const vehiclePages: MetadataRoute.Sitemap = vehicles.map((v) => ({
+  // Filo boşken hiç araç URL'i bildirilmez; araç eklendikçe otomatik eklenir.
+  const vehiclePages: MetadataRoute.Sitemap = availableVehicles.map((v) => ({
     url: `${SITE.url}/araclar/${v.slug}`,
-    lastModified: v.updatedAt,
+    lastModified: v.updatedAt ?? STATIC_UPDATED,
     changeFrequency: "weekly",
     priority: 0.8,
   }));
@@ -89,11 +69,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: l.priority,
   }));
 
-  return [
-    ...staticPages,
-    ...vehiclePages,
-    ...locationPages,
-    ...durationPages,
-    ...postPages,
-  ];
+  return [...staticPages, ...vehiclePages, ...locationPages];
 }

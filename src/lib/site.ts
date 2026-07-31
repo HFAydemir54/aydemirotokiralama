@@ -28,21 +28,6 @@ export const SITE = {
   googleReviewUrl: "",
 } as const;
 
-/**
- * Fiyatların sitede gösterilip gösterilmeyeceği.
- *
- * ŞU AN `false`: data/vehicles.ts'teki fiyatlar örnek (mock) veri olduğu için
- * hiçbir tutar yayınlanmıyor; fiyat alanlarının yerinde "WhatsApp'tan fiyat
- * alın" çağrısı gösteriliyor. Bu, fiyat tablolarının ve schema.org Offer
- * verisinin uydurma rakamla yayına çıkmasını engeller.
- *
- * GERÇEK FİYATLAR GİRİLDİKTEN SONRA: data/vehicles.ts'teki tutarları
- * güncelleyin ve bu değeri `true` yapın — fiyat tabloları, kartlardaki
- * tutarlar, meta açıklamalardaki "₺X'den başlayan" ifadeleri ve Car/Offer
- * schema'sı otomatik olarak geri gelir.
- */
-export const SHOW_PRICES: boolean = false;
-
 export const ADDRESS_ONE_LINE =`${SITE.address.street}, ${SITE.address.postalCode} ${SITE.address.district}/${SITE.address.city}`;
 
 /** Ön-doldurulmuş WhatsApp linki üretir. */

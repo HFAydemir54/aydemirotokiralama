@@ -1,4 +1,18 @@
 /**
+ * ⚠️ ŞU ANDA YAYINDA DEĞİL.
+ *
+ * Bu yazılar hazır ancak /blog rotaları kaldırıldığı için sitede
+ * yayınlanmıyor. Sebep: metinlerde doğrulanmamış işletme koşulları geçiyor
+ * (kilometre limiti, iptal süresi, depozito uygulaması, kredi kartı şartı).
+ *
+ * YAYINA ALMAK İÇİN:
+ *   1. Aşağıdaki yazılardaki koşulları kendi gerçek şartlarınızla doğrulayın.
+ *   2. src/app/blog/page.tsx ve src/app/blog/[slug]/page.tsx rotalarını geri
+ *      ekleyin (git geçmişinde mevcut: commit b0e0cab).
+ *   3. sitemap.ts'e blog URL'lerini geri ekleyin.
+ */
+
+/**
  * Blog yazıları.
  *
  * İçerik MDX yerine yapılandırılmış bloklar halinde tutuluyor: ek bağımlılık

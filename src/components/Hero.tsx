@@ -1,13 +1,15 @@
 import Image from "next/image";
 import { Clock, MapPin, Plane, ShieldCheck } from "lucide-react";
 import ReservationForm from "./ReservationForm";
-import { SHOW_PRICES, formatPrice } from "@/lib/site";
-import { minDailyPrice, vehicles, vehicleTitle } from "@/data/vehicles";
+import WhatsAppCta from "./WhatsAppCta";
 
 /**
  * Server component — LCP metni (H1) hydration beklemeden boyanır.
- * Daha önce framer-motion `initial={{ opacity: 0 }}` kullanıldığı için
- * başlık, JS yüklenene kadar görünmüyordu; bu LCP'yi doğrudan bozuyordu.
+ * Daha önce framer-motion `initial={{ opacity: 0 }}` kullanıldığı için başlık
+ * JS yüklenene kadar görünmüyordu; bu LCP'yi doğrudan bozuyordu.
+ *
+ * Hero'da fiyat veya araç modeli gösterilmez — bu bilgiler kesinleşmeden
+ * hiçbir sayısal iddiada bulunulmuyor.
  */
 export default function Hero({
   title,
@@ -18,11 +20,6 @@ export default function Hero({
   highlight?: string;
   description: string;
 }) {
-  const options = vehicles.map((v) => ({
-    slug: v.slug,
-    label: vehicleTitle(v),
-  }));
-
   return (
     <section id="rezervasyon" className="relative overflow-hidden pt-20">
       <div className="absolute inset-0">
@@ -55,14 +52,18 @@ export default function Hero({
           {description}
         </p>
 
-        <p className="mt-4 text-sm text-white/60">
-          {SHOW_PRICES
-            ? `Günlük kiralama ${formatPrice(minDailyPrice)}'den başlayan fiyatlarla.`
-            : "Tarihlerinizi girin, uygun araçları ve fiyatı dakikalar içinde paylaşalım."}
-        </p>
-
         <div className="mt-8 max-w-4xl">
-          <ReservationForm options={options} />
+          <ReservationForm />
+        </div>
+
+        <div className="mt-6">
+          <WhatsAppCta
+            label="hero_bilgi_al"
+            message="Merhaba, araç kiralama hakkında bilgi almak istiyorum."
+            className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/10"
+          >
+            WhatsApp&apos;tan Bilgi Al
+          </WhatsAppCta>
         </div>
 
         <ul className="mt-10 flex flex-wrap gap-x-10 gap-y-4">

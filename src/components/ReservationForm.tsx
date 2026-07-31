@@ -5,18 +5,26 @@ import { ArrowRight, CalendarDays, Car } from "lucide-react";
 import { track } from "@/lib/analytics";
 import { waLink } from "@/lib/site";
 
-type Option = { slug: string; label: string };
-
 /**
  * Rezervasyon formu — backend yoktur.
- * Form, girilen bilgileri ön-doldurulmuş bir WhatsApp mesajına çevirir.
- * Amaç: gelen talebin "bilgi almak istiyorum" yerine tarih ve araç içermesi.
+ * Girilen bilgileri ön-doldurulmuş bir WhatsApp mesajına çevirir; amaç gelen
+ * talebin "bilgi almak istiyorum" yerine tarih ve ihtiyaç içermesi.
+ *
+ * Araç seçimi, filo kesinleşene kadar model adı yerine SINIF üzerinden
+ * yapılır — sitede olmayan bir modeli listelememek için.
  */
-export default function ReservationForm({ options }: { options: Option[] }) {
+const VEHICLE_CLASSES = [
+  "Ekonomik",
+  "Orta sınıf",
+  "Otomatik vites",
+  "SUV",
+] as const;
+
+export default function ReservationForm() {
   const today = new Date().toISOString().slice(0, 10);
   const [pickup, setPickup] = useState("");
   const [dropoff, setDropoff] = useState("");
-  const [vehicle, setVehicle] = useState("");
+  const [vehicleClass, setVehicleClass] = useState("");
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -24,13 +32,13 @@ export default function ReservationForm({ options }: { options: Option[] }) {
     const parts = ["Merhaba, araç kiralamak istiyorum."];
     if (pickup) parts.push(`Alış: ${formatDate(pickup)}`);
     if (dropoff) parts.push(`Teslim: ${formatDate(dropoff)}`);
-    parts.push(`Araç: ${vehicle || "Uygun olan aracınız"}`);
-    parts.push("Uygun araçları ve fiyatı paylaşabilir misiniz?");
+    if (vehicleClass) parts.push(`Tercih: ${vehicleClass}`);
+    parts.push("Uygun araçlarınızı ve fiyatı paylaşabilir misiniz?");
 
     track("reservation_form_submit", {
       pickup_date: pickup,
       dropoff_date: dropoff,
-      vehicle: vehicle || "belirtilmedi",
+      vehicle_class: vehicleClass || "belirtilmedi",
     });
 
     window.open(waLink(parts.join("\n")), "_blank", "noopener,noreferrer");
@@ -65,17 +73,17 @@ export default function ReservationForm({ options }: { options: Option[] }) {
           />
         </Field>
 
-        <Field label="Araç" htmlFor="vehicle" icon={Car}>
+        <Field label="Araç Tercihi" htmlFor="vehicle-class" icon={Car}>
           <select
-            id="vehicle"
-            value={vehicle}
-            onChange={(e) => setVehicle(e.target.value)}
+            id="vehicle-class"
+            value={vehicleClass}
+            onChange={(e) => setVehicleClass(e.target.value)}
             className="w-full rounded-lg border border-white/20 bg-white/95 px-3 py-2.5 text-sm text-primary outline-none focus:border-accent"
           >
             <option value="">Fark etmez</option>
-            {options.map((o) => (
-              <option key={o.slug} value={o.label}>
-                {o.label}
+            {VEHICLE_CLASSES.map((c) => (
+              <option key={c} value={c}>
+                {c}
               </option>
             ))}
           </select>
@@ -86,12 +94,12 @@ export default function ReservationForm({ options }: { options: Option[] }) {
         type="submit"
         className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-7 py-3.5 text-sm font-semibold text-white transition-all hover:bg-accent/90 hover:shadow-lg hover:shadow-accent/20"
       >
-        Uygun Araçları Gör
+        Hemen Rezervasyon
         <ArrowRight className="h-4 w-4" />
       </button>
 
       <p className="mt-3 text-center text-xs text-white/60">
-        Bilgileriniz WhatsApp mesajına aktarılır, saniyeler içinde dönüş yapıyoruz.
+        Bilgileriniz WhatsApp mesajına aktarılır, en kısa sürede dönüş yapıyoruz.
       </p>
     </form>
   );

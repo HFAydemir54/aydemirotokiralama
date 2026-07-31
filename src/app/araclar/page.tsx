@@ -1,22 +1,16 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import VehicleCard from "@/components/VehicleCard";
-import FaqSection from "@/components/FaqSection";
-import LocationsGrid from "@/components/LocationsGrid";
+import FleetEmptyState from "@/components/FleetEmptyState";
 import JsonLd from "@/components/JsonLd";
+import VehicleCard from "@/components/VehicleCard";
 import { breadcrumbSchema } from "@/lib/schema";
-import { SHOW_PRICES, formatPrice } from "@/lib/site";
-import { homeFaqs } from "@/data/faq";
-import { SEGMENT_LABELS, minDailyPrice, vehicles } from "@/data/vehicles";
-import type { Segment } from "@/data/vehicles";
+import { availableVehicles, hasVehicles } from "@/data/vehicles";
 
 export const metadata: Metadata = {
-  title: SHOW_PRICES ? "Kiralık Araçlar ve Günlük Fiyatlar" : "Kiralık Araç Filomuz",
-  description: SHOW_PRICES
-    ? `Aydemir Oto Kiralama filosu ve güncel günlük fiyatları. Ekonomik, orta sınıf ve SUV araçlar ${formatPrice(
-        minDailyPrice
-      )}'den başlayan fiyatlarla. Pendik ve Sabiha Gökçen teslim.`
-    : "Aydemir Oto Kiralama filosu: ekonomik, orta sınıf ve SUV araçlar. Günlük, haftalık ve aylık kiralama. Pendik ve Sabiha Gökçen teslim, WhatsApp'tan hızlı fiyat.",
+  title: "Kiralık Araç Filomuz",
+  description:
+    "Aydemir Oto Kiralama araç filosu. Günlük, haftalık ve aylık kiralama; Pendik ve Sabiha Gökçen Havalimanı teslim. Güncel araç ve fiyat bilgisi için bize yazın.",
   alternates: { canonical: "/araclar" },
 };
 
@@ -24,9 +18,6 @@ const crumbs = [
   { name: "Ana Sayfa", path: "/" },
   { name: "Araçlar", path: "/araclar" },
 ];
-
-/** Segmentleri sabit sırayla gösteriyoruz (ekonomikten yukarı). */
-const segmentOrder: Segment[] = ["ekonomik", "orta", "suv", "lux"];
 
 export default function VehiclesPage() {
   return (
@@ -36,51 +27,58 @@ export default function VehiclesPage() {
         <Breadcrumbs items={crumbs} />
       </div>
 
-      <section className="bg-background py-16">
+      <section className="bg-background py-14">
         <div className="mx-auto max-w-6xl px-6">
           <h1 className="text-4xl font-bold tracking-tight text-primary sm:text-5xl">
             Kiralık Araçlarımız
           </h1>
-          <p className="mt-6 max-w-3xl leading-relaxed text-muted">
-            Filomuzdaki tüm araçların günlük, haftalık ve aylık fiyatlarını
-            aşağıda bulabilirsiniz. Fiyatlara sigorta ve bakım dahildir; teslim
-            öncesi toplam tutarı yazılı olarak paylaşıyoruz. Güncel fiyat için
-            WhatsApp&apos;tan yazmanız yeterli. Araç seçiminde
-            kararsız kalırsanız kullanım amacınızı yazın, size uygun olanı
-            önerelim.
+          <p className="mt-5 max-w-3xl leading-relaxed text-muted">
+            Pendik merkez ofisimizden ve Sabiha Gökçen Havalimanı&apos;ndan araç
+            teslimi yapıyoruz. Günlük, haftalık ve aylık kiralama seçenekleri
+            mevcuttur. İhtiyacınıza uygun aracı birlikte belirleyelim.
           </p>
         </div>
       </section>
 
-      {segmentOrder.map((segment) => {
-        const group = vehicles.filter((v) => v.segment === segment);
-        if (group.length === 0) return null;
-
-        return (
-          <section
-            key={segment}
-            className="border-t border-border bg-surface py-14"
-          >
-            <div className="mx-auto max-w-6xl px-6">
-              <h2 className="mb-8 text-2xl font-bold tracking-tight text-primary">
-                {SEGMENT_LABELS[segment]} Araçlar
-              </h2>
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {group.map((v) => (
-                  <VehicleCard key={v.slug} vehicle={v} />
-                ))}
-              </div>
+      <section className="bg-surface py-14">
+        <div className="mx-auto max-w-6xl px-6">
+          {hasVehicles ? (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {availableVehicles.map((v) => (
+                <VehicleCard key={v.slug} vehicle={v} />
+              ))}
             </div>
-          </section>
-        );
-      })}
+          ) : (
+            <FleetEmptyState />
+          )}
+        </div>
+      </section>
 
-      <LocationsGrid
-        title="Aracınızı Nereye Teslim Edelim?"
-        description="Aşağıdaki bölgelerin tamamına araç teslimatı yapıyoruz."
-        className="bg-background"
-      />
-      <FaqSection faqs={homeFaqs} className="bg-surface" />
+      <section className="border-t border-border bg-background py-14">
+        <div className="mx-auto max-w-6xl px-6">
+          <h2 className="mb-6 text-xl font-bold text-primary">İlgili Sayfalar</h2>
+          <ul className="flex flex-wrap gap-3">
+            {[
+              { href: "/pendik-arac-kiralama", label: "Pendik Araç Kiralama" },
+              {
+                href: "/sabiha-gokcen-arac-kiralama",
+                label: "Sabiha Gökçen Araç Kiralama",
+              },
+              { href: "/kiralama-kosullari", label: "Kiralama Koşulları" },
+              { href: "/iletisim", label: "İletişim" },
+            ].map((l) => (
+              <li key={l.href}>
+                <Link
+                  href={l.href}
+                  className="inline-block rounded-lg border border-border bg-surface px-4 py-2 text-sm text-primary-light transition-colors hover:border-accent/40 hover:text-accent"
+                >
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
     </>
   );
 }

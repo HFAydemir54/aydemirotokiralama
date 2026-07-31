@@ -1,9 +1,7 @@
 import Link from "next/link";
 import { Car, MapPin, Phone } from "lucide-react";
 import { SITE } from "@/lib/site";
-import { durations } from "@/data/durations";
 import { locations } from "@/data/locations";
-import { vehicles, vehicleTitle } from "@/data/vehicles";
 
 /**
  * Footer aynı zamanda sitewide internal linking katmanıdır:
@@ -14,7 +12,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-border bg-surface pb-24 pt-14 md:pb-14">
       <div className="mx-auto max-w-6xl px-6">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
           <div>
             <div className="flex items-center gap-2.5">
               <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-white">
@@ -55,15 +53,6 @@ export default function Footer() {
             </a>
           </div>
 
-          <FooterCol title="Araçlar">
-            {vehicles.slice(0, 6).map((v) => (
-              <FooterLink key={v.slug} href={`/araclar/${v.slug}`}>
-                {vehicleTitle(v)} Kiralama
-              </FooterLink>
-            ))}
-            <FooterLink href="/araclar">Tüm Araçlar</FooterLink>
-          </FooterCol>
-
           <FooterCol title="Bölgeler">
             {locations.map((l) => (
               <FooterLink key={l.slug} href={`/${l.slug}`}>
@@ -73,17 +62,12 @@ export default function Footer() {
           </FooterCol>
 
           <FooterCol title="Kurumsal">
+            <FooterLink href="/araclar">Araç Filomuz</FooterLink>
             <FooterLink href="/sabiha-gokcen-arac-kiralama">
               Sabiha Gökçen Araç Kiralama
             </FooterLink>
-            {durations.map((d) => (
-              <FooterLink key={d.slug} href={`/${d.slug}`}>
-                {d.name} Araç Kiralama
-              </FooterLink>
-            ))}
             <FooterLink href="/kiralama-kosullari">Kiralama Koşulları</FooterLink>
             <FooterLink href="/sss">Sık Sorulan Sorular</FooterLink>
-            <FooterLink href="/blog">Blog</FooterLink>
             <FooterLink href="/iletisim">İletişim</FooterLink>
           </FooterCol>
         </div>

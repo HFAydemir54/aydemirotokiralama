@@ -1,4 +1,13 @@
 /**
+ * ⚠️ ŞU ANDA YAYINDA DEĞİL.
+ *
+ * Süre bazlı sayfalar (/gunluk-, /haftalik-, /aylik-arac-kiralama) kaldırıldı;
+ * içerikte doğrulanmamış koşullar (kilometre limiti, gecikme ücreti, araç
+ * değişimi taahhüdü) yer aldığı için. Rotalar git geçmişinde mevcut
+ * (commit b0e0cab).
+ */
+
+/**
  * Süre bazlı kiralama sayfaları: /gunluk-, /haftalik-, /aylik-arac-kiralama
  *
  * Bu sayfalar lokasyon sayfalarından farklı bir arama niyetini karşılar:

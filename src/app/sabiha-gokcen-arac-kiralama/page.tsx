@@ -4,7 +4,7 @@ import { Clock, MapPin, Plane } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FaqSection from "@/components/FaqSection";
 import JsonLd from "@/components/JsonLd";
-import RelatedPosts from "@/components/RelatedPosts";
+import FleetEmptyState from "@/components/FleetEmptyState";
 import VehicleCard from "@/components/VehicleCard";
 import WhatsAppCta from "@/components/WhatsAppCta";
 import {
@@ -12,9 +12,9 @@ import {
   faqSchema,
   localServiceSchema,
 } from "@/lib/schema";
-import { SHOW_PRICES, formatPrice } from "@/lib/site";
+
 import { airportFaqs } from "@/data/faq";
-import { minDailyPrice, popularVehicles } from "@/data/vehicles";
+import { featuredVehicles, hasVehicles } from "@/data/vehicles";
 
 const DESCRIPTION =
   "Sabiha Gökçen Havalimanı'nda araç kiralama. Uçuş takipli karşılama, 7/24 araç teslimi, gece inen uçuşlarda da hizmet. WhatsApp'tan hızlı rezervasyon.";
@@ -60,10 +60,8 @@ export default function AirportPage() {
             Sabiha Gökçen Havalimanı&apos;na indiğinizde aracınız sizi bekliyor
             olsun. Pendik&apos;teki ofisimiz havalimanına yaklaşık 8 km mesafede
             olduğu için teslimatı hızlı yapıyor, uçuşunuzu takip ederek rötar
-            durumunda teslim saatini kendimiz güncelliyoruz.
-            {SHOW_PRICES
-              ? ` Günlük kiralama ${formatPrice(minDailyPrice)}'den başlıyor.`
-              : " Uçuş bilginizi yazın, uygun araçları ve fiyatı hemen paylaşalım."}
+            durumunda teslim saatini kendimiz güncelliyoruz. Uçuş bilginizi
+            yazın, uygun araçları ve fiyatı hemen paylaşalım.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">
@@ -156,18 +154,18 @@ export default function AirportPage() {
       {/* Araçlar */}
       <section className="border-t border-border bg-surface py-16">
         <div className="mx-auto max-w-6xl px-6">
-          <h2 className="mb-3 text-2xl font-bold tracking-tight text-primary sm:text-3xl">
+          <h2 className="mb-8 text-2xl font-bold tracking-tight text-primary sm:text-3xl">
             Sabiha Gökçen&apos;de Teslim Edebileceğimiz Araçlar
           </h2>
-          <p className="mb-8 max-w-2xl text-muted">
-            Havalimanı teslimlerinde bagaj hacmi öne çıktığı için sedan ve SUV
-            araçlarımız daha çok tercih ediliyor.
-          </p>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {popularVehicles.map((v) => (
-              <VehicleCard key={v.slug} vehicle={v} />
-            ))}
-          </div>
+          {hasVehicles ? (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {featuredVehicles.map((v) => (
+                <VehicleCard key={v.slug} vehicle={v} />
+              ))}
+            </div>
+          ) : (
+            <FleetEmptyState />
+          )}
         </div>
       </section>
 
@@ -177,15 +175,6 @@ export default function AirportPage() {
         className="bg-background"
       />
 
-      <RelatedPosts
-        slugs={[
-          "sabiha-gokcen-arac-kiralama-nasil-yapilir",
-          "arac-kiralama-icin-gerekli-belgeler",
-          "kredi-kartsiz-arac-kiralama",
-        ]}
-        className="bg-surface"
-      />
-
       {/* İlgili sayfalar */}
       <section className="border-t border-border bg-surface py-14">
         <div className="mx-auto max-w-6xl px-6">
@@ -193,7 +182,6 @@ export default function AirportPage() {
           <ul className="flex flex-wrap gap-3">
             {[
               { href: "/pendik-arac-kiralama", label: "Pendik Araç Kiralama" },
-              { href: "/kurtkoy-arac-kiralama", label: "Kurtköy Araç Kiralama" },
               { href: "/tuzla-arac-kiralama", label: "Tuzla Araç Kiralama" },
               { href: "/istanbul-arac-kiralama", label: "İstanbul Araç Kiralama" },
               { href: "/kiralama-kosullari", label: "Kiralama Koşulları" },

@@ -1,6 +1,5 @@
-import { SHOW_PRICES, SITE } from "./site";
+import { SITE } from "./site";
 import type { Faq } from "@/data/faq";
-import type { Post } from "@/data/posts";
 import type { Vehicle } from "@/data/vehicles";
 import { vehicleTitle } from "@/data/vehicles";
 import { locations } from "@/data/locations";
@@ -122,69 +121,35 @@ export function vehicleSchema(v: Vehicle) {
     name,
     brand: { "@type": "Brand", name: v.brand },
     model: v.model,
-    vehicleModelDate: String(v.year),
-    vehicleTransmission: v.transmission,
-    fuelType: v.fuel,
-    seatingCapacity: v.seats,
-    vehicleEngine: { "@type": "EngineSpecification", name: v.engine },
-    image: v.image ? `${SITE.url}${v.image}` : `${SITE.url}/hero-bg.jpg`,
-    // Fiyat gösterimi kapalıyken Offer bloğu hiç yayınlanmaz: sayfada
-    // görünmeyen (ve doğrulanmamış) bir fiyatı schema'ya koymak politika
-    // ihlalidir. SHOW_PRICES açılınca otomatik geri gelir.
-    ...(SHOW_PRICES ? {
-    offers: {
-      "@type": "Offer",
-      availability: "https://schema.org/InStock",
-      priceCurrency: "TRY",
-      price: v.prices.daily,
-      priceSpecification: {
-        "@type": "UnitPriceSpecification",
-        price: v.prices.daily,
-        priceCurrency: "TRY",
-        unitCode: "DAY",
-        referenceQuantity: {
-          "@type": "QuantitativeValue",
-          value: 1,
-          unitCode: "DAY",
-        },
-      },
-      seller: { "@id": BUSINESS_ID },
-    },
-    } : {}),
-  };
-}
-
-/** Süre bazlı sayfalar için hizmet tanımı. */
-export function durationServiceSchema(durationName: string, description: string) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    serviceType: `${durationName} Araç Kiralama`,
-    provider: { "@id": BUSINESS_ID },
-    areaServed: { "@type": "City", name: "İstanbul" },
-    description,
-  };
-}
-
-/**
- * Blog yazıları için BlogPosting.
- * `author` ve `publisher` işletme kimliğine bağlanır — E-E-A-T sinyali.
- */
-export function postSchema(post: Post) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.description,
-    inLanguage: "tr-TR",
-    datePublished: post.publishedAt,
-    dateModified: post.updatedAt,
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": `${SITE.url}/blog/${post.slug}`,
-    },
-    author: { "@id": `${SITE.url}/#organization` },
-    publisher: { "@id": `${SITE.url}/#organization` },
+    // Yalnızca GİRİLMİŞ alanlar schema'ya yazılır — boş alan uydurulmaz.
+    ...(v.year && { vehicleModelDate: String(v.year) }),
+    ...(v.transmission && { vehicleTransmission: v.transmission }),
+    ...(v.fuel && { fuelType: v.fuel }),
+    ...(v.seats && { seatingCapacity: v.seats }),
+    ...(v.image && { image: `${SITE.url}${v.image}` }),
+    // Offer yalnızca gerçek bir günlük fiyat girildiğinde yayınlanır.
+    ...(typeof v.dailyPrice === "number"
+      ? {
+          offers: {
+            "@type": "Offer",
+            availability: "https://schema.org/InStock",
+            priceCurrency: "TRY",
+            price: v.dailyPrice,
+            priceSpecification: {
+              "@type": "UnitPriceSpecification",
+              price: v.dailyPrice,
+              priceCurrency: "TRY",
+              unitCode: "DAY",
+              referenceQuantity: {
+                "@type": "QuantitativeValue",
+                value: 1,
+                unitCode: "DAY",
+              },
+            },
+            seller: { "@id": BUSINESS_ID },
+          },
+        }
+      : {}),
   };
 }
 
