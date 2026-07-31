@@ -2,6 +2,12 @@ import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import StickyCta from "@/components/StickyCta";
+import JsonLd from "@/components/JsonLd";
+import { autoRentalSchema, organizationSchema, websiteSchema } from "@/lib/schema";
+import { SITE } from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -9,51 +15,43 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Aydemir Oto Kiralama | Pendik Araç Kiralama",
-  description:
-    "Aydemir Oto Kiralama — Pendik/İstanbul'da 7/24 güvenilir araç kiralama hizmeti. Ekonomik, konforlu ve lüks araç seçenekleri.",
-  keywords: [
-    "araç kiralama",
-    "oto kiralama",
-    "pendik araç kiralama",
-    "istanbul araç kiralama",
-    "aydemir oto kiralama",
-  ],
-  metadataBase: new URL("https://www.aydemirotokiralama.com"),
-  alternates: {
-    canonical: "/",
+  metadataBase: new URL(SITE.url),
+  title: {
+    default: "Pendik Araç Kiralama | Aydemir Oto Kiralama",
+    // Alt sayfalar sadece kendi başlığını verir, marka adı otomatik eklenir.
+    template: "%s | Aydemir Oto Kiralama",
   },
+  description:
+    "Pendik ve Sabiha Gökçen Havalimanı'nda 7/24 araç kiralama. Günlük, haftalık ve aylık kiralama, adrese teslim, WhatsApp'tan hızlı rezervasyon.",
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "tr_TR",
-    url: "https://www.aydemirotokiralama.com",
-    siteName: "Aydemir Oto Kiralama",
-    title: "Aydemir Oto Kiralama | Pendik Araç Kiralama",
+    url: SITE.url,
+    siteName: SITE.name,
+    title: "Pendik Araç Kiralama | Aydemir Oto Kiralama",
     description:
-      "Pendik/İstanbul'da 7/24 güvenilir araç kiralama hizmeti. Ekonomik, konforlu ve lüks araç seçenekleri.",
+      "Pendik ve Sabiha Gökçen Havalimanı'nda 7/24 araç kiralama. Günlük, haftalık ve aylık kiralama seçenekleri.",
     images: [
       {
         url: "/hero-bg.jpg",
         width: 1200,
         height: 630,
-        alt: "Aydemir Oto Kiralama",
+        alt: SITE.name,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aydemir Oto Kiralama | Pendik Araç Kiralama",
+    title: "Pendik Araç Kiralama | Aydemir Oto Kiralama",
     description:
-      "Pendik/İstanbul'da 7/24 güvenilir araç kiralama hizmeti. Ekonomik, konforlu ve lüks araç seçenekleri.",
+      "Pendik ve Sabiha Gökçen Havalimanı'nda 7/24 araç kiralama. WhatsApp'tan hızlı rezervasyon.",
     images: ["/hero-bg.jpg"],
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-    },
+    googleBot: { index: true, follow: true },
   },
 };
 
@@ -65,40 +63,9 @@ export default function RootLayout({
   return (
     <html lang="tr" className={`${geistSans.variable} scroll-smooth`}>
       <head>
-        {/* Schema.org LocalBusiness */}
-        <Script
-          id="schema-local-business"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "LocalBusiness",
-              name: "Aydemir Oto Kiralama",
-              image: "https://www.aydemirotokiralama.com/hero-bg.jpg",
-              url: "https://www.aydemirotokiralama.com",
-              telephone: "+905330703654",
-              priceRange: "₺₺",
-              openingHours: "Mo-Su 00:00-23:59",
-              address: {
-                "@type": "PostalAddress",
-                streetAddress: "Çamçeşme, Katip Çelebi Cd No:6/A",
-                addressLocality: "Pendik",
-                addressRegion: "İstanbul",
-                postalCode: "34899",
-                addressCountry: "TR",
-              },
-              geo: {
-                "@type": "GeoCoordinates",
-                latitude: 40.8764,
-                longitude: 29.2552,
-              },
-              sameAs: [
-                "https://wa.me/905330703654",
-                "https://www.instagram.com/aydemirotokiralama/",
-              ],
-            }),
-          }}
-        />
+        {/* Structured data — native <script>, ilk HTML yanıtında yer alır */}
+        <JsonLd data={[autoRentalSchema, organizationSchema, websiteSchema]} />
+
         {/* Google Tag Manager */}
         <Script
           id="gtm-script"
@@ -124,7 +91,11 @@ export default function RootLayout({
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
-        {children}
+
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
+        <StickyCta />
       </body>
     </html>
   );

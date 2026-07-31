@@ -1,0 +1,196 @@
+import { SITE } from "./site";
+import type { Faq } from "@/data/faq";
+import type { Post } from "@/data/posts";
+import type { Vehicle } from "@/data/vehicles";
+import { vehicleTitle } from "@/data/vehicles";
+import { locations } from "@/data/locations";
+
+const BUSINESS_ID = `${SITE.url}/#business`;
+const WEBSITE_ID = `${SITE.url}/#website`;
+
+const postalAddress = {
+  "@type": "PostalAddress",
+  streetAddress: SITE.address.street,
+  addressLocality: SITE.address.district,
+  addressRegion: SITE.address.city,
+  postalCode: SITE.address.postalCode,
+  addressCountry: SITE.address.country,
+};
+
+/**
+ * Araç kiralama işletmeleri için doğru schema tipi AutoRental'dır
+ * (LocalBusiness'ın alt tipi).
+ *
+ * NOT: aggregateRating / review alanları BİLEREK eklenmemiştir. Google,
+ * sitede görünmeyen veya gerçek olmayan puan verisini politika ihlali sayar.
+ * Gerçek Google yorumlarınızı siteye ekledikten sonra buraya gerçek puan ve
+ * yorum sayısını girebiliriz.
+ */
+export const autoRentalSchema = {
+  "@context": "https://schema.org",
+  "@type": "AutoRental",
+  "@id": BUSINESS_ID,
+  name: SITE.name,
+  url: SITE.url,
+  image: `${SITE.url}/hero-bg.jpg`,
+  telephone: SITE.phoneE164,
+  priceRange: "₺₺",
+  currenciesAccepted: "TRY",
+  paymentAccepted: "Nakit, Kredi Kartı, Havale/EFT",
+  address: postalAddress,
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: SITE.geo.lat,
+    longitude: SITE.geo.lng,
+  },
+  hasMap: SITE.googleMaps,
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+      ],
+      opens: "00:00",
+      closes: "23:59",
+    },
+  ],
+  areaServed: [
+    ...locations.map((l) => ({ "@type": "City", name: l.name })),
+    { "@type": "Airport", name: "Sabiha Gökçen Havalimanı", iataCode: "SAW" },
+  ],
+  sameAs: [SITE.instagram, `https://wa.me/${SITE.whatsapp}`],
+};
+
+export const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": `${SITE.url}/#organization`,
+  name: SITE.name,
+  url: SITE.url,
+  logo: `${SITE.url}/hero-bg.jpg`,
+  telephone: SITE.phoneE164,
+  address: postalAddress,
+  sameAs: [SITE.instagram],
+};
+
+export const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": WEBSITE_ID,
+  url: SITE.url,
+  name: SITE.name,
+  inLanguage: "tr-TR",
+  publisher: { "@id": `${SITE.url}/#organization` },
+};
+
+export function faqSchema(faqs: Faq[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+}
+
+export function breadcrumbSchema(items: { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      item: `${SITE.url}${item.path}`,
+    })),
+  };
+}
+
+export function vehicleSchema(v: Vehicle) {
+  const name = vehicleTitle(v);
+  return {
+    "@context": "https://schema.org",
+    "@type": "Car",
+    name,
+    brand: { "@type": "Brand", name: v.brand },
+    model: v.model,
+    vehicleModelDate: String(v.year),
+    vehicleTransmission: v.transmission,
+    fuelType: v.fuel,
+    seatingCapacity: v.seats,
+    vehicleEngine: { "@type": "EngineSpecification", name: v.engine },
+    image: v.image ? `${SITE.url}${v.image}` : `${SITE.url}/hero-bg.jpg`,
+    offers: {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      priceCurrency: "TRY",
+      price: v.prices.daily,
+      priceSpecification: {
+        "@type": "UnitPriceSpecification",
+        price: v.prices.daily,
+        priceCurrency: "TRY",
+        unitCode: "DAY",
+        referenceQuantity: {
+          "@type": "QuantitativeValue",
+          value: 1,
+          unitCode: "DAY",
+        },
+      },
+      seller: { "@id": BUSINESS_ID },
+    },
+  };
+}
+
+/** Süre bazlı sayfalar için hizmet tanımı. */
+export function durationServiceSchema(durationName: string, description: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: `${durationName} Araç Kiralama`,
+    provider: { "@id": BUSINESS_ID },
+    areaServed: { "@type": "City", name: "İstanbul" },
+    description,
+  };
+}
+
+/**
+ * Blog yazıları için BlogPosting.
+ * `author` ve `publisher` işletme kimliğine bağlanır — E-E-A-T sinyali.
+ */
+export function postSchema(post: Post) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.description,
+    inLanguage: "tr-TR",
+    datePublished: post.publishedAt,
+    dateModified: post.updatedAt,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE.url}/blog/${post.slug}`,
+    },
+    author: { "@id": `${SITE.url}/#organization` },
+    publisher: { "@id": `${SITE.url}/#organization` },
+  };
+}
+
+/** Lokasyon sayfaları için hizmet tanımı. */
+export function localServiceSchema(locationName: string, description: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: `${locationName} Araç Kiralama`,
+    provider: { "@id": BUSINESS_ID },
+    areaServed: { "@type": "City", name: locationName },
+    description,
+  };
+}
