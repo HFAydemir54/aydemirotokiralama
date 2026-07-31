@@ -18,8 +18,8 @@ export default function Footer() {
             <Image
               src="/logo/logo-on-light.png"
               alt={SITE.name}
-              width={190}
-              height={118}
+              width={300}
+              height={186}
               className="h-16 w-auto"
             />
 

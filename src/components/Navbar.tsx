@@ -51,8 +51,8 @@ export default function Navbar() {
           <Image
             src={solid ? "/logo/logo-on-light.png" : "/logo/logo-on-dark.png"}
             alt="Aydemir Oto Kiralama"
-            width={190}
-            height={118}
+            width={300}
+            height={186}
             priority
             className="h-14 w-auto"
           />
