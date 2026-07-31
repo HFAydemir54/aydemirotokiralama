@@ -5,6 +5,7 @@ import { Clock, MapPin, Plane } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FaqSection from "@/components/FaqSection";
 import JsonLd from "@/components/JsonLd";
+import PriceOnRequest from "@/components/PriceOnRequest";
 import RelatedPosts from "@/components/RelatedPosts";
 import VehicleCard from "@/components/VehicleCard";
 import WhatsAppCta from "@/components/WhatsAppCta";
@@ -13,7 +14,7 @@ import {
   faqSchema,
   localServiceSchema,
 } from "@/lib/schema";
-import { formatPrice } from "@/lib/site";
+import { SHOW_PRICES, formatPrice } from "@/lib/site";
 import { homeFaqs } from "@/data/faq";
 import { getLocation, locations } from "@/data/locations";
 import { minDailyPrice, popularVehicles, vehicles } from "@/data/vehicles";
@@ -82,8 +83,10 @@ export default async function LocationPage(props: PageProps<"/[lokasyon]">) {
             {location.intro}
           </p>
           <p className="mt-4 text-sm text-white/60">
-            Günlük kiralama {formatPrice(minDailyPrice)}&apos;den başlayan
-            fiyatlarla · {location.deliveryTime}
+            {SHOW_PRICES
+              ? `Günlük kiralama ${formatPrice(minDailyPrice)}'den başlayan fiyatlarla · `
+              : "Günlük, haftalık ve aylık kiralama · "}
+            {location.deliveryTime}
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">
@@ -128,7 +131,7 @@ export default async function LocationPage(props: PageProps<"/[lokasyon]">) {
 
           <div className="rounded-2xl border border-border bg-surface p-8">
             <h2 className="text-lg font-semibold text-primary">
-              {location.name} araç kiralama fiyatları
+              {location.name}&apos;e teslim ettiğimiz araçlar
             </h2>
             <table className="mt-5 w-full text-sm">
               <thead>
@@ -137,10 +140,10 @@ export default async function LocationPage(props: PageProps<"/[lokasyon]">) {
                     Araç
                   </th>
                   <th scope="col" className="pb-2 text-right font-medium">
-                    Günlük
+                    {SHOW_PRICES ? "Günlük" : "Vites / Yakıt"}
                   </th>
                   <th scope="col" className="pb-2 text-right font-medium">
-                    Aylık
+                    {SHOW_PRICES ? "Aylık" : "Fiyat"}
                   </th>
                 </tr>
               </thead>
@@ -155,11 +158,23 @@ export default async function LocationPage(props: PageProps<"/[lokasyon]">) {
                         {v.brand} {v.model}
                       </Link>
                     </th>
-                    <td className="py-3 text-right font-semibold text-accent">
-                      {formatPrice(v.prices.daily)}
-                    </td>
                     <td className="py-3 text-right text-muted">
-                      {formatPrice(v.prices.monthly)}
+                      {SHOW_PRICES
+                        ? formatPrice(v.prices.daily)
+                        : `${v.transmission} · ${v.fuel}`}
+                    </td>
+                    <td className="py-3 text-right">
+                      {SHOW_PRICES ? (
+                        <span className="text-muted">
+                          {formatPrice(v.prices.monthly)}
+                        </span>
+                      ) : (
+                        <PriceOnRequest
+                          size="sm"
+                          label={`fiyat_lokasyon_${v.slug}`}
+                          message={`Merhaba, ${location.locative} ${v.brand} ${v.model} kiralamak istiyorum. Fiyat bilgisi alabilir miyim?`}
+                        />
+                      )}
                     </td>
                   </tr>
                 ))}

@@ -21,7 +21,7 @@ export const homeFaqs: Faq[] = [
   },
   {
     q: "Depozito alınıyor mu?",
-    a: "Evet, araç segmentine göre 5.000 ₺ ile 10.000 ₺ arasında değişen bir depozito alınır. Depozito, araç sorunsuz teslim edildikten sonra iade edilir. Trafik cezası ve HGS geçişleri depozitodan mahsup edilebilir.",
+    a: "Evet, araç segmentine göre değişen bir depozito alınır; tutarı rezervasyon sırasında size net olarak bildiriyoruz. Depozito, araç sorunsuz teslim edildikten sonra iade edilir. Trafik cezası ve HGS geçişleri depozitodan mahsup edilebilir.",
   },
   {
     q: "Kredi kartı gerekiyor mu?",
@@ -104,7 +104,7 @@ export const airportFaqs: Faq[] = [
 ];
 
 /** Araç detay sayfalarında gösterilen ortak sorular */
-export function vehicleFaqs(vehicleName: string, minAge: number, deposit: number): Faq[] {
+export function vehicleFaqs(vehicleName: string, minAge: number): Faq[] {
   return [
     {
       q: `${vehicleName} kiralamak için yaş şartı nedir?`,
@@ -112,7 +112,7 @@ export function vehicleFaqs(vehicleName: string, minAge: number, deposit: number
     },
     {
       q: `${vehicleName} için depozito ne kadar?`,
-      a: `${vehicleName} için ${deposit.toLocaleString("tr-TR")} ₺ depozito alınır ve araç sorunsuz teslim edildiğinde iade edilir.`,
+      a: `${vehicleName} için segmentine uygun bir depozito alınır ve araç sorunsuz teslim edildiğinde iade edilir. Güncel tutarı rezervasyon sırasında bildiriyoruz.`,
     },
     {
       q: `${vehicleName} aracını Sabiha Gökçen Havalimanı'ndan teslim alabilir miyim?`,

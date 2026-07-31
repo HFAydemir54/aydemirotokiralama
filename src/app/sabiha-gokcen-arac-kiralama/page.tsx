@@ -12,7 +12,7 @@ import {
   faqSchema,
   localServiceSchema,
 } from "@/lib/schema";
-import { formatPrice } from "@/lib/site";
+import { SHOW_PRICES, formatPrice } from "@/lib/site";
 import { airportFaqs } from "@/data/faq";
 import { minDailyPrice, popularVehicles } from "@/data/vehicles";
 
@@ -60,8 +60,10 @@ export default function AirportPage() {
             Sabiha Gökçen Havalimanı&apos;na indiğinizde aracınız sizi bekliyor
             olsun. Pendik&apos;teki ofisimiz havalimanına yaklaşık 8 km mesafede
             olduğu için teslimatı hızlı yapıyor, uçuşunuzu takip ederek rötar
-            durumunda teslim saatini kendimiz güncelliyoruz. Günlük kiralama{" "}
-            {formatPrice(minDailyPrice)}&apos;den başlıyor.
+            durumunda teslim saatini kendimiz güncelliyoruz.
+            {SHOW_PRICES
+              ? ` Günlük kiralama ${formatPrice(minDailyPrice)}'den başlıyor.`
+              : " Uçuş bilginizi yazın, uygun araçları ve fiyatı hemen paylaşalım."}
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">

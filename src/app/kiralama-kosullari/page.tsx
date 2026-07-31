@@ -4,7 +4,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
 import WhatsAppCta from "@/components/WhatsAppCta";
 import { breadcrumbSchema } from "@/lib/schema";
-import { formatPrice } from "@/lib/site";
+import { SHOW_PRICES, formatPrice } from "@/lib/site";
 import { SEGMENT_LABELS, vehicles, vehicleTitle } from "@/data/vehicles";
 
 export const metadata: Metadata = {
@@ -66,7 +66,11 @@ export default function TermsPage() {
                     <th scope="col" className="pb-2 font-medium">Segment</th>
                     <th scope="col" className="pb-2 text-right font-medium">Min. yaş</th>
                     <th scope="col" className="pb-2 text-right font-medium">Ehliyet</th>
-                    <th scope="col" className="pb-2 text-right font-medium">Depozito</th>
+                    {SHOW_PRICES && (
+                      <th scope="col" className="pb-2 text-right font-medium">
+                        Depozito
+                      </th>
+                    )}
                     <th scope="col" className="pb-2 text-right font-medium">Km/gün</th>
                   </tr>
                 </thead>
@@ -84,7 +88,11 @@ export default function TermsPage() {
                       <td className="py-3 text-muted">{SEGMENT_LABELS[v.segment]}</td>
                       <td className="py-3 text-right">{v.minAge}</td>
                       <td className="py-3 text-right">{v.minLicenseYears} yıl</td>
-                      <td className="py-3 text-right">{formatPrice(v.deposit)}</td>
+                      {SHOW_PRICES && (
+                        <td className="py-3 text-right">
+                          {formatPrice(v.deposit)}
+                        </td>
+                      )}
                       <td className="py-3 text-right">{v.kmLimitDaily}</td>
                     </tr>
                   ))}
@@ -96,7 +104,8 @@ export default function TermsPage() {
           <Section title="Depozito">
             <p>
               Depozito, araç tesliminde alınır ve araç sorunsuz iade edildiğinde
-              geri ödenir. Trafik cezası, HGS geçişi veya hasar bedeli varsa
+              geri ödenir. Tutarı araç segmentine göre değişir ve rezervasyon
+              sırasında size net olarak bildirilir. Trafik cezası, HGS geçişi veya hasar bedeli varsa
               depozitodan mahsup edilir. Depozitoyu nakit, havale veya kredi
               kartı provizyonu ile karşılayabilirsiniz — kredi kartı zorunlu
               değildir.

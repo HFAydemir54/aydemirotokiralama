@@ -5,16 +5,18 @@ import FaqSection from "@/components/FaqSection";
 import LocationsGrid from "@/components/LocationsGrid";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
-import { formatPrice } from "@/lib/site";
+import { SHOW_PRICES, formatPrice } from "@/lib/site";
 import { homeFaqs } from "@/data/faq";
 import { SEGMENT_LABELS, minDailyPrice, vehicles } from "@/data/vehicles";
 import type { Segment } from "@/data/vehicles";
 
 export const metadata: Metadata = {
-  title: "Kiralık Araçlar ve Günlük Fiyatlar",
-  description: `Aydemir Oto Kiralama filosu ve güncel günlük fiyatları. Ekonomik, orta sınıf ve SUV araçlar ${formatPrice(
-    minDailyPrice
-  )}'den başlayan fiyatlarla. Pendik ve Sabiha Gökçen teslim.`,
+  title: SHOW_PRICES ? "Kiralık Araçlar ve Günlük Fiyatlar" : "Kiralık Araç Filomuz",
+  description: SHOW_PRICES
+    ? `Aydemir Oto Kiralama filosu ve güncel günlük fiyatları. Ekonomik, orta sınıf ve SUV araçlar ${formatPrice(
+        minDailyPrice
+      )}'den başlayan fiyatlarla. Pendik ve Sabiha Gökçen teslim.`
+    : "Aydemir Oto Kiralama filosu: ekonomik, orta sınıf ve SUV araçlar. Günlük, haftalık ve aylık kiralama. Pendik ve Sabiha Gökçen teslim, WhatsApp'tan hızlı fiyat.",
   alternates: { canonical: "/araclar" },
 };
 
@@ -37,12 +39,13 @@ export default function VehiclesPage() {
       <section className="bg-background py-16">
         <div className="mx-auto max-w-6xl px-6">
           <h1 className="text-4xl font-bold tracking-tight text-primary sm:text-5xl">
-            Kiralık Araçlarımız ve Günlük Fiyatları
+            Kiralık Araçlarımız
           </h1>
           <p className="mt-6 max-w-3xl leading-relaxed text-muted">
             Filomuzdaki tüm araçların günlük, haftalık ve aylık fiyatlarını
             aşağıda bulabilirsiniz. Fiyatlara sigorta ve bakım dahildir; teslim
-            öncesi toplam tutarı yazılı olarak paylaşıyoruz. Araç seçiminde
+            öncesi toplam tutarı yazılı olarak paylaşıyoruz. Güncel fiyat için
+            WhatsApp&apos;tan yazmanız yeterli. Araç seçiminde
             kararsız kalırsanız kullanım amacınızı yazın, size uygun olanı
             önerelim.
           </p>

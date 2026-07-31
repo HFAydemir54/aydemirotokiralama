@@ -3,9 +3,10 @@ import { Check } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FaqSection from "@/components/FaqSection";
 import JsonLd from "@/components/JsonLd";
+import PriceOnRequest from "@/components/PriceOnRequest";
 import WhatsAppCta from "@/components/WhatsAppCta";
 import { breadcrumbSchema, faqSchema, durationServiceSchema } from "@/lib/schema";
-import { formatPrice } from "@/lib/site";
+import { SHOW_PRICES, formatPrice } from "@/lib/site";
 import { homeFaqs } from "@/data/faq";
 import { durations, type Duration } from "@/data/durations";
 import { vehicles, vehicleTitle } from "@/data/vehicles";
@@ -46,10 +47,12 @@ export default function DurationPage({ duration }: { duration: Duration }) {
           <p className="mt-6 max-w-3xl leading-relaxed text-white/75">
             {duration.intro}
           </p>
-          <p className="mt-4 text-sm text-white/60">
-            Günlüğe denk gelen tutar {formatPrice(Math.round(cheapestPerDay))}&apos;den
-            başlıyor.
-          </p>
+          {SHOW_PRICES && (
+            <p className="mt-4 text-sm text-white/60">
+              Günlüğe denk gelen tutar{" "}
+              {formatPrice(Math.round(cheapestPerDay))}&apos;den başlıyor.
+            </p>
+          )}
 
           <div className="mt-8 flex flex-wrap gap-4">
             <WhatsAppCta
@@ -94,7 +97,9 @@ export default function DurationPage({ duration }: { duration: Duration }) {
         <div className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-2">
           <div>
             <h2 className="text-2xl font-bold tracking-tight text-primary">
-              {duration.name} kiralama fiyatları
+              {SHOW_PRICES
+                ? `${duration.name} kiralama fiyatları`
+                : `${duration.name} kiralayabileceğiniz araçlar`}
             </h2>
             <div className="mt-6 overflow-x-auto">
               <table className="w-full min-w-[420px] text-sm">
@@ -102,10 +107,10 @@ export default function DurationPage({ duration }: { duration: Duration }) {
                   <tr className="border-b border-border text-left text-xs uppercase tracking-wide text-muted">
                     <th scope="col" className="pb-2 font-medium">Araç</th>
                     <th scope="col" className="pb-2 text-right font-medium">
-                      {duration.priceLabel}
+                      {SHOW_PRICES ? duration.priceLabel : "Vites / Yakıt"}
                     </th>
                     <th scope="col" className="pb-2 text-right font-medium">
-                      Günlüğe denk
+                      {SHOW_PRICES ? "Günlüğe denk" : "Fiyat"}
                     </th>
                   </tr>
                 </thead>
@@ -120,12 +125,26 @@ export default function DurationPage({ duration }: { duration: Duration }) {
                           {vehicleTitle(v)}
                         </Link>
                       </th>
-                      <td className="py-3 text-right font-semibold text-accent">
-                        {formatPrice(v.prices[duration.priceKey])}
-                      </td>
                       <td className="py-3 text-right text-muted">
-                        {formatPrice(
-                          Math.round(v.prices[duration.priceKey] / duration.divisor)
+                        {SHOW_PRICES
+                          ? formatPrice(v.prices[duration.priceKey])
+                          : `${v.transmission} · ${v.fuel}`}
+                      </td>
+                      <td className="py-3 text-right">
+                        {SHOW_PRICES ? (
+                          <span className="text-muted">
+                            {formatPrice(
+                              Math.round(
+                                v.prices[duration.priceKey] / duration.divisor
+                              )
+                            )}
+                          </span>
+                        ) : (
+                          <PriceOnRequest
+                            size="sm"
+                            label={`fiyat_sure_${duration.slug}_${v.slug}`}
+                            message={`Merhaba, ${vehicleTitle(v)} için ${duration.name.toLowerCase()} kiralama fiyatını öğrenebilir miyim?`}
+                          />
                         )}
                       </td>
                     </tr>

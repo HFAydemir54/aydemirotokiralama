@@ -1,4 +1,4 @@
-import { SITE } from "./site";
+import { SHOW_PRICES, SITE } from "./site";
 import type { Faq } from "@/data/faq";
 import type { Post } from "@/data/posts";
 import type { Vehicle } from "@/data/vehicles";
@@ -128,6 +128,10 @@ export function vehicleSchema(v: Vehicle) {
     seatingCapacity: v.seats,
     vehicleEngine: { "@type": "EngineSpecification", name: v.engine },
     image: v.image ? `${SITE.url}${v.image}` : `${SITE.url}/hero-bg.jpg`,
+    // Fiyat gösterimi kapalıyken Offer bloğu hiç yayınlanmaz: sayfada
+    // görünmeyen (ve doğrulanmamış) bir fiyatı schema'ya koymak politika
+    // ihlalidir. SHOW_PRICES açılınca otomatik geri gelir.
+    ...(SHOW_PRICES ? {
     offers: {
       "@type": "Offer",
       availability: "https://schema.org/InStock",
@@ -146,6 +150,7 @@ export function vehicleSchema(v: Vehicle) {
       },
       seller: { "@id": BUSINESS_ID },
     },
+    } : {}),
   };
 }
 

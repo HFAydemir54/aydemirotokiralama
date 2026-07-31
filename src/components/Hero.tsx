@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Clock, MapPin, Plane, ShieldCheck } from "lucide-react";
 import ReservationForm from "./ReservationForm";
-import { formatPrice } from "@/lib/site";
+import { SHOW_PRICES, formatPrice } from "@/lib/site";
 import { minDailyPrice, vehicles, vehicleTitle } from "@/data/vehicles";
 
 /**
@@ -56,7 +56,9 @@ export default function Hero({
         </p>
 
         <p className="mt-4 text-sm text-white/60">
-          Günlük kiralama {formatPrice(minDailyPrice)}&apos;den başlayan fiyatlarla.
+          {SHOW_PRICES
+            ? `Günlük kiralama ${formatPrice(minDailyPrice)}'den başlayan fiyatlarla.`
+            : "Tarihlerinizi girin, uygun araçları ve fiyatı dakikalar içinde paylaşalım."}
         </p>
 
         <div className="mt-8 max-w-4xl">

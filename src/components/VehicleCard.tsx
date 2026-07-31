@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Car, Fuel, Gauge, Users } from "lucide-react";
+import PriceOnRequest from "./PriceOnRequest";
 import WhatsAppCta from "./WhatsAppCta";
-import { formatPrice } from "@/lib/site";
+import { SHOW_PRICES, formatPrice } from "@/lib/site";
 import { vehicleTitle, type Vehicle } from "@/data/vehicles";
 
 export default function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
@@ -23,10 +24,19 @@ export default function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
         </h3>
 
         <p className="mt-1">
-          <span className="text-2xl font-bold text-accent">
-            {formatPrice(vehicle.prices.daily)}
-          </span>
-          <span className="text-sm text-muted"> / gün</span>
+          {SHOW_PRICES ? (
+            <>
+              <span className="text-2xl font-bold text-accent">
+                {formatPrice(vehicle.prices.daily)}
+              </span>
+              <span className="text-sm text-muted"> / gün</span>
+            </>
+          ) : (
+            <PriceOnRequest
+              label={`fiyat_kart_${vehicle.slug}`}
+              message={`Merhaba, ${name} için günlük kiralama fiyatını öğrenebilir miyim?`}
+            />
+          )}
         </p>
 
         <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted">

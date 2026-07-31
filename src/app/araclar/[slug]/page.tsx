@@ -17,8 +17,9 @@ import JsonLd from "@/components/JsonLd";
 import RelatedPosts from "@/components/RelatedPosts";
 import VehicleCard, { VehicleImage } from "@/components/VehicleCard";
 import WhatsAppCta from "@/components/WhatsAppCta";
+import PriceOnRequest from "@/components/PriceOnRequest";
 import { breadcrumbSchema, faqSchema, vehicleSchema } from "@/lib/schema";
-import { formatPrice } from "@/lib/site";
+import { SHOW_PRICES, formatPrice } from "@/lib/site";
 import { vehicleFaqs } from "@/data/faq";
 import {
   getVehicle,
@@ -43,13 +44,17 @@ export async function generateMetadata(
   if (!vehicle) return {};
 
   const name = vehicleTitle(vehicle);
+  const specs = `${vehicle.transmission}, ${vehicle.fuel}, ${vehicle.seats} kişilik`;
+
   return {
-    title: `${name} Kiralama | Günlük ${formatPrice(vehicle.prices.daily)}`,
-    description: `${name} kiralama günlük ${formatPrice(
-      vehicle.prices.daily
-    )} fiyatla. ${vehicle.transmission}, ${vehicle.fuel}, ${
-      vehicle.seats
-    } kişilik. Pendik ve Sabiha Gökçen Havalimanı teslim, WhatsApp'tan hızlı rezervasyon.`,
+    title: SHOW_PRICES
+      ? `${name} Kiralama | Günlük ${formatPrice(vehicle.prices.daily)}`
+      : `${name} Kiralama`,
+    description: SHOW_PRICES
+      ? `${name} kiralama günlük ${formatPrice(
+          vehicle.prices.daily
+        )} fiyatla. ${specs}. Pendik ve Sabiha Gökçen Havalimanı teslim, WhatsApp'tan hızlı rezervasyon.`
+      : `${name} kiralama — ${specs}. Günlük, haftalık ve aylık kiralama. Pendik ve Sabiha Gökçen Havalimanı teslim, WhatsApp'tan hızlı rezervasyon.`,
     alternates: { canonical: `/araclar/${vehicle.slug}` },
   };
 }
@@ -60,7 +65,7 @@ export default async function VehiclePage(props: PageProps<"/araclar/[slug]">) {
   if (!vehicle) notFound();
 
   const name = vehicleTitle(vehicle);
-  const faqs = vehicleFaqs(name, vehicle.minAge, vehicle.deposit);
+  const faqs = vehicleFaqs(name, vehicle.minAge);
   const crumbs = [
     { name: "Ana Sayfa", path: "/" },
     { name: "Araçlar", path: "/araclar" },
@@ -108,33 +113,56 @@ export default async function VehiclePage(props: PageProps<"/araclar/[slug]">) {
               <h2 className="text-sm font-semibold uppercase tracking-widest text-accent">
                 Kiralama Fiyatları
               </h2>
-              <table className="mt-4 w-full text-sm">
-                <tbody className="divide-y divide-border">
-                  <PriceRow
-                    label="Günlük"
-                    value={formatPrice(vehicle.prices.daily)}
-                    highlight
-                  />
-                  <PriceRow
-                    label="Haftalık (7 gün)"
-                    value={formatPrice(vehicle.prices.weekly)}
-                    note={`günlük ${formatPrice(
-                      Math.round(vehicle.prices.weekly / 7)
-                    )}`}
-                  />
-                  <PriceRow
-                    label="Aylık (30 gün)"
-                    value={formatPrice(vehicle.prices.monthly)}
-                    note={`günlük ${formatPrice(
-                      Math.round(vehicle.prices.monthly / 30)
-                    )}`}
-                  />
-                </tbody>
-              </table>
-              <p className="mt-3 text-xs text-muted">
-                Fiyatlara sigorta ve bakım dahildir. Günlük {vehicle.kmLimitDaily} km
-                kilometre limiti uygulanır.
-              </p>
+
+              {SHOW_PRICES ? (
+                <>
+                  <table className="mt-4 w-full text-sm">
+                    <tbody className="divide-y divide-border">
+                      <PriceRow
+                        label="Günlük"
+                        value={formatPrice(vehicle.prices.daily)}
+                        highlight
+                      />
+                      <PriceRow
+                        label="Haftalık (7 gün)"
+                        value={formatPrice(vehicle.prices.weekly)}
+                        note={`günlük ${formatPrice(
+                          Math.round(vehicle.prices.weekly / 7)
+                        )}`}
+                      />
+                      <PriceRow
+                        label="Aylık (30 gün)"
+                        value={formatPrice(vehicle.prices.monthly)}
+                        note={`günlük ${formatPrice(
+                          Math.round(vehicle.prices.monthly / 30)
+                        )}`}
+                      />
+                    </tbody>
+                  </table>
+                  <p className="mt-3 text-xs text-muted">
+                    Fiyatlara sigorta ve bakım dahildir. Günlük{" "}
+                    {vehicle.kmLimitDaily} km kilometre limiti uygulanır.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <ul className="mt-4 space-y-2 text-sm text-muted">
+                    <li>Günlük kiralama</li>
+                    <li>Haftalık kiralama — günlük fiyata göre avantajlı</li>
+                    <li>Aylık (uzun dönem) kiralama — en düşük günlük maliyet</li>
+                  </ul>
+                  <p className="mt-4">
+                    <PriceOnRequest
+                      label={`fiyat_detay_${vehicle.slug}`}
+                      message={`Merhaba, ${name} için günlük, haftalık ve aylık kiralama fiyatlarını öğrenebilir miyim?`}
+                    />
+                  </p>
+                  <p className="mt-3 text-xs text-muted">
+                    Fiyatlara sigorta ve bakım dahildir. Tarihlerinizi yazın,
+                    toplam tutarı dakikalar içinde paylaşalım.
+                  </p>
+                </>
+              )}
             </div>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
@@ -171,8 +199,9 @@ export default async function VehiclePage(props: PageProps<"/araclar/[slug]">) {
                 En az {vehicle.minLicenseYears} yıllık sürücü belgesi
               </Condition>
               <Condition icon={Wallet} label="Depozito">
-                {formatPrice(vehicle.deposit)} (araç sorunsuz teslim edildiğinde iade
-                edilir)
+                {SHOW_PRICES
+                  ? `${formatPrice(vehicle.deposit)} (araç sorunsuz teslim edildiğinde iade edilir)`
+                  : "Araç sorunsuz teslim edildiğinde iade edilir; tutarı rezervasyon sırasında bildiriyoruz"}
               </Condition>
               <Condition icon={Gauge} label="Kilometre limiti">
                 Günlük {vehicle.kmLimitDaily} km
