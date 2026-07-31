@@ -4,6 +4,7 @@ import { Clock, MapPin, Plane } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FaqSection from "@/components/FaqSection";
 import JsonLd from "@/components/JsonLd";
+import RelatedPosts from "@/components/RelatedPosts";
 import FleetEmptyState from "@/components/FleetEmptyState";
 import VehicleCard from "@/components/VehicleCard";
 import WhatsAppCta from "@/components/WhatsAppCta";
@@ -177,6 +178,15 @@ export default function AirportPage() {
         faqs={airportFaqs}
         title="Sabiha Gökçen Araç Kiralama SSS"
         className="bg-background"
+      />
+
+      <RelatedPosts
+        slugs={[
+          "sabiha-gokcen-arac-kiralama-nasil-yapilir",
+          "arac-kiralama-icin-gerekli-belgeler",
+          "kredi-kartsiz-arac-kiralama",
+        ]}
+        className="bg-surface"
       />
 
       {/* İlgili sayfalar */}

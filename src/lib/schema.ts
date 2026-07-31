@@ -1,5 +1,6 @@
 import { SITE } from "./site";
 import type { Faq } from "@/data/faq";
+import type { Post } from "@/data/posts";
 import type { Vehicle } from "@/data/vehicles";
 import { vehicleTitle } from "@/data/vehicles";
 import { locations } from "@/data/locations";
@@ -150,6 +151,29 @@ export function vehicleSchema(v: Vehicle) {
           },
         }
       : {}),
+  };
+}
+
+/**
+ * Blog yazıları için BlogPosting.
+ * author ve publisher işletme kimliğine bağlanır — içeriğin kim tarafından
+ * yayınlandığı Google için netleşir (E-E-A-T sinyali).
+ */
+export function postSchema(post: Post) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.description,
+    inLanguage: "tr-TR",
+    datePublished: post.publishedAt,
+    dateModified: post.updatedAt,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE.url}/blog/${post.slug}`,
+    },
+    author: { "@id": `${SITE.url}/#organization` },
+    publisher: { "@id": `${SITE.url}/#organization` },
   };
 }
 

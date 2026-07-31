@@ -70,6 +70,7 @@ export default function Footer() {
             </FooterLink>
             <FooterLink href="/kiralama-kosullari">Kiralama Koşulları</FooterLink>
             <FooterLink href="/sss">Sık Sorulan Sorular</FooterLink>
+            <FooterLink href="/blog">Araç Kiralama Rehberi</FooterLink>
             <FooterLink href="/iletisim">İletişim</FooterLink>
           </FooterCol>
         </div>

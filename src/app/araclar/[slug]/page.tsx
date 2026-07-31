@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
 import PriceDisplay from "@/components/PriceDisplay";
+import RelatedPosts from "@/components/RelatedPosts";
 import VehicleCard, { VehicleImage } from "@/components/VehicleCard";
 import VehicleSpecs from "@/components/VehicleSpecs";
 import WhatsAppCta from "@/components/WhatsAppCta";
@@ -230,6 +231,15 @@ export default async function VehiclePage(props: PageProps<"/araclar/[slug]">) {
         faqs={faqs}
         title={`${name} Kiralama Hakkında Sık Sorulanlar`}
         className="bg-background"
+      />
+
+      <RelatedPosts
+        slugs={[
+          "arac-kiralama-yas-siniri",
+          "depozitosuz-arac-kiralama",
+          "arac-kiralarken-dikkat-edilmesi-gerekenler",
+        ]}
+        className="bg-surface"
       />
 
       {similar.length > 0 && (

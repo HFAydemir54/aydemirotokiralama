@@ -5,6 +5,7 @@ import WhyUs from "@/components/WhyUs";
 import FleetEmptyState from "@/components/FleetEmptyState";
 import VehicleCard from "@/components/VehicleCard";
 import SabihaSection from "@/components/SabihaSection";
+import RelatedPosts from "@/components/RelatedPosts";
 import Reviews from "@/components/Reviews";
 import LocationsGrid from "@/components/LocationsGrid";
 import FaqSection from "@/components/FaqSection";
@@ -63,6 +64,7 @@ export default function Home() {
       <SabihaSection />
       <Reviews />
       <LocationsGrid />
+      <RelatedPosts title="Araç Kiralama Rehberi" className="bg-background" />
       <FaqSection faqs={homeFaqs} />
       <Contact />
     </>

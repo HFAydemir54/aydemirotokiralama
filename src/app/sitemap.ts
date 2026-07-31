@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { locations } from "@/data/locations";
+import { posts } from "@/data/posts";
 import { availableVehicles } from "@/data/vehicles";
 import { SITE } from "@/lib/site";
 
@@ -51,7 +52,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.5,
     },
+    {
+      url: `${SITE.url}/blog`,
+      lastModified: STATIC_UPDATED,
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
   ];
+
+  const postPages: MetadataRoute.Sitemap = posts.map((p) => ({
+    url: `${SITE.url}/blog/${p.slug}`,
+    lastModified: p.updatedAt,
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
 
 
   // Filo boşken hiç araç URL'i bildirilmez; araç eklendikçe otomatik eklenir.
@@ -69,5 +83,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: l.priority,
   }));
 
-  return [...staticPages, ...vehiclePages, ...locationPages];
+  return [...staticPages, ...vehiclePages, ...locationPages, ...postPages];
 }

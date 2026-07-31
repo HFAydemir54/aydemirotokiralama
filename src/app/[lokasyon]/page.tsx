@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Clock, MapPin, Plane } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
+import RelatedPosts from "@/components/RelatedPosts";
 import FleetEmptyState from "@/components/FleetEmptyState";
 import VehicleCard from "@/components/VehicleCard";
 import WhatsAppCta from "@/components/WhatsAppCta";
@@ -196,6 +197,15 @@ export default async function LocationPage(props: PageProps<"/[lokasyon]">) {
           )}
         </div>
       </section>
+
+      <RelatedPosts
+        slugs={[
+          "pendik-arac-kiralama-fiyatlari",
+          "istanbul-gunluk-arac-kiralama",
+          "arac-kiralama-icin-gerekli-belgeler",
+        ]}
+        className="bg-background"
+      />
 
       {/* Yakın bölgeler + havalimanı: internal linking */}
       <section className="border-t border-border bg-surface py-14">
