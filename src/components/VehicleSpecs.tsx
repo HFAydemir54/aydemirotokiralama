@@ -1,4 +1,4 @@
-import { Briefcase, Fuel, Gauge, Users } from "lucide-react";
+import { Briefcase, CalendarDays, Fuel, Gauge, Users } from "lucide-react";
 import type { Vehicle } from "@/data/vehicles";
 
 /**
@@ -14,6 +14,7 @@ export default function VehicleSpecs({
   className?: string;
 }) {
   const specs = [
+    vehicle.year && { icon: CalendarDays, text: `${vehicle.year} Model` },
     vehicle.transmission && { icon: Gauge, text: vehicle.transmission },
     vehicle.fuel && { icon: Fuel, text: vehicle.fuel },
     vehicle.seats && { icon: Users, text: `${vehicle.seats} Kişilik` },

@@ -1,9 +1,13 @@
 /**
  * ARAÇ FİLOSU — MERKEZİ VERİ KAYNAĞI
  * ============================================================================
- * Bu dizi şu anda BİLEREK BOŞTUR. Gerçek filo bilgisi (model, fotoğraf, fiyat)
- * kesinleşmediği için sitede hiçbir araç gösterilmiyor; araç bölümlerinde
- * "filomuz yakında" durumu görünür.
+ * Sitedeki tüm araç bilgisi buradan gelir. Dizi boşaltılırsa araç bölümleri
+ * otomatik olarak "Araç Filomuz Yakında" durumuna döner.
+ *
+ * MEVCUT DURUM: 4 araç girili, fotoğraflar henüz yok (placeholder gösteriliyor).
+ * Eksik alanlar: yakıt tipi, kişi kapasitesi, bagaj, haftalık/aylık fiyat.
+ * Bu alanlar boş oldukları için sitede hiç görünmüyorlar — uydurma değer
+ * yazılmadı. Bilgi netleştikçe ilgili alanı doldurmanız yeterli.
  *
  * ARAÇ EKLEMEK İÇİN: aşağıdaki diziye bir nesne ekleyin. Başka hiçbir yeri
  * değiştirmeniz gerekmez — ana sayfa filo bölümü, /araclar listesi, araç
@@ -63,7 +67,62 @@ export type Vehicle = {
   updatedAt?: string;
 };
 
-export const vehicles: Vehicle[] = [];
+export const vehicles: Vehicle[] = [
+  {
+    slug: "renault-clio-kiralama",
+    brand: "Renault",
+    model: "Clio",
+    year: 2024,
+    transmission: "Otomatik",
+    dailyPrice: 2500,
+    // Haftalık ve aylık fiyatlar araca ve süreye göre değişiyor →
+    // null bırakıldı, sitede "Fiyat için iletişime geçin" gösterilir.
+    weeklyPrice: null,
+    monthlyPrice: null,
+    available: true,
+    featured: true,
+    updatedAt: "2026-08-01",
+  },
+  {
+    slug: "fiat-egea-kiralama",
+    brand: "Fiat",
+    model: "Egea",
+    year: 2022,
+    transmission: "Otomatik",
+    dailyPrice: 2500,
+    weeklyPrice: null,
+    monthlyPrice: null,
+    available: true,
+    featured: true,
+    updatedAt: "2026-08-01",
+  },
+  {
+    slug: "renault-taliant-kiralama",
+    brand: "Renault",
+    model: "Taliant",
+    year: 2022,
+    transmission: "Otomatik",
+    dailyPrice: 2500,
+    weeklyPrice: null,
+    monthlyPrice: null,
+    available: true,
+    featured: true,
+    updatedAt: "2026-08-01",
+  },
+  {
+    slug: "peugeot-301-kiralama",
+    brand: "Peugeot",
+    model: "301",
+    year: 2018,
+    transmission: "Manuel",
+    dailyPrice: 2000,
+    weeklyPrice: null,
+    monthlyPrice: null,
+    available: true,
+    featured: true,
+    updatedAt: "2026-08-01",
+  },
+];
 
 /** Sitede gösterilecek araçlar. */
 export const availableVehicles = vehicles.filter((v) => v.available);

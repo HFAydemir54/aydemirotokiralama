@@ -18,10 +18,9 @@ import {
 /**
  * Araç detay sayfası altyapısı.
  *
- * data/vehicles.ts şu anda boş olduğu için hiçbir sayfa üretilmiyor ve
- * /araclar/<herhangi-bir-slug> 404 dönüyor (dynamicParams = false).
- * Diziye gerçek bir araç eklendiği anda sayfası otomatik oluşur — burada
- * kod değişikliği gerekmez.
+ * Sayfalar data/vehicles.ts'ten üretilir. Listede olmayan bir slug 404 döner
+ * (dynamicParams = false), böylece uydurma URL'ler indexlenmez. Yeni araç
+ * eklemek için yalnızca veri dosyasına ekleme yapmak yeterlidir.
  */
 export function generateStaticParams() {
   return availableVehicles.map((v) => ({ slug: v.slug }));
@@ -106,29 +105,25 @@ export default async function VehiclePage(props: PageProps<"/araclar/[slug]">) {
                   slug={vehicle.slug}
                   name={name}
                 />
-                {typeof vehicle.weeklyPrice === "number" && (
-                  <PriceRow
-                    label="Haftalık"
-                    value={vehicle.weeklyPrice}
-                    unit="Hafta"
-                    slug={vehicle.slug}
-                    name={name}
-                  />
-                )}
-                {typeof vehicle.monthlyPrice === "number" && (
-                  <PriceRow
-                    label="Aylık"
-                    value={vehicle.monthlyPrice}
-                    unit="Ay"
-                    slug={vehicle.slug}
-                    name={name}
-                  />
-                )}
+                <PriceRow
+                  label="Haftalık"
+                  value={vehicle.weeklyPrice}
+                  unit="Hafta"
+                  slug={vehicle.slug}
+                  name={name}
+                />
+                <PriceRow
+                  label="Aylık"
+                  value={vehicle.monthlyPrice}
+                  unit="Ay"
+                  slug={vehicle.slug}
+                  name={name}
+                />
               </dl>
 
               <p className="mt-4 text-xs text-muted">
-                Tarihlerinizi yazın, toplam tutarı ve kiralama koşullarını
-                paylaşalım.
+                Haftalık ve aylık kiralamalarda fiyat süreye göre değişir.
+                Tarihlerinizi yazın, toplam tutarı paylaşalım.
               </p>
             </div>
 
