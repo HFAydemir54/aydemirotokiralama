@@ -76,9 +76,7 @@ export default function Contact() {
           <div className="overflow-hidden rounded-2xl border border-white/10">
             <iframe
               title="Aydemir Oto Kiralama Konum"
-              src={`https://maps.google.com/maps?q=${encodeURIComponent(
-                `${SITE.address.street}, ${SITE.address.postalCode} ${SITE.address.district}/${SITE.address.city}`
-              )}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
+              src={`https://maps.google.com/maps?q=${SITE.geo.lat},${SITE.geo.lng}&z=16&output=embed`}
               width="100%"
               height="100%"
               style={{ border: 0, minHeight: 380 }}

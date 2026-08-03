@@ -19,16 +19,16 @@ export const SITE = {
     postalCode: "34899",
     country: "TR",
   },
-  geo: { lat: 40.8764, lng: 29.2552 },
+  geo: { lat: 40.871014, lng: 29.269372 },
   instagram: "https://www.instagram.com/aydemirotokiralama/",
   /**
    * Google Business Profile Place ID — işletmenin Google'daki benzersiz
    * kimliği. Maps bağlantısı bundan üretilir, adres aramasından daha
    * güvenilirdir (yanlış konumu göstermez).
    */
-  placeId: "ChIJkbgF8QLdyhQRh2Yln7VeizY",
+  placeId: "0x14cadd02f105b891:0x368b5eb59f256687",
   googleMaps:
-    "https://www.google.com/maps/place/?q=place_id:ChIJkbgF8QLdyhQRh2Yln7VeizY",
+    "https://www.google.com/maps/place/Aydemir+Oto+Kiralama/@40.871018,29.2667971,17z/data=!3m1!4b1!4m6!3m5!1s0x14cadd02f105b891:0x368b5eb59f256687!8m2!3d40.871014!4d29.269372",
   /** GBP "yorum yaz" kısa linki — tıklandığında doğrudan yıldız verme ekranı açılır. */
   googleReviewUrl: "https://g.page/r/CYdmJZ-1Xos2EBM/review",
 } as const;
