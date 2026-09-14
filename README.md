@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aydemir Oto Kiralama
 
-## Getting Started
+Pendik'teki Aydemir Oto Kiralama'nın web sitesi: https://www.aydemirotokiralama.com
 
-First, run the development server:
+Next.js 16 (App Router), React 19, TypeScript ve Tailwind CSS v4. Veritabanı veya backend yoktur; tüm içerik `src/data/` altındaki TypeScript dosyalarından gelir. Rezervasyon formu, girilen bilgileri hazır doldurulmuş bir WhatsApp mesajına çevirir.
+
+> Next.js 16'da API'ler eskisinden farklıdır. Kod yazmadan önce `node_modules/next/dist/docs/` altındaki ilgili rehbere bakın (bkz. `AGENTS.md`).
+
+## Geliştirme
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
+npm run build   # production derlemesi
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Yayına alma
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`main` dalına yapılan her push Vercel'de otomatik production yayını başlatır.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Remote SSH adresiyle tanımlı. Bilgisayarda SSH anahtarı yoksa push'u GitHub CLI oturumuyla HTTPS üzerinden yapın:
 
-## Learn More
+```bash
+git remote set-url origin https://github.com/HFAydemir54/aydemirotokiralama.git
+gh auth setup-git
+```
 
-To learn more about Next.js, take a look at the following resources:
+## İçerik nerede güncellenir?
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Ne | Dosya |
+|---|---|
+| İşletme adı, adres, telefon, WhatsApp, konum, Google linkleri | `src/lib/site.ts` |
+| Araçlar ve fiyatlar | `src/data/vehicles.ts` |
+| Lokasyon sayfaları (`/pendik-arac-kiralama` vb.) | `src/data/locations.ts` |
+| Süre sayfaları (günlük / haftalık / aylık) | `src/data/durations.ts` |
+| Blog yazıları | `src/data/posts.ts` |
+| Sık sorulan sorular | `src/data/faq.ts` |
+| Google yorumları | `src/data/reviews.ts` |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Araç eklemek
 
-## Deploy on Vercel
+`src/data/vehicles.ts` içindeki diziye bir nesne ekleyin. Ana sayfa, `/araclar`, araç detay sayfası, sitemap ve schema.org çıktısı otomatik güncellenir. Dosyanın başındaki açıklamada örnek bir kayıt var.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Fiyat `null` bırakılırsa sitede "Fiyat için iletişime geçin" yazar.
+- Fotoğraf yoksa nötr bir placeholder gösterilir. Stok fotoğraf kullanılmaz.
+- `available: false` olan araç sitede listelenmez.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Önemli kurallar
+
+- **İşletme bilgileri tek kaynaktan gelir.** `site.ts` Google Business Profile ile birebir aynı olmalıdır.
+- **Uydurma bilgi yazılmaz.** Kesinleşmemiş fiyat, özellik veya koşul sitede gösterilmez.
+- **SSS metinleri schema'ya da gider.** `faq.ts`'deki cevaplar hem sayfada hem Google'ın okuduğu FAQ verisinde kullanılır; kiralama koşulları değişirse burayı güncelleyin.
+- **Elle yazılmış fiyat metinleri.** "₺2.000'den başlayan" ifadesi `src/app/layout.tsx`, `src/data/faq.ts` ve `src/data/locations.ts` içinde elle yazılıdır; en düşük fiyat değişirse bu üç dosyayı da güncelleyin. `/arac-kiralama` sayfası fiyatı `vehicles.ts`'ten otomatik alır.
+- **Sitemap tarihleri** veri dosyalarındaki `updatedAt` alanından gelir. İçeriği değiştirdiğinizde bu tarihi de güncelleyin.
+
+## Görseller
+
+Vercel görsel optimizasyonu kota nedeniyle kapalıdır (`next.config.ts` → `images.unoptimized`). `public/` altına koyduğunuz görselleri önceden küçültün: logolar yaklaşık 300px, hero görseli 1920px (mobil sürümü 900px).
