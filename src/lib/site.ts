@@ -40,10 +40,6 @@ export function waLink(message: string): string {
   return `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(message)}`;
 }
 
-export const WA_DEFAULT = waLink(
-  "Merhaba, araç kiralama hakkında bilgi almak istiyorum."
-);
-
 /** Fiyatları ₺1.400 biçiminde yazar. */
 export function formatPrice(value: number): string {
   return `₺${value.toLocaleString("tr-TR")}`;
