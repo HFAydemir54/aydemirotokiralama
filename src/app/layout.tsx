@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s | Aydemir Oto Kiralama",
   },
   description:
-    "Pendik Çamçeşme'deki ofisimizden araç kiralama. Sabiha Gökçen Havalimanı'na araç getiriyoruz. Depozito yok, 7/24 açık, WhatsApp'tan rezervasyon.",
+    "Pendik'te araç ve araba kiralama (rent a car). Günlük ₺2.000'den başlayan fiyatlar, depozito yok, 7/24 açık. Sabiha Gökçen Havalimanı'na araç getiriyoruz.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",

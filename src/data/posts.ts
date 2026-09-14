@@ -57,9 +57,9 @@ export const posts: Post[] = [
   {
     slug: "pendik-arac-kiralama-fiyatlari",
     title: "Pendik Araç Kiralama Fiyatları",
-    metaTitle: "Pendik Araç Kiralama Fiyatları",
+    metaTitle: "Pendik Araç Kiralama Fiyatları: En Uygun Seçenekler",
     description:
-      "Pendik'te araç kiralama fiyatları ne kadar? Güncel günlük fiyatlarımız, fiyatı etkileyen faktörler ve teklif alırken sormanız gereken sorular.",
+      "Pendik'te en uygun araç kiralama fiyatları ne kadar? Güncel günlük fiyatlarımız, fiyatı etkileyen faktörler ve teklif alırken sormanız gereken sorular.",
     excerpt:
       "Güncel günlük fiyatlarımız, fiyatı neyin belirlediği ve teklif alırken hangi kalemleri sormanız gerektiği.",
     keyword: "pendik araç kiralama fiyatları",

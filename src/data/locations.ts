@@ -41,9 +41,9 @@ export const locations: Location[] = [
     slug: "pendik-arac-kiralama",
     name: "Pendik",
     locative: "Pendik'te",
-    title: "Pendik Araç Kiralama | Günlük Fiyatlar",
+    title: "Pendik Araç Kiralama | Oto ve Araba Kiralama",
     description:
-      "Pendik'te araç kiralama. Çamçeşme'deki ofisimizden günlük, haftalık ve aylık kiralama. Depozito yok, 7/24 açık, WhatsApp'tan rezervasyon.",
+      "Pendik araç kiralama ve oto kiralama: Çamçeşme'deki ofisimizden günlük ₺2.000'den başlayan fiyatlarla kiralık araba. Depozito yok, 7/24 açık.",
     intro:
       "Aydemir Oto Kiralama'nın ofisi Pendik Çamçeşme'de, Katip Çelebi Caddesi üzerindedir. Araç teslimlerimizi buradan yapıyoruz ve ofisimiz 7/24 açık; gece geç saatte veya sabah erkenden de araç teslim alabilirsiniz.",
     access:

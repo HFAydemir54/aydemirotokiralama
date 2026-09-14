@@ -24,6 +24,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      url: `${SITE.url}/arac-kiralama`,
+      lastModified: "2026-09-14",
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
       url: `${SITE.url}/sabiha-gokcen-arac-kiralama`,
       lastModified: STATIC_UPDATED,
       changeFrequency: "weekly",

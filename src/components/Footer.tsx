@@ -65,6 +65,7 @@ export default function Footer() {
           </FooterCol>
 
           <FooterCol title="Kurumsal">
+            <FooterLink href="/arac-kiralama">Araç Kiralama</FooterLink>
             <FooterLink href="/araclar">Araç Filomuz</FooterLink>
             {durations.map((d) => (
               <FooterLink key={d.slug} href={`/${d.slug}`}>

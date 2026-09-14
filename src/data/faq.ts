@@ -22,6 +22,10 @@ export type Faq = { q: string; a: string };
 /** Ana sayfada gösterilen SSS */
 export const homeFaqs: Faq[] = [
   {
+    q: "Pendik'te en uygun araç kiralama fiyatı ne kadar?",
+    a: "Günlük araç kiralama fiyatlarımız ₺2.000'den başlıyor. Haftalık ve aylık kiralık araba fiyatları araca ve süreye göre değiştiği için tarihlerinizi WhatsApp'tan yazmanız yeterli, size özel fiyatı hemen paylaşıyoruz.",
+  },
+  {
     q: "Araç kiralamak için yaş sınırı var mı?",
     a: "Yaş sınırımız bulunmuyor. Aradığımız tek şart, sürücü belgenizin en az 2 yıllık olmasıdır.",
   },

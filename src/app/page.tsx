@@ -22,7 +22,7 @@ export default function Home() {
 
       <Hero
         title="Pendik Araç Kiralama"
-        description="Pendik merkez ofisimizden ve Sabiha Gökçen Havalimanı'ndan 7/24 araç teslimi yapıyoruz. Tarihlerinizi yazın, size uygun aracı ve fiyatı hemen paylaşalım."
+        description="Pendik'te kiralık araba arıyorsanız doğru yerdesiniz: Pendik ofisimizden ve Sabiha Gökçen Havalimanı'ndan 7/24 araç teslimi yapıyoruz. Tarihlerinizi yazın, size en uygun aracı ve fiyatı hemen paylaşalım."
       />
 
       {/* Araç filosu — veri girilene kadar boş durum gösterilir */}

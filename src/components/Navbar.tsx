@@ -9,6 +9,7 @@ import { track } from "@/lib/analytics";
 import { SITE } from "@/lib/site";
 
 const navLinks = [
+  { href: "/arac-kiralama", label: "Araç Kiralama" },
   { href: "/araclar", label: "Araçlar" },
   { href: "/sabiha-gokcen-arac-kiralama", label: "Sabiha Gökçen" },
   { href: "/pendik-arac-kiralama", label: "Pendik" },
