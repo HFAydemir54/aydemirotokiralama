@@ -118,7 +118,147 @@ export default function CarRentalPage() {
         </div>
       </section>
 
+      {/* Uzun içerik — genel sorgular için. Yalnızca doğrulanmış koşullar yazıldı. */}
       <section className="bg-background py-16">
+        <div className="mx-auto max-w-3xl space-y-5 px-6 leading-relaxed text-muted">
+          <h2 className="text-2xl font-bold tracking-tight text-primary sm:text-3xl">
+            Araç Kiralama Hakkında Bilmeniz Gerekenler
+          </h2>
+          <p>
+            Araç kiralama, kendi aracı olmayan ya da aracı serviste olan herkes
+            için şehir içinde ve şehir dışında özgürce hareket etmenin en pratik
+            yoludur. Toplu taşımanın yetişmediği saatlerde, iş toplantıları
+            arasında ya da aileyle yapılan bir hafta sonu gezisinde kiralık araba,
+            zamanınızı kendiniz planlamanızı sağlar. Aydemir Oto Kiralama olarak
+            Pendik Çamçeşme&apos;deki ofisimizden günlük, haftalık ve aylık araba
+            kiralama hizmeti veriyoruz. Amacımız karmaşık sözleşmeler ve gizli
+            şartlar olmadan, baştan net konuşarak size uygun aracı teslim etmek.
+          </p>
+
+          <h3 className="pt-2 text-xl font-semibold text-primary">
+            Kimler araç kiralayabilir?
+          </h3>
+          <p>
+            Bizde yaş sınırı bulunmuyor. Aradığımız tek şart, sürücü belgenizin
+            en az 2 yıllık olmasıdır. Kiralama sırasında geçerli ehliyetiniz ve
+            kimlik belgeniz yeterlidir. Pek çok firmanın uyguladığı yaş
+            kısıtlamaları nedeniyle araç bulmakta zorlanan genç sürücüler de
+            ehliyet süresi şartını karşıladıkları sürece bizden rahatlıkla araç
+            kiralayabilir.
+          </p>
+
+          <h3 className="pt-2 text-xl font-semibold text-primary">
+            Depozitosuz ve kredi kartsız araba kiralama
+          </h3>
+          <p>
+            Araç kiralarken en çok sorulan konulardan biri depozitodur. Biz
+            depozito almıyoruz; kartınızda günlerce bloke edilen bir tutar
+            olmuyor. Ödemeleri nakit veya banka havalesi ile kabul ediyoruz,
+            kredi kartı geçmemektedir. Aracı ileri bir tarih için önceden ayırtmak
+            isterseniz yalnızca kapora alıyoruz. Kapora, rezervasyonun iptal
+            edilmesi durumunda iade edilmemektedir; bu nedenle tarihlerinizi
+            netleştirdikten sonra rezervasyon yapmanızı öneriyoruz.
+          </p>
+
+          <h3 className="pt-2 text-xl font-semibold text-primary">
+            En uygun araç kiralama fiyatları
+          </h3>
+          <p>
+            {minPrice
+              ? `Günlük araç kiralama fiyatlarımız ${formatPrice(minPrice)}'den başlıyor. `
+              : ""}
+            Fiyat; seçtiğiniz araca, kiralama süresine ve tarihlere göre
+            değişir. Kiralama süresi uzadıkça günlük maliyet genellikle düşer, bu
+            yüzden birkaç günlük ihtiyaçlarınızda haftalık, uzun süreli
+            ihtiyaçlarınızda ise aylık kiralama seçeneğini sormanızı tavsiye
+            ediyoruz. Haftalık ve aylık fiyatlar araca göre belirlendiği için
+            tarihlerinizi WhatsApp&apos;tan yazmanız yeterli; size özel toplam
+            tutarı hemen paylaşıyoruz. Teklifte göreceğiniz tutar, ödeyeceğiniz
+            tutardır.
+          </p>
+
+          <h3 className="pt-2 text-xl font-semibold text-primary">
+            Günlük, haftalık veya aylık: hangisi size uygun?
+          </h3>
+          <p>
+            Günlük araç kiralama; havalimanı transferi, tek günlük bir iş
+            ziyareti, taşınma günü ya da kısa bir şehir içi ihtiyaç için
+            idealdir. Birkaç gün süren tatillerde, misafir ağırlarken veya kendi
+            aracınız birkaç gün serviste kaldığında haftalık kiralama hem daha
+            pratik hem de genellikle daha ekonomiktir. Şehre uzun süreliğine
+            gelenler, proje bazlı çalışanlar ya da araç satın almadan önce bir
+            süre beklemek isteyenler için ise aylık araç kiralama, her gün yeni
+            bir sözleşme yapmadan aracı kesintisiz kullanmanın en kolay yoludur.
+            Hangi seçeneğin size daha uygun olduğundan emin değilseniz,
+            ihtiyacınızı anlatmanız yeterli; tarihlerinize göre en mantıklı
+            süreyi ve fiyatı birlikte hesaplayalım.
+          </p>
+
+          <h3 className="pt-2 text-xl font-semibold text-primary">
+            Neden Aydemir Oto Kiralama?
+          </h3>
+          <p>
+            Kiralama öncesinde tüm koşulları açıkça paylaşıyoruz: yaş sınırı
+            yok, depozito yok, kilometre sınırı ve ödeme yöntemleri baştan belli.
+            Ofisimiz 7/24 açık, WhatsApp&apos;tan yazdığınızda hızlıca dönüş
+            yapıyoruz. Google&apos;daki müşteri yorumlarımız, bu yaklaşımın
+            karşılığını gösteriyor.
+          </p>
+
+          <h3 className="pt-2 text-xl font-semibold text-primary">
+            Kiralık araba seçenekleri
+          </h3>
+          <p>
+            Filomuzda şehir içi kullanıma uygun, yakıt tüketimi düşük binek
+            araçlar bulunuyor. Otomatik vites tercih edenler için benzinli ve
+            dizel seçeneklerimiz, manuel vites kullananlar için ise daha
+            ekonomik bir alternatifimiz var. Tüm araçlarımız 5 kişiliktir;
+            sigortalı ve kaskoludur. Güncel araç listesini, model yıllarını ve
+            günlük fiyatları aşağıdaki araç kartlarında görebilirsiniz.
+          </p>
+
+          <h3 className="pt-2 text-xl font-semibold text-primary">
+            Teslim noktası: Pendik ofisi ve Sabiha Gökçen
+          </h3>
+          <p>
+            Araç teslimlerimizi Pendik Çamçeşme&apos;de, Katip Çelebi Caddesi
+            üzerindeki ofisimizden yapıyoruz. Ofisimiz Sabiha Gökçen
+            Havalimanı&apos;na yaklaşık 15 dakika mesafededir ve havalimanına
+            araç getiriyoruz. Uçağınız indiğinde beklemeden yola çıkabilmeniz
+            için teslim saatini önceden WhatsApp&apos;tan birlikte belirliyoruz.
+            Ofisimiz 7/24 açık olduğu için gece geç saatlerde ya da sabahın
+            erken saatlerinde de araç teslim alabilirsiniz. Kartal, Tuzla,
+            Kurtköy, Maltepe ve Sancaktepe gibi yakın ilçelerden gelen
+            müşterilerimiz de araçlarını Pendik ofisimizden teslim alıyor.
+          </p>
+
+          <h3 className="pt-2 text-xl font-semibold text-primary">
+            Kilometre sınırı ve kullanım
+          </h3>
+          <p>
+            Kiralamalarımızda günlük 200 km kilometre sınırı uygulanır. Şehir
+            içi kullanımda bu sınır çoğu ihtiyaç için fazlasıyla yeterlidir.
+            Şehir dışına çıkmayı veya uzun yol yapmayı planlıyorsanız bunu
+            rezervasyon sırasında belirtmeniz, sürpriz bir durumla
+            karşılaşmamanız açısından önemlidir.
+          </p>
+
+          <h3 className="pt-2 text-xl font-semibold text-primary">
+            Rent a car nasıl yapılır?
+          </h3>
+          <p>
+            Bizimle araç kiralamak birkaç adımdan ibaret. Önce WhatsApp&apos;tan
+            ya da telefonla kiralama tarihlerinizi ve varsa araç tercihinizi
+            iletin. Müsait araçları ve toplam fiyatı sizinle paylaşalım. Teslim
+            yeri ve saatini netleştirdikten sonra, belirlenen zamanda ehliyetiniz
+            ve kimliğinizle gelip sözleşmeyi tamamlayın ve yola çıkın. Sorularınız
+            için 7/24 bize ulaşabilirsiniz; en uygun araç kiralama seçeneğini
+            birlikte bulalım.
+          </p>
+        </div>
+      </section>
+
+      <section className="border-t border-border bg-background py-16">
         <div className="mx-auto max-w-3xl px-6">
           <h2 className="text-2xl font-bold tracking-tight text-primary sm:text-3xl">
             Rent a Car: Kiralama Seçenekleri
