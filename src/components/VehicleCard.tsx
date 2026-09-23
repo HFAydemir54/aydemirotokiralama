@@ -89,6 +89,11 @@ export function VehicleImage({
         sizes={sizes}
         className="object-cover transition-transform duration-500 group-hover:scale-105"
       />
+      {vehicle.count && vehicle.count > 1 && (
+        <span className="absolute right-3 top-3 rounded-full bg-primary/90 px-3 py-1 text-xs font-semibold text-white">
+          Filoda {vehicle.count} adet
+        </span>
+      )}
     </div>
   );
 }

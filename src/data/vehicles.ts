@@ -4,7 +4,7 @@
  * Sitedeki tüm araç bilgisi buradan gelir. Dizi boşaltılırsa araç bölümleri
  * otomatik olarak "Araç Filomuz Yakında" durumuna döner.
  *
- * MEVCUT DURUM: 4 araç girili, fotoğraflar henüz yok (placeholder gösteriliyor).
+ * MEVCUT DURUM: 7 araç kaydı (Clio'dan 2 adet), hepsinin fotoğrafı var.
  * Girilmemiş alanlar: bagaj hacmi, haftalık/aylık fiyat — sitede hiç
  * görünmüyorlar, uydurma değer yazılmadı.
  *
@@ -46,6 +46,8 @@ export type Vehicle = {
   slug: string;
   brand: string;
   model: string;
+  /** Başlığa eklenen ayırt edici ek, örn. "Manuel" → "Renault Clio Manuel". */
+  variant?: string;
   year?: number;
   /** public/ altındaki yol. Boşsa placeholder gösterilir. */
   image?: string;
@@ -59,6 +61,8 @@ export type Vehicle = {
   engine?: string;
   seats?: number;
   luggage?: number;
+  /** Filodaki adet. 2 ve üzeriyse kartta "Filoda X adet" rozeti gösterilir. */
+  count?: number;
   /** false ise sitede hiç listelenmez. */
   available: boolean;
   /** Ana sayfada öne çıkarılsın mı (boşsa hayır). */
@@ -74,6 +78,8 @@ export const vehicles: Vehicle[] = [
     brand: "Renault",
     model: "Clio",
     year: 2024,
+    image: "/araclar/renault-clio.jpg",
+    count: 2,
     transmission: "Otomatik",
     fuel: "Benzin",
     engine: "1.0",
@@ -92,6 +98,7 @@ export const vehicles: Vehicle[] = [
     brand: "Fiat",
     model: "Egea",
     year: 2022,
+    image: "/araclar/fiat-egea.jpg",
     transmission: "Otomatik",
     fuel: "Dizel",
     engine: "1.6",
@@ -108,6 +115,7 @@ export const vehicles: Vehicle[] = [
     brand: "Renault",
     model: "Taliant",
     year: 2022,
+    image: "/araclar/renault-taliant.jpg",
     transmission: "Otomatik",
     fuel: "Benzin",
     engine: "1.0",
@@ -124,6 +132,7 @@ export const vehicles: Vehicle[] = [
     brand: "Peugeot",
     model: "301",
     year: 2018,
+    image: "/araclar/peugeot-301.jpg",
     transmission: "Manuel",
     fuel: "Dizel",
     engine: "1.5",
@@ -135,15 +144,68 @@ export const vehicles: Vehicle[] = [
     featured: true,
     updatedAt: "2026-08-01",
   },
+  {
+    slug: "renault-clio-manuel-kiralama",
+    brand: "Renault",
+    model: "Clio",
+    image: "/araclar/renault-clio.jpg",
+    variant: "Manuel",
+    year: 2023,
+    transmission: "Manuel",
+    fuel: "Benzin",
+    engine: "1.0",
+    seats: 5,
+    dailyPrice: null,
+    weeklyPrice: null,
+    monthlyPrice: null,
+    available: true,
+    updatedAt: "2026-09-23",
+  },
+  {
+    slug: "renault-megane-kiralama",
+    brand: "Renault",
+    model: "Megane",
+    year: 2024,
+    image: "/araclar/renault-megane.jpg",
+    transmission: "Otomatik",
+    fuel: "Benzin",
+    engine: "1.3",
+    seats: 5,
+    dailyPrice: null,
+    weeklyPrice: null,
+    monthlyPrice: null,
+    available: true,
+    featured: true,
+    updatedAt: "2026-09-23",
+  },
+  {
+    slug: "fiat-doblo-kiralama",
+    brand: "Fiat",
+    model: "Doblo",
+    year: 2025,
+    image: "/araclar/fiat-doblo.jpg",
+    transmission: "Otomatik",
+    fuel: "Dizel",
+    engine: "1.5",
+    seats: 5,
+    dailyPrice: null,
+    weeklyPrice: null,
+    monthlyPrice: null,
+    available: true,
+    featured: true,
+    updatedAt: "2026-09-23",
+  },
 ];
 
 /** Sitede gösterilecek araçlar. */
 export const availableVehicles = vehicles.filter((v) => v.available);
 
-/** Ana sayfada gösterilenler — featured yoksa ilk 6 araç. */
-export const featuredVehicles = availableVehicles.some((v) => v.featured)
-  ? availableVehicles.filter((v) => v.featured)
-  : availableVehicles.slice(0, 6);
+/** Ana sayfada gösterilenler (en fazla 6) — featured yoksa ilk 6 araç. */
+export const featuredVehicles = (
+  availableVehicles.some((v) => v.featured)
+    ? availableVehicles.filter((v) => v.featured)
+    : availableVehicles
+).slice(0, 6);
 
 /** Filo boş mu — boş durum bileşenlerini tetikler. */
 export const hasVehicles = availableVehicles.length > 0;
@@ -153,7 +215,7 @@ export function getVehicle(slug: string): Vehicle | undefined {
 }
 
 export function vehicleTitle(v: Vehicle): string {
-  return `${v.brand} ${v.model}`;
+  return [v.brand, v.model, v.variant].filter(Boolean).join(" ");
 }
 
 /** En düşük günlük fiyat; hiç fiyat girilmemişse null. */
