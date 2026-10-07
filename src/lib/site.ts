@@ -31,6 +31,12 @@ export const SITE = {
     "https://www.google.com/maps/place/Aydemir+Oto+Kiralama/@40.871018,29.2667971,17z/data=!3m1!4b1!4m6!3m5!1s0x14cadd02f105b891:0x368b5eb59f256687!8m2!3d40.871014!4d29.269372",
   /** GBP "yorum yaz" kısa linki — tıklandığında doğrudan yıldız verme ekranı açılır. */
   googleReviewUrl: "https://g.page/r/CYdmJZ-1Xos2EBM/review",
+  /** Havale/EFT bilgileri — /odeme sayfasında gösterilir. */
+  bank: {
+    accountHolder: "Muhammed Yusuf Aydemir",
+    bankName: "Ziraat Bankası",
+    iban: "TR53 0001 0090 1039 1587 5050 01",
+  },
 } as const;
 
 export const ADDRESS_ONE_LINE =`${SITE.address.street}, ${SITE.address.postalCode} ${SITE.address.district}/${SITE.address.city}`;
