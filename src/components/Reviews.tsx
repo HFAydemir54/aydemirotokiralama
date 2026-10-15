@@ -128,7 +128,7 @@ export default function Reviews() {
 
 function Stars({ value, className = "" }: { value: number; className?: string }) {
   return (
-    <div className={`flex gap-0.5 ${className}`} aria-label={`${value} / 5 puan`}>
+    <div className={`flex gap-0.5 ${className}`} role="img" aria-label={`${value} / 5 puan`}>
       {Array.from({ length: 5 }, (_, i) => (
         <Star
           key={i}
