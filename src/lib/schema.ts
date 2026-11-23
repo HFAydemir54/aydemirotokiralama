@@ -1,4 +1,4 @@
-import { SITE } from "./site";
+import { HOME_UPDATED, SITE, SITE_DESCRIPTION } from "./site";
 import type { Faq } from "@/data/faq";
 import type { Post } from "@/data/posts";
 import type { Vehicle } from "@/data/vehicles";
@@ -31,12 +31,14 @@ export const autoRentalSchema = {
   "@type": "AutoRental",
   "@id": BUSINESS_ID,
   name: SITE.name,
+  description: SITE_DESCRIPTION,
   url: SITE.url,
   image: `${SITE.url}/og-image.png`,
   telephone: SITE.phoneE164,
   priceRange: "₺₺",
   currenciesAccepted: "TRY",
-  paymentAccepted: "Nakit, Kredi Kartı, Havale/EFT",
+  // Kredi kartı GEÇMİYOR (bkz. data/faq.ts doğrulanmış koşullar).
+  paymentAccepted: "Nakit, Havale/EFT",
   address: postalAddress,
   geo: {
     "@type": "GeoCoordinates",
@@ -76,8 +78,45 @@ export const organizationSchema = {
   logo: `${SITE.url}/logo/logo-icon.png`,
   telephone: SITE.phoneE164,
   address: postalAddress,
-  sameAs: [SITE.instagram],
+  // Google İşletme Profili + Instagram: işletmenin site dışındaki gerçek
+  // profilleri. Var olmayan profil (Wikipedia, LinkedIn vb.) EKLENMEZ.
+  sameAs: [SITE.instagram, SITE.googleMaps],
 };
+
+/**
+ * Ana sayfa için WebPage. Güncelleme tarihi sayfada <time> ile de görünür
+ * (Google: tarih hem yapılandırılmış veride hem sayfada olmalı).
+ */
+export const homePageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": `${SITE.url}/#webpage`,
+  url: SITE.url,
+  name: "Pendik Araç Kiralama",
+  description: SITE_DESCRIPTION,
+  inLanguage: "tr-TR",
+  dateModified: HOME_UPDATED,
+  isPartOf: { "@id": WEBSITE_ID },
+  about: { "@id": BUSINESS_ID },
+  author: { "@id": `${SITE.url}/#organization` },
+  publisher: { "@id": `${SITE.url}/#organization` },
+};
+
+/** /hakkimizda için AboutPage. */
+export function aboutPageSchema(description: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "@id": `${SITE.url}/hakkimizda#webpage`,
+    url: `${SITE.url}/hakkimizda`,
+    name: `Hakkımızda | ${SITE.name}`,
+    description,
+    inLanguage: "tr-TR",
+    isPartOf: { "@id": WEBSITE_ID },
+    about: { "@id": BUSINESS_ID },
+    mainEntity: { "@id": `${SITE.url}/#organization` },
+  };
+}
 
 export const websiteSchema = {
   "@context": "https://schema.org",

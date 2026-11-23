@@ -1,0 +1,11 @@
+# ai.txt — Aydemir Oto Kiralama
+# Yapay zekâ sistemlerinin bu sitenin içeriğini kullanma izinleri.
+# Tüm içerik açık; yalnızca banka bilgilerini içeren ve arama motorlarına
+# zaten kapalı (noindex) olan /odeme sayfası hariç.
+#
+# Site özeti: https://www.aydemirotokiralama.com/llms.txt
+# İşletme bilgisi: https://www.aydemirotokiralama.com/ai/summary.json
+
+User-Agent: *
+Allow: /
+Disallow: /odeme

@@ -41,7 +41,10 @@ export const locations: Location[] = [
     slug: "pendik-arac-kiralama",
     name: "Pendik",
     locative: "Pendik'te",
-    title: "Pendik Araç Kiralama | Oto ve Araba Kiralama",
+    // Ana sayfa da "Pendik Araç Kiralama" hedefliyor ve Google bu sorguda ana
+    // sayfayı seçiyor (Search Console, Kasım 2026). Bu sayfa ikinci kopya
+    // olmasın diye "oto kiralama" ve ofise yakın mahallelere ayrıştırıldı.
+    title: "Pendik Oto Kiralama: Çamçeşme, Kaynarca, Güzelyalı",
     description:
       "Pendik araç kiralama ve oto kiralama: Çamçeşme'deki ofisimizden günlük ₺2.000'den başlayan fiyatlarla kiralık araba. Depozito yok, 7/24 açık.",
     intro:
@@ -63,7 +66,7 @@ export const locations: Location[] = [
     slug: "kurtkoy-arac-kiralama",
     name: "Kurtköy",
     locative: "Kurtköy'de",
-    title: "Kurtköy Araç Kiralama | Havalimanına Yakın",
+    title: "Kurtköy Araç Kiralama – Sabiha Gökçen'e 15 dk",
     description:
       "Kurtköy ve çevresinde araç kiralama. Sabiha Gökçen Havalimanı'na araç getiriyoruz, ofisimiz havalimanına 15 dakika mesafede.",
     intro:
@@ -129,7 +132,7 @@ export const locations: Location[] = [
     slug: "maltepe-arac-kiralama",
     name: "Maltepe",
     locative: "Maltepe'de",
-    title: "Maltepe Araç Kiralama | Günlük Kiralama",
+    title: "Maltepe Araç ve Oto Kiralama – Depozitosuz, 7/24",
     description:
       "Maltepe'den araç kiralama. Pendik'teki ofisimizden teslim, günlük ve haftalık kiralama, depozito yok.",
     intro:

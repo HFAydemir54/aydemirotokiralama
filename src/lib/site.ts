@@ -41,6 +41,22 @@ export const SITE = {
 
 export const ADDRESS_ONE_LINE =`${SITE.address.street}, ${SITE.address.postalCode} ${SITE.address.district}/${SITE.address.city}`;
 
+/**
+ * Ana sayfa meta açıklaması. AutoRental schema'sının `description` alanı da
+ * buradan beslenir — ikisinin aynı olması yapay zekâ ve arama motorlarına
+ * tutarlı bir işletme tanımı verir.
+ */
+export const SITE_DESCRIPTION =
+  "Pendik'te araç ve araba kiralama (rent a car). Günlük ₺2.000'den başlayan fiyatlar, depozito yok, 7/24 açık. Sabiha Gökçen Havalimanı'na araç getiriyoruz.";
+
+/**
+ * Ana sayfanın son içerik güncellemesi. Sayfada görünür tarih, WebPage
+ * schema'sı ve sitemap aynı değeri kullanır. Ana sayfa içeriğini
+ * değiştirdiğinizde bu tarihi de güncelleyin (her build'de "bugün" YAZMAYIN —
+ * sahte tazelik sinyali olur, bkz. sitemap.ts).
+ */
+export const HOME_UPDATED = "2026-11-23";
+
 /** Ön-doldurulmuş WhatsApp linki üretir. */
 export function waLink(message: string): string {
   return `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(message)}`;

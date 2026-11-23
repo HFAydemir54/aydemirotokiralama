@@ -49,8 +49,16 @@ export async function generateMetadata(
     .filter(Boolean)
     .join(", ");
 
+  // Vites türü başlıkta: "kiralık clio otomatik" gibi aramalarla eşleşir ve
+  // aynı modelin manuel/otomatik sayfalarını SERP'te ayırt ettirir. Varyant
+  // zaten vitesi söylüyorsa ("Renault Clio Manuel") tekrar yazılmaz.
+  const gear =
+    vehicle.transmission && vehicle.variant !== vehicle.transmission
+      ? ` (${vehicle.transmission})`
+      : "";
+
   return {
-    title: `${name} Kiralama`,
+    title: { absolute: `${name} Kiralama${gear} – Pendik | Aydemir` },
     description: specs
       ? `${name} kiralama — ${specs}. Günlük, haftalık ve aylık kiralama. Pendik ve Sabiha Gökçen Havalimanı teslim.`
       : `${name} kiralama. Günlük, haftalık ve aylık kiralama. Pendik ve Sabiha Gökçen Havalimanı teslim, WhatsApp'tan hızlı rezervasyon.`,

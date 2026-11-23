@@ -34,7 +34,9 @@ export async function generateMetadata(
   if (!location) return {};
 
   return {
-    title: location.title,
+    // Kısa marka eki: "| Aydemir Oto Kiralama" şablonu bu başlıkları 65+
+    // karaktere çıkarıp SERP'te kestiriyordu.
+    title: { absolute: `${location.title} | Aydemir` },
     description: location.description,
     alternates: { canonical: `/${location.slug}` },
   };

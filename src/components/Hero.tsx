@@ -31,7 +31,10 @@ export default function Hero({
         <source media="(max-width: 768px)" srcSet="/hero-bg-mobile.jpg" />
         <img
           src="/hero-bg.jpg"
+          // Süs amaçlı arka plan: boş alt + role="presentation" ekran
+          // okuyuculara ve tarayıcı araçlarına bilinçli olarak atlandığını söyler.
           alt=""
+          role="presentation"
           width={1920}
           height={1280}
           fetchPriority="high"

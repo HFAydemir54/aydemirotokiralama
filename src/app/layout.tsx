@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 import StickyCta from "@/components/StickyCta";
 import JsonLd from "@/components/JsonLd";
 import { autoRentalSchema, organizationSchema, websiteSchema } from "@/lib/schema";
-import { SITE } from "@/lib/site";
+import { SITE, SITE_DESCRIPTION } from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,13 +17,22 @@ const geistSans = Geist({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: "Pendik Araç Kiralama | Aydemir Oto Kiralama",
+    // Ana sayfa başlığı: Search Console'da "araç kiralama", "pendik oto
+    // kiralama", "pendik rent a car" sorguları ilk 10'da çok gösterim alıp az
+    // tıklanıyordu (Kasım 2026). "rent a car" ve başlangıç fiyatı tıklama
+    // oranını artırmak için başlığa eklendi. Fiyat, en düşük günlük araç
+    // fiyatıyla (data/vehicles.ts) aynı olmalı.
+    default: "Pendik Araç Kiralama & Rent a Car – Günlük ₺2.000'den",
     // Alt sayfalar sadece kendi başlığını verir, marka adı otomatik eklenir.
     template: "%s | Aydemir Oto Kiralama",
   },
-  description:
-    "Pendik'te araç ve araba kiralama (rent a car). Günlük ₺2.000'den başlayan fiyatlar, depozito yok, 7/24 açık. Sabiha Gökçen Havalimanı'na araç getiriyoruz.",
-  alternates: { canonical: "/" },
+  description: SITE_DESCRIPTION,
+  // <meta name="author"> — içeriği kimin yayınladığını belirtir.
+  authors: [{ name: SITE.name, url: SITE.url }],
+  alternates: {
+    canonical: "/",
+    types: { "application/rss+xml": "/blog/rss.xml" },
+  },
   openGraph: {
     type: "website",
     locale: "tr_TR",

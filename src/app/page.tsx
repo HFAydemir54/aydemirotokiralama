@@ -13,12 +13,14 @@ import Contact from "@/components/Contact";
 import JsonLd from "@/components/JsonLd";
 import { homeFaqs } from "@/data/faq";
 import { featuredVehicles, hasVehicles } from "@/data/vehicles";
-import { faqSchema } from "@/lib/schema";
+import { faqSchema, homePageSchema } from "@/lib/schema";
+import { formatDate } from "@/lib/date";
+import { HOME_UPDATED } from "@/lib/site";
 
 export default function Home() {
   return (
     <>
-      <JsonLd data={faqSchema(homeFaqs)} />
+      <JsonLd data={[homePageSchema, faqSchema(homeFaqs)]} />
 
       <Hero
         title="Pendik Araç Kiralama"
@@ -66,6 +68,11 @@ export default function Home() {
       <LocationsGrid />
       <RelatedPosts title="Araç Kiralama Rehberi" className="bg-background" />
       <FaqSection faqs={homeFaqs} />
+      <p className="-mt-10 pb-10 text-center text-xs text-muted">
+        Bu sayfa en son{" "}
+        <time dateTime={HOME_UPDATED}>{formatDate(HOME_UPDATED)}</time>{" "}
+        tarihinde güncellendi.
+      </p>
       <Contact />
     </>
   );

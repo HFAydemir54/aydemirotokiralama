@@ -22,7 +22,8 @@ const DESCRIPTION =
 
 export const metadata: Metadata = {
   // absolute: marka soneki eklenmesin, başlık SERP'te kesilmesin.
-  title: { absolute: "Sabiha Gökçen Araç Kiralama | Aydemir Oto Kiralama" },
+  // "sabiha gökçen rent a car" aylık ~1.600 aranıyor (OpenSEO, Kasım 2026).
+  title: { absolute: "Sabiha Gökçen Araç Kiralama, Rent a Car – Havalimanı Teslim" },
   description: DESCRIPTION,
   alternates: { canonical: "/sabiha-gokcen-arac-kiralama" },
 };

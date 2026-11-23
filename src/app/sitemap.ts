@@ -3,7 +3,7 @@ import { durations } from "@/data/durations";
 import { locations } from "@/data/locations";
 import { posts } from "@/data/posts";
 import { availableVehicles } from "@/data/vehicles";
-import { SITE } from "@/lib/site";
+import { HOME_UPDATED, SITE } from "@/lib/site";
 
 /**
  * Dinamik sitemap.
@@ -19,9 +19,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: SITE.url,
-      lastModified: STATIC_UPDATED,
+      lastModified: HOME_UPDATED,
       changeFrequency: "weekly",
       priority: 1,
+    },
+    {
+      url: `${SITE.url}/hakkimizda`,
+      lastModified: "2026-11-23",
+      changeFrequency: "yearly",
+      priority: 0.4,
     },
     {
       url: `${SITE.url}/arac-kiralama`,
