@@ -41,7 +41,9 @@ export const metadata: Metadata = {
     locale: "tr_TR",
     url: SITE.url,
     siteName: SITE.name,
-    title: "Pendik Araç Kiralama & Rent a Car | Aydemir Oto Kiralama",
+    // Paylaşım başlığının "|" öncesi H1 ile ("Pendik Araç Kiralama") aynı
+    // tutulur: marka tutarlılığı (H1 / og:title / schema) böyle korunur.
+    title: "Pendik Araç Kiralama | Aydemir Oto Kiralama",
     description:
       "Pendik'te araç kiralama. Sabiha Gökçen Havalimanı'na araç getiriyoruz. Günlük, haftalık ve aylık kiralama, depozito yok.",
     images: [
@@ -55,7 +57,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pendik Araç Kiralama & Rent a Car | Aydemir Oto Kiralama",
+    title: "Pendik Araç Kiralama | Aydemir Oto Kiralama",
     description:
       "Pendik'te araç kiralama. Sabiha Gökçen Havalimanı'na araç getiriyoruz. Depozito yok, 7/24 açık.",
     images: ["/og-image.png"],
