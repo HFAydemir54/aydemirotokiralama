@@ -8,7 +8,8 @@ import RelatedPosts from "@/components/RelatedPosts";
 import FleetEmptyState from "@/components/FleetEmptyState";
 import VehicleCard from "@/components/VehicleCard";
 import WhatsAppCta from "@/components/WhatsAppCta";
-import { breadcrumbSchema, localServiceSchema } from "@/lib/schema";
+import FaqSection from "@/components/FaqSection";
+import { breadcrumbSchema, faqSchema, localServiceSchema } from "@/lib/schema";
 
 import { getLocation, locations } from "@/data/locations";
 import { featuredVehicles, hasVehicles } from "@/data/vehicles";
@@ -62,6 +63,7 @@ export default async function LocationPage(props: PageProps<"/[lokasyon]">) {
       <JsonLd
         data={[
           localServiceSchema(location.name, location.description),
+          ...(location.faqs?.length ? [faqSchema(location.faqs)] : []),
           breadcrumbSchema(crumbs),
         ]}
       />
@@ -144,7 +146,8 @@ export default async function LocationPage(props: PageProps<"/[lokasyon]">) {
               <div>
                 <dt className="font-medium text-primary">Kiralama süreleri</dt>
                 <dd className="mt-1 text-muted">
-                  Minimum 1 gün; günlük, haftalık ve aylık kiralama.
+                  Minimum 1 gün; günlük, haftalık, aylık ve uzun dönem
+                  kiralama.
                 </dd>
               </div>
               <div>
@@ -199,6 +202,14 @@ export default async function LocationPage(props: PageProps<"/[lokasyon]">) {
           )}
         </div>
       </section>
+
+      {location.faqs && location.faqs.length > 0 && (
+        <FaqSection
+          faqs={location.faqs}
+          title={`${location.name} Araç Kiralama Hakkında Sık Sorulanlar`}
+          className="border-t border-border bg-background"
+        />
+      )}
 
       <RelatedPosts
         slugs={[

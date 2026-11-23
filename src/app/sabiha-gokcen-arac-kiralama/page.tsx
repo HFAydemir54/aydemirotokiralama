@@ -196,6 +196,8 @@ export default function AirportPage() {
           <h2 className="mb-6 text-xl font-bold text-primary">İlgili Sayfalar</h2>
           <ul className="flex flex-wrap gap-3">
             {[
+              // Havalimanı Kurtköy'de: en ilgili bölge sayfası ilk sırada.
+              { href: "/kurtkoy-arac-kiralama", label: "Kurtköy Araç Kiralama" },
               { href: "/pendik-arac-kiralama", label: "Pendik Araç Kiralama" },
               { href: "/tuzla-arac-kiralama", label: "Tuzla Araç Kiralama" },
               { href: "/istanbul-arac-kiralama", label: "İstanbul Araç Kiralama" },

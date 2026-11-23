@@ -72,9 +72,11 @@ export default function TermsPage() {
             </p>
           </Section>
 
-          <Section title="Sigorta">
+          <Section title="Sigorta ve bakım">
             <p>
-              Tüm araçlarımız sigortalı ve kaskoludur.
+              Tüm araçlarımız sigortalı ve kaskoludur. Araçların bakımını biz
+              yapıyoruz; aylık ve uzun dönem kiralamalarda da sizden bakım
+              ücreti alınmaz.
             </p>
           </Section>
 

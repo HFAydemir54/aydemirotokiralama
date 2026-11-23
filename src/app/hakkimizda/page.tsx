@@ -52,7 +52,10 @@ export default function AboutPage() {
           <p className="mt-5 leading-relaxed text-muted">
             {SITE.name}, Pendik Çamçeşme&apos;de Katip Çelebi Caddesi
             üzerindeki ofisinden araç kiralama hizmeti veren yerel bir
-            işletmedir. Ofisimiz 7/24 açıktır; günlük, haftalık ve aylık
+            işletmedir. Ofisimiz 7/24 açıktır; günlük, haftalık, aylık ve{" "}
+            <Link href="/uzun-donem-arac-kiralama" className="text-accent hover:underline">
+              uzun dönem
+            </Link>{" "}
             kiralama yapıyor, Sabiha Gökçen Havalimanı&apos;na araç
             getiriyoruz.
           </p>
@@ -74,7 +77,7 @@ export default function AboutPage() {
               <li>Depozito almıyoruz. Yaş sınırı yok; en az 2 yıllık ehliyet yeterli.</li>
               <li>Ödeme nakit veya havale ile yapılır; kredi kartı geçmemektedir.</li>
               <li>Günlük 200 km kilometre sınırı uygulanır.</li>
-              <li>Tüm araçlarımız sigortalı ve kaskoludur.</li>
+              <li>Tüm araçlarımız sigortalı ve kaskoludur; bakımlarını biz yapıyoruz.</li>
             </ul>
             <p>
               Tüm ayrıntılar{" "}

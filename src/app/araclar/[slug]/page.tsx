@@ -58,8 +58,12 @@ export async function generateMetadata(
       : "";
 
   return {
-    title: { absolute: `${name} Kiralama${gear} – Pendik | Aydemir` },
-    description: specs
+    title: {
+      absolute: `${vehicle.seoTitle ?? `${name} Kiralama${gear} – Pendik`} | Aydemir`,
+    },
+    description: vehicle.seoDescription
+      ? vehicle.seoDescription
+      : specs
       ? `${name} kiralama — ${specs}. Günlük, haftalık ve aylık kiralama. Pendik ve Sabiha Gökçen Havalimanı teslim.`
       : `${name} kiralama. Günlük, haftalık ve aylık kiralama. Pendik ve Sabiha Gökçen Havalimanı teslim, WhatsApp'tan hızlı rezervasyon.`,
     alternates: { canonical: `/araclar/${vehicle.slug}` },

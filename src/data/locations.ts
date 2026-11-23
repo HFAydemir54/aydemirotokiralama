@@ -32,6 +32,12 @@ export type Location = {
   useCase: string;
   /** İlgili komşu ilçe slug'ları (internal linking) */
   nearby: string[];
+  /**
+   * İlçeye özel SSS — sayfada görünür ve FAQPage schema'sına gider.
+   * Cevaplar yalnızca bu dosyadaki ulaşım bilgisine ve data/faq.ts'teki
+   * doğrulanmış koşullara dayanır; ilçeler arası kopyalamayın.
+   */
+  faqs?: { q: string; a: string }[];
   priority: number;
   updatedAt: string;
 };
@@ -59,8 +65,22 @@ export const locations: Location[] = [
       "kartal-arac-kiralama",
       "tuzla-arac-kiralama",
     ],
+    faqs: [
+      {
+        q: "Pendik'teki ofisiniz tam olarak nerede?",
+        a: "Ofisimiz Pendik Çamçeşme Mahallesi'nde, Katip Çelebi Caddesi No:6/A adresindedir. Araç teslimlerimizi buradan yapıyoruz ve ofisimiz 7/24 açık.",
+      },
+      {
+        q: "Kaynarca veya Güzelyalı'dan ofisinize nasıl gelirim?",
+        a: "Çamçeşme'deki ofisimize Pendik merkez, Kaynarca ve Güzelyalı yönünden toplu taşıma ve özel araçla kolayca ulaşılıyor. Konum için iletişim sayfamızdaki haritayı kullanabilirsiniz.",
+      },
+      {
+        q: "Pendik'te oto kiralama fiyatları ne kadar?",
+        a: "Günlük araç kiralama fiyatlarımız ₺2.000'den başlıyor. Haftalık ve aylık fiyatlar süreye göre belirlendiği için tarihlerinizi WhatsApp'tan yazmanız yeterli.",
+      },
+    ],
     priority: 0.9,
-    updatedAt: "2026-08-01",
+    updatedAt: "2026-11-23",
   },
   {
     slug: "kurtkoy-arac-kiralama",
@@ -81,8 +101,22 @@ export const locations: Location[] = [
       "sancaktepe-arac-kiralama",
       "tuzla-arac-kiralama",
     ],
+    faqs: [
+      {
+        q: "Kurtköy'de kiraladığım aracı nereden teslim alırım?",
+        a: "Aracı Sabiha Gökçen Havalimanı'nda ya da Pendik Çamçeşme'deki ofisimizde teslim alabilirsiniz. Kurtköy'deki adreslere teslim yapmıyoruz; havalimanı dışındaki teslimler ofisimizden yapılır.",
+      },
+      {
+        q: "Ofisiniz Kurtköy'e ne kadar uzaklıkta?",
+        a: "Ofisimiz Kurtköy'e ve Sabiha Gökçen Havalimanı'na yaklaşık 15 dakikalık mesafededir.",
+      },
+      {
+        q: "Kurtköy'de gece araç kiralayabilir miyim?",
+        a: "Evet, ofisimiz 7/24 açık. Havalimanında teslim alacaksanız varış saatinizi önceden WhatsApp'tan yazmanız yeterli.",
+      },
+    ],
     priority: 0.8,
-    updatedAt: "2026-08-01",
+    updatedAt: "2026-11-23",
   },
   {
     slug: "kartal-arac-kiralama",
@@ -103,8 +137,22 @@ export const locations: Location[] = [
       "maltepe-arac-kiralama",
       "tuzla-arac-kiralama",
     ],
+    faqs: [
+      {
+        q: "Kartal'dan ofisinize nasıl gelirim?",
+        a: "Kartal'dan ofisimize E-5 ve sahil yolu üzerinden ulaşabilirsiniz; M4 metro hattı ve Marmaray da Kartal ile Pendik arasında doğrudan bağlantı sağlıyor. Ofisimiz Kartal'a yaklaşık 10 km mesafede.",
+      },
+      {
+        q: "Kartal'da günübirlik araç kiralayabilir miyim?",
+        a: "Evet, minimum kiralama süremiz 1 gün. Günlük araç kiralama fiyatlarımız ₺2.000'den başlıyor ve günlük 200 km sınırı uygulanıyor.",
+      },
+      {
+        q: "Kartal'a araç getiriyor musunuz?",
+        a: "Hayır, adrese teslim hizmetimiz yok. Kartal'dan kiralayan misafirlerimiz aracı Pendik Çamçeşme'deki ofisimizden teslim alıyor.",
+      },
+    ],
     priority: 0.7,
-    updatedAt: "2026-08-01",
+    updatedAt: "2026-11-23",
   },
   {
     slug: "tuzla-arac-kiralama",
@@ -125,8 +173,22 @@ export const locations: Location[] = [
       "kurtkoy-arac-kiralama",
       "kartal-arac-kiralama",
     ],
+    faqs: [
+      {
+        q: "Tuzla'da haftalık veya aylık araç kiralayabilir miyim?",
+        a: "Evet. Günlük kiralamanın yanında haftalık, aylık ve uzun dönem kiralama da yapıyoruz. Bu sürelerdeki fiyatlar süreye göre belirlendiği için ihtiyacınızı WhatsApp'tan yazmanız yeterli.",
+      },
+      {
+        q: "Tuzla'dan ofisinize nasıl gelirim?",
+        a: "Tuzla'dan ofisimize E-5 ve sahil yolu üzerinden ulaşabilirsiniz; Marmaray hattı da Tuzla ile Pendik arasında doğrudan bağlantı sağlıyor. Ofisimiz Tuzla'ya yaklaşık 10 km mesafede.",
+      },
+      {
+        q: "Tuzla'ya kiralık araba getiriyor musunuz?",
+        a: "Hayır, adrese teslim hizmetimiz yok. Araç Pendik Çamçeşme'deki ofisimizden teslim edilir; tek istisna Sabiha Gökçen Havalimanı'dır.",
+      },
+    ],
     priority: 0.7,
-    updatedAt: "2026-08-01",
+    updatedAt: "2026-11-23",
   },
   {
     slug: "maltepe-arac-kiralama",
@@ -146,8 +208,22 @@ export const locations: Location[] = [
       "kartal-arac-kiralama",
       "pendik-arac-kiralama",
     ],
+    faqs: [
+      {
+        q: "Maltepe'ye araç getiriyor musunuz?",
+        a: "Hayır, adrese teslim hizmetimiz yok. Maltepe'den kiralayan misafirlerimiz aracı Pendik Çamçeşme'deki ofisimizden teslim alıyor; ofisimiz 7/24 açık.",
+      },
+      {
+        q: "Maltepe'den ofisinize nasıl gelirim?",
+        a: "Maltepe'den ofisimize E-5 veya sahil yolu üzerinden ulaşılıyor; M4 metro hattı da Maltepe ile Pendik arasında doğrudan bağlantı sağlıyor. Ofisimiz Maltepe'ye yaklaşık 20 km mesafede.",
+      },
+      {
+        q: "Maltepe'de oto kiralama için depozito gerekiyor mu?",
+        a: "Hayır, depozito almıyoruz. En az 2 yıllık ehliyet ve kimlik yeterli; ödeme nakit veya havaleyle yapılıyor.",
+      },
+    ],
     priority: 0.6,
-    updatedAt: "2026-08-01",
+    updatedAt: "2026-11-23",
   },
   {
     slug: "sancaktepe-arac-kiralama",
@@ -168,8 +244,22 @@ export const locations: Location[] = [
       "pendik-arac-kiralama",
       "kartal-arac-kiralama",
     ],
+    faqs: [
+      {
+        q: "Sancaktepe'den ofisinize nasıl ulaşırım?",
+        a: "Sancaktepe'den ofisimize TEM otoyolu ve Kurtköy bağlantısı üzerinden ulaşılıyor; Sabiha Gökçen Havalimanı yönü de aynı güzergâh üzerinde. Ofisimiz Sancaktepe'ye yaklaşık 15 km mesafede.",
+      },
+      {
+        q: "Sancaktepe'den kiraladığım araçla şehir dışına çıkabilir miyim?",
+        a: "Günlük 200 km kilometre sınırı uygulanıyor; sınır aşılırsa ek ücret alınır. Şehirlerarası bir yolculuk planlıyorsanız rezervasyon sırasında belirtin, koşulları önceden netleştirelim.",
+      },
+      {
+        q: "Sancaktepe'ye kiralık araç teslim ediyor musunuz?",
+        a: "Hayır, adrese teslim hizmetimiz yok. Araç Pendik Çamçeşme'deki ofisimizden teslim edilir; Sabiha Gökçen Havalimanı'na ise araç getiriyoruz.",
+      },
+    ],
     priority: 0.6,
-    updatedAt: "2026-08-01",
+    updatedAt: "2026-11-23",
   },
   {
     slug: "istanbul-arac-kiralama",

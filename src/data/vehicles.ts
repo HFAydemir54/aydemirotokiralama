@@ -69,6 +69,12 @@ export type Vehicle = {
   featured?: boolean;
   /** Araç sayfasındaki serbest tanıtım metni (opsiyonel). */
   intro?: string;
+  /**
+   * Başlık/açıklama özelleştirmesi (opsiyonel). Boşsa otomatik üretilir:
+   * "<Marka Model> Kiralama (<Vites>) – Pendik | Aydemir".
+   */
+  seoTitle?: string;
+  seoDescription?: string;
   updatedAt?: string;
 };
 
@@ -193,7 +199,14 @@ export const vehicles: Vehicle[] = [
     monthlyPrice: null,
     available: true,
     featured: true,
-    updatedAt: "2026-09-23",
+    // "ticari araç kiralama" (~1.900/ay) ve "kiralık ticari araç" (~720/ay)
+    // aramalarında filodaki tek hafif ticari araç (OpenSEO, Kasım 2026).
+    seoTitle: "Fiat Doblo Kiralama – Hafif Ticari Araç, Otomatik",
+    seoDescription:
+      "Kiralık Fiat Doblo: 2025 model, otomatik, dizel, 5 kişilik hafif ticari araç. Günlük, haftalık ve aylık ticari araç kiralama; depozito yok, Pendik ofisinden teslim.",
+    intro:
+      "Fiat Doblo, geniş iç hacmiyle hafif ticari araç arayanlar için pratik bir seçenek: malzeme ya da ekipman taşımak, taşınmak veya kalabalık bagajla yolculuk yapmak için uygun. Filomuzdaki Doblo 2025 model, otomatik vitesli ve dizel. Günlük, haftalık ve aylık ticari araç kiralama yapıyoruz; fiyat için WhatsApp'tan yazmanız yeterli.",
+    updatedAt: "2026-11-23",
   },
 ];
 

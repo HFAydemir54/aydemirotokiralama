@@ -202,20 +202,35 @@ export const posts: Post[] = [
 
   {
     slug: "arac-kiralama-icin-gerekli-belgeler",
-    title: "Araç Kiralamak İçin Gerekli Belgeler",
-    metaTitle: "Araç Kiralamak İçin Gerekli Belgeler",
+    // Search Console (Kasım 2026): "araba kiralamak için ne gerekli",
+    // "araç kiralama şartları", "rent a car için gerekli belgeler" sorgularında
+    // 55-82. sırada → başlık "şartlar"ı da kapsayacak şekilde genişletildi.
+    title: "Araç Kiralama Şartları ve Gerekli Belgeler",
+    metaTitle: "Araç Kiralama Şartları ve Gerekli Belgeler",
     description:
-      "Araç kiralarken hangi belgeler isteniyor? Ehliyet, kimlik ve ödeme konusunda bilmeniz gerekenler.",
+      "Araba kiralamak için ne gerekli? Ehliyet süresi, kimlik, yaş sınırı, depozito ve ödeme: araç kiralama şartları ve gerekli belgelerin kısa listesi.",
     excerpt:
-      "Teslim noktasında yanınızda olması gerekenler ve ehliyet süresi şartının nedeni.",
+      "Araba kiralamak için gereken belgeler, ehliyet süresi şartı ve tüm kiralama koşullarının özeti.",
     keyword: "araç kiralama gerekli belgeler",
     publishedAt: "2026-08-01",
-    updatedAt: "2026-08-01",
+    updatedAt: "2026-11-23",
     readingMinutes: 3,
     blocks: [
       {
         type: "p",
         text: "Araç kiralama işlemi, doğru belgelerle geldiğinizde birkaç dakika sürer. Bizde istenen belgeler oldukça sade.",
+      },
+      { type: "h2", text: "Kısaca: araba kiralamak için ne gerekli?" },
+      {
+        type: "ul",
+        items: [
+          "En az 2 yıllık sürücü belgesi (aslı)",
+          "Kimlik belgesi",
+          "Yaş sınırı yok",
+          "Depozito yok; yalnızca aracı önceden ayırtmak isterseniz kapora alınır",
+          "Ödeme nakit veya havale ile; kredi kartı geçmiyor",
+          "Günlük 200 km kilometre sınırı",
+        ],
       },
       { type: "h2", text: "Yanınızda olması gerekenler" },
       {
@@ -302,14 +317,17 @@ export const posts: Post[] = [
   {
     slug: "depozitosuz-arac-kiralama",
     title: "Depozitosuz Araç Kiralama Mümkün mü?",
-    metaTitle: "Depozitosuz Araç Kiralama Mümkün mü?",
+    // Search Console (Kasım 2026): "kredi kartsız depozitosuz araç kiralama"
+    // 29., "depozitosuz araç kiralama" 62. sırada → kredi kartı ve yerel
+    // (Pendik) niyet başlığa eklendi.
+    metaTitle: "Depozitosuz ve Kredi Kartsız Araç Kiralama – Pendik",
     description:
-      "Araç kiralamada depozito neden alınır, depozitosuz kiralama mümkün müdür? Kapora ile depozito arasındaki fark.",
+      "Depozitosuz araç kiralama mümkün mü? Depozito nedir, kaporadan farkı ne? Pendik'te depozito ve kredi kartı olmadan araç kiralama koşulları.",
     excerpt:
       "Depozitonun sektördeki işlevi, kapora ile farkı ve bizde depozito alınmamasının ne anlama geldiği.",
     keyword: "depozitosuz araç kiralama",
     publishedAt: "2026-08-01",
-    updatedAt: "2026-08-01",
+    updatedAt: "2026-11-23",
     readingMinutes: 4,
     blocks: [
       {
@@ -346,6 +364,11 @@ export const posts: Post[] = [
       {
         type: "p",
         text: "Araçlarımız sigortalı ve kaskoludur. Bu yüzden güvence için ayrıca depozito almaya gerek duymuyoruz. Teslim sırasında aracı birlikte kontrol ediyoruz; bu adımda aracın mevcut durumunu fotoğraflamanızı öneririz.",
+      },
+      { type: "h2", text: "Kredi kartı olmadan, depozitosuz kiralama" },
+      {
+        type: "p",
+        text: "Bizde depozito alınmadığı gibi kredi kartı da gerekmiyor: ödeme nakit veya banka havalesiyle yapılıyor. Ayrıntılar [kredi kartsız araç kiralama](/blog/kredi-kartsiz-arac-kiralama) yazımızda. Aracı [Pendik Çamçeşme'deki ofisimizden](/pendik-arac-kiralama) teslim alabilir ya da [Sabiha Gökçen Havalimanı'na](/sabiha-gokcen-arac-kiralama) getirmemizi isteyebilirsiniz.",
       },
       {
         type: "p",

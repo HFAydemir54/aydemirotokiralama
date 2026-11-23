@@ -15,6 +15,10 @@
  *   - Havalimanına araç getiriliyor; diğer bölgelerde teslim ofisten yapılıyor
  *   - Ofis Sabiha Gökçen'e 15 dakika mesafede, 7/24 açık
  *   - Tüm araçlar sigortalı ve kaskolu
+ *   - Araçların bakımı işletmeye ait; müşteriden bakım ücreti alınmıyor
+ *     (23 Kasım 2026'da teyit edildi)
+ *   - Uzun dönem / yıllık kiralama yapılıyor, fiyat iletişimle veriliyor
+ *     (23 Kasım 2026'da teyit edildi)
  */
 
 export type Faq = { q: string; a: string };
@@ -88,6 +92,15 @@ export const extraFaqs: Faq[] = [
   {
     q: "Haftalık ve aylık kiralama yapıyor musunuz?",
     a: "Evet, günlük kiralamanın yanında haftalık ve aylık kiralama da yapıyoruz. Bu sürelerdeki fiyatlar kiralama süresine göre değiştiği için WhatsApp'tan bilgi verebiliriz.",
+  },
+  {
+    // İşletme sahibi tarafından 23 Kasım 2026'da teyit edildi.
+    q: "Uzun dönem veya yıllık araç kiralama yapıyor musunuz?",
+    a: "Evet, 6 ay, 12 ay ve daha uzun süreli kiralama yapıyoruz. Uzun dönem fiyatları süreye ve araca göre belirlendiği için ihtiyacınızı WhatsApp'tan yazın, size özel teklifi paylaşalım.",
+  },
+  {
+    q: "Uzun dönem kiralamada aracın bakımını kim yapıyor?",
+    a: "Araçların bakımını biz yapıyoruz ve sizden bakım ücreti almıyoruz. Sigorta ve kasko da bize ait; siz yalnızca yakıt ve kullanım masrafını üstlenirsiniz.",
   },
 ];
 

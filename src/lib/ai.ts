@@ -14,7 +14,8 @@ export const KEY_FACTS = [
   "Yaş sınırı yoktur; sürücü belgesinin en az 2 yıllık olması yeterlidir.",
   "Ödeme nakit veya havale/EFT ile yapılır; kredi kartı geçmez.",
   "Günlük 200 km kilometre sınırı uygulanır; aşımda ek ücret alınır.",
-  "Minimum kiralama süresi 1 gündür; günlük, haftalık ve aylık kiralama yapılır. Haftalık ve aylık fiyatlar süreye göre belirlenir.",
+  "Minimum kiralama süresi 1 gündür; günlük, haftalık, aylık ve uzun dönem (6 ay, 12 ay, yıllık) kiralama yapılır. Haftalık, aylık ve uzun dönem fiyatları süreye göre belirlenir ve iletişimle verilir.",
   "Tüm araçlar sigortalı ve kaskoludur.",
+  "Araçların bakımı firmaya aittir; müşteriden bakım ücreti alınmaz.",
   "Rezervasyon ve fiyat bilgisi WhatsApp veya telefonla alınır.",
 ] as const;

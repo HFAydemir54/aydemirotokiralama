@@ -1,5 +1,6 @@
 /**
- * Süre bazlı kiralama sayfaları: /gunluk-, /haftalik-, /aylik-arac-kiralama
+ * Süre bazlı kiralama sayfaları: /gunluk-, /haftalik-, /aylik-,
+ * /uzun-donem-arac-kiralama
  *
  * Bu sayfalar lokasyon sayfalarından farklı bir arama niyetini karşılar:
  * kullanıcı "nerede" değil "ne kadar süre" sorusuyla arıyor.
@@ -12,6 +13,8 @@
  *   - Nakit veya havale; kredi kartı geçmiyor
  *   - Teslim Pendik ofisinden, Sabiha Gökçen'e araç getiriliyor
  *   - Ofis 7/24 açık, araçlar sigortalı ve kaskolu
+ *   - Bakım işletmeye ait, müşteriden bakım ücreti alınmıyor (23.11.2026)
+ *   - Uzun dönem / yıllık kiralama var, fiyat iletişimle (23.11.2026)
  *
  * Kurumsal fatura, taksitli ödeme, ücretsiz araç değişimi gibi doğrulanmamış
  * hiçbir hizmet yazılmaz. Üç sayfanın `benefits`, `bestFor` ve `notes`
@@ -124,9 +127,11 @@ export const durations: Duration[] = [
   {
     slug: "aylik-arac-kiralama",
     name: "Aylık",
-    title: "Aylık Araç Kiralama | Uzun Dönem",
+    // "Uzun dönem" ifadesi /uzun-donem-arac-kiralama sayfasına bırakıldı —
+    // iki sayfa aynı aramada birbirine rakip olmasın.
+    title: "Aylık Araç Kiralama | 1 Aydan İtibaren",
     description:
-      "Aylık (uzun dönem) araç kiralama. Sigorta, kasko ve bakım dahil; depozito yok. Aylık fiyat için WhatsApp'tan bilgi alın.",
+      "Aylık araç kiralama: 1 aydan itibaren kiralık araç. Sigorta, kasko ve bakım dahil; depozito yok. Aylık fiyat için WhatsApp'tan bilgi alın.",
     h1: "Aylık Araç Kiralama",
     intro:
       "Bir ay ve üzeri kiralamalarda fiyatı süreye göre belirliyoruz. Aylık kiralama, araç satın almadan araç kullanmanın esnek yolu: sigorta, kasko ve periyodik bakım bize ait, siz yalnızca yakıt ve kullanım masrafını üstlenirsiniz.",
@@ -161,8 +166,58 @@ export const durations: Duration[] = [
         title: "Ödeme",
         text: "Ödeme nakit veya banka havalesiyle yapılır; kredi kartı geçmemektedir.",
       },
+      {
+        title: "6 ay ve üzeri için",
+        text: "Daha uzun süreli ihtiyaçlar için uzun dönem ve yıllık araç kiralama sayfamıza bakabilirsiniz.",
+      },
     ],
-    updatedAt: "2026-08-01",
+    updatedAt: "2026-11-23",
+  },
+  {
+    // İşletme sahibi 23 Kasım 2026'da uzun dönem/yıllık kiralama yaptıklarını,
+    // fiyatın iletişimle verildiğini ve bakımın kendilerine ait olduğunu teyit
+    // etti. Kurumsal fatura, taksit gibi doğrulanmamış hizmetler YAZILMADI.
+    slug: "uzun-donem-arac-kiralama",
+    name: "Uzun Dönem",
+    title: "Uzun Dönem ve Yıllık Araç Kiralama – 6, 12 Ay",
+    description:
+      "Uzun dönem ve yıllık araç kiralama: 6 ay, 12 ay ve daha uzun süreli kiralık araç. Sigorta, kasko ve bakım dahil, depozito yok. Fiyat için WhatsApp'tan teklif alın.",
+    h1: "Uzun Dönem ve Yıllık Araç Kiralama",
+    intro:
+      "6 ay, 12 ay ya da daha uzun süre araca ihtiyacınız varsa uzun dönem araç kiralama yapıyoruz. Uzun dönem fiyatları kiralama süresine ve araca göre belirlendiği için sabit bir fiyat listesi yayınlamıyoruz; ne kadar süreyle hangi araca ihtiyacınız olduğunu yazın, size özel teklifi paylaşalım.",
+    pricing:
+      "6 aylık, 12 aylık ve yıllık araç kiralama fiyatları süreye ve seçtiğiniz araca göre belirlenir. Fiyat için WhatsApp'tan ya da telefonla bize ulaşın.",
+    benefits: [
+      {
+        title: "Süreye göre teklif",
+        text: "6 ay, 12 ay veya daha uzun süre için fiyatı ihtiyacınıza göre birlikte belirliyoruz.",
+      },
+      {
+        title: "Bakım, sigorta ve kasko bize ait",
+        text: "Aracın bakımını biz yapıyoruz ve sizden bakım ücreti almıyoruz. Tüm araçlarımız sigortalı ve kaskolu; siz yalnızca yakıt ve kullanım masrafını üstlenirsiniz.",
+      },
+      {
+        title: "Depozito yok",
+        text: "Uzun dönem kiralamada da depozito almıyoruz. Ödeme nakit veya banka havalesiyle yapılır.",
+      },
+    ],
+    bestFor: [
+      "Bir yıl veya daha uzun süre İstanbul'da görevli olanlar",
+      "Araç satın almak yerine kiralamayı tercih edenler",
+      "İşi için aylarca sürekli araca ihtiyaç duyanlar",
+      "Yeni aracının teslimini uzun süre bekleyenler",
+    ],
+    notes: [
+      {
+        title: "Kilometre planı",
+        text: "Günlük 200 km sınırı uzun dönem kiralamalarda da geçerli. Aylık ortalama kaç km yapacağınızı teklif aşamasında konuşalım.",
+      },
+      {
+        title: "Ödeme",
+        text: "Ödeme nakit veya banka havalesiyle yapılır; kredi kartı geçmemektedir.",
+      },
+    ],
+    updatedAt: "2026-11-23",
   },
 ];
 
