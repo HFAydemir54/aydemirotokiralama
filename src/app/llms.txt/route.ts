@@ -70,6 +70,7 @@ ${sortedPosts.map((p) => link(`/blog/${p.slug}`, p.title, p.description)).join("
 ## Optional
 
 ${[
+  link("/llms-full.txt", "Sitenin tam içeriği tek dosyada (Markdown)"),
   link("/blog", "Araç Kiralama Rehberi", "tüm blog yazıları"),
   link("/blog/rss.xml", "Blog RSS beslemesi"),
   link("/ai/summary.json", "Makine okunur işletme özeti (JSON)"),
