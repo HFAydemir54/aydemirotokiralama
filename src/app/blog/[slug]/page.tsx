@@ -7,6 +7,7 @@ import JsonLd from "@/components/JsonLd";
 import PostBody from "@/components/PostBody";
 import WhatsAppCta from "@/components/WhatsAppCta";
 import { breadcrumbSchema, postSchema } from "@/lib/schema";
+import { pageMetadata, withBrand } from "@/lib/seo";
 import { formatDate } from "@/lib/date";
 import { getPost, otherPosts, posts } from "@/data/posts";
 
@@ -23,18 +24,16 @@ export async function generateMetadata(
   const post = getPost(slug);
   if (!post) return {};
 
-  return {
-    title: post.metaTitle,
+  // pageMetadata: og:image ve og:url de verilir (önceden blog yazıları ana
+  // sayfanın görselini/URL'ini devralmıyor, hiç og:image taşımıyordu).
+  return pageMetadata({
+    title: withBrand(post.metaTitle),
     description: post.description,
-    alternates: { canonical: `/blog/${post.slug}` },
-    openGraph: {
-      type: "article",
-      title: post.metaTitle,
-      description: post.description,
-      publishedTime: post.publishedAt,
-      modifiedTime: post.updatedAt,
-    },
-  };
+    path: `/blog/${post.slug}`,
+    type: "article",
+    publishedTime: post.publishedAt,
+    modifiedTime: post.updatedAt,
+  });
 }
 
 export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {

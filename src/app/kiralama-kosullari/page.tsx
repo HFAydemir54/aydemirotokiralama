@@ -3,14 +3,20 @@ import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
 import WhatsAppCta from "@/components/WhatsAppCta";
-import { breadcrumbSchema } from "@/lib/schema";
+import UpdatedNote from "@/components/UpdatedNote";
+import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
+import { PAGE_UPDATED, pageMetadata, withBrand } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Kiralama Koşulları",
-  description:
-    "Aydemir Oto Kiralama kiralama koşulları: yaş sınırı yok, 2 yıllık ehliyet yeterli, depozito alınmıyor. Gerekli belgeler, kilometre sınırı, ödeme ve teslim koşulları.",
-  alternates: { canonical: "/kiralama-kosullari" },
-};
+const PATH = "/kiralama-kosullari";
+const UPDATED = PAGE_UPDATED[PATH];
+const DESCRIPTION =
+  "Aydemir Oto Kiralama kiralama koşulları: yaş sınırı yok, 2 yıllık ehliyet yeterli, depozito alınmıyor. Gerekli belgeler, kilometre sınırı, ödeme ve teslim koşulları.";
+
+export const metadata: Metadata = pageMetadata({
+  title: withBrand("Kiralama Koşulları"),
+  description: DESCRIPTION,
+  path: PATH,
+});
 
 const crumbs = [
   { name: "Ana Sayfa", path: "/" },
@@ -20,7 +26,17 @@ const crumbs = [
 export default function TermsPage() {
   return (
     <>
-      <JsonLd data={breadcrumbSchema(crumbs)} />
+      <JsonLd
+        data={[
+          webPageSchema({
+            path: PATH,
+            name: "Kiralama Koşulları",
+            description: DESCRIPTION,
+            dateModified: UPDATED,
+          }),
+          breadcrumbSchema(crumbs),
+        ]}
+      />
       <div className="pt-20">
         <Breadcrumbs items={crumbs} />
       </div>
@@ -142,6 +158,7 @@ export default function TermsPage() {
           </div>
         </div>
       </article>
+      <UpdatedNote date={UPDATED} />
     </>
   );
 }

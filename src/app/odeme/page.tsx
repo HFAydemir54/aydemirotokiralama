@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import CopyField from "@/components/CopyField";
 import { SITE } from "@/lib/site";
+import { pageMetadata, withBrand } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Ödeme Bilgileri",
+export const metadata: Metadata = pageMetadata({
+  title: withBrand("Ödeme Bilgileri"),
   description: "Aydemir Oto Kiralama havale/EFT bilgileri.",
-  alternates: { canonical: "/odeme" },
-  robots: { index: false, follow: false },
-};
+  path: "/odeme",
+  noindex: true,
+});
 
 export default function PaymentPage() {
   const { accountHolder, bankName, iban } = SITE.bank;

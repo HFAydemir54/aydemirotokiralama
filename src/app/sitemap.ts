@@ -4,14 +4,16 @@ import { locations } from "@/data/locations";
 import { posts } from "@/data/posts";
 import { availableVehicles } from "@/data/vehicles";
 import { HOME_UPDATED, SITE } from "@/lib/site";
+import { BLOG_UPDATED, FLEET_UPDATED, PAGE_UPDATED } from "@/lib/seo";
 
 /**
  * Dinamik sitemap.
  *
  * `lastModified` bilerek `new Date()` DEĞİL: her build'de "bugün" yazmak
  * Google'a sahte tazelik sinyali gönderir ve zamanla güvenilirliğini yitirir.
- * Tarihler veri dosyalarındaki `updatedAt` alanından gelir — içerik
- * güncellediğinizde o alanı da güncelleyin.
+ * Tarihler veri dosyalarındaki `updatedAt` alanından ve lib/seo.ts →
+ * PAGE_UPDATED'ten gelir; sayfalarda görünen tarih ve WebPage schema'sı da
+ * aynı kaynağı kullanır. İçerik güncellediğinizde o tarihi de güncelleyin.
  */
 const STATIC_UPDATED = "2026-07-31";
 
@@ -25,49 +27,49 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE.url}/hakkimizda`,
-      lastModified: "2026-11-23",
+      lastModified: PAGE_UPDATED["/hakkimizda"],
       changeFrequency: "yearly",
       priority: 0.4,
     },
     {
       url: `${SITE.url}/arac-kiralama`,
-      lastModified: "2026-09-14",
+      lastModified: PAGE_UPDATED["/arac-kiralama"],
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
       url: `${SITE.url}/sabiha-gokcen-arac-kiralama`,
-      lastModified: STATIC_UPDATED,
+      lastModified: PAGE_UPDATED["/sabiha-gokcen-arac-kiralama"],
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
       url: `${SITE.url}/araclar`,
-      lastModified: STATIC_UPDATED,
+      lastModified: FLEET_UPDATED,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
       url: `${SITE.url}/kiralama-kosullari`,
-      lastModified: STATIC_UPDATED,
+      lastModified: PAGE_UPDATED["/kiralama-kosullari"],
       changeFrequency: "monthly",
       priority: 0.5,
     },
     {
       url: `${SITE.url}/sss`,
-      lastModified: STATIC_UPDATED,
+      lastModified: PAGE_UPDATED["/sss"],
       changeFrequency: "monthly",
       priority: 0.5,
     },
     {
       url: `${SITE.url}/iletisim`,
-      lastModified: STATIC_UPDATED,
+      lastModified: PAGE_UPDATED["/iletisim"],
       changeFrequency: "monthly",
       priority: 0.5,
     },
     {
       url: `${SITE.url}/blog`,
-      lastModified: STATIC_UPDATED,
+      lastModified: BLOG_UPDATED,
       changeFrequency: "weekly",
       priority: 0.6,
     },

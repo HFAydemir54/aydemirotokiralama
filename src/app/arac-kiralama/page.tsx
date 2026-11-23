@@ -8,7 +8,14 @@ import RelatedPosts from "@/components/RelatedPosts";
 import FleetEmptyState from "@/components/FleetEmptyState";
 import VehicleCard from "@/components/VehicleCard";
 import WhatsAppCta from "@/components/WhatsAppCta";
-import { breadcrumbSchema, faqSchema, localServiceSchema } from "@/lib/schema";
+import UpdatedNote from "@/components/UpdatedNote";
+import {
+  breadcrumbSchema,
+  faqSchema,
+  localServiceSchema,
+  webPageSchema,
+} from "@/lib/schema";
+import { PAGE_UPDATED, pageMetadata } from "@/lib/seo";
 import { formatPrice } from "@/lib/site";
 import type { Faq } from "@/data/faq";
 import { availableVehicles, hasVehicles, minDailyPrice } from "@/data/vehicles";
@@ -24,11 +31,14 @@ const DESCRIPTION = `Araç kiralama ve araba kiralama (rent a car) Aydemir Oto K
   minPrice ? ` Günlük ${formatPrice(minPrice)}'den başlayan fiyatlar,` : ""
 } depozito yok, 7/24 açık. Pendik ofisi ve Sabiha Gökçen teslim.`;
 
-export const metadata: Metadata = {
-  title: { absolute: "Araç Kiralama | Uygun Fiyatlı Araba Kiralama – Aydemir" },
+const PATH = "/arac-kiralama";
+const UPDATED = PAGE_UPDATED[PATH];
+
+export const metadata: Metadata = pageMetadata({
+  title: "Araç Kiralama | Uygun Fiyatlı Araba Kiralama – Aydemir",
   description: DESCRIPTION,
-  alternates: { canonical: "/arac-kiralama" },
-};
+  path: PATH,
+});
 
 const crumbs = [
   { name: "Ana Sayfa", path: "/" },
@@ -67,6 +77,12 @@ export default function CarRentalPage() {
     <>
       <JsonLd
         data={[
+          webPageSchema({
+            path: PATH,
+            name: "Araç Kiralama",
+            description: DESCRIPTION,
+            dateModified: UPDATED,
+          }),
           localServiceSchema("İstanbul", DESCRIPTION),
           faqSchema(faqs),
           breadcrumbSchema(crumbs),
@@ -355,6 +371,7 @@ export default function CarRentalPage() {
           </ul>
         </div>
       </section>
+      <UpdatedNote date={UPDATED} className="bg-surface" />
     </>
   );
 }

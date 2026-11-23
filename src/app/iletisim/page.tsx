@@ -3,14 +3,20 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import Contact from "@/components/Contact";
 import JsonLd from "@/components/JsonLd";
 import LocationsGrid from "@/components/LocationsGrid";
-import { breadcrumbSchema } from "@/lib/schema";
+import UpdatedNote from "@/components/UpdatedNote";
+import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
+import { PAGE_UPDATED, pageMetadata, withBrand } from "@/lib/seo";
 import { ADDRESS_ONE_LINE, SITE } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "İletişim",
-  description: `Aydemir Oto Kiralama iletişim bilgileri. ${ADDRESS_ONE_LINE} · ${SITE.phoneDisplay} · 7/24 açık.`,
-  alternates: { canonical: "/iletisim" },
-};
+const PATH = "/iletisim";
+const UPDATED = PAGE_UPDATED[PATH];
+const DESCRIPTION = `Aydemir Oto Kiralama iletişim bilgileri. ${ADDRESS_ONE_LINE} · ${SITE.phoneDisplay} · 7/24 açık.`;
+
+export const metadata: Metadata = pageMetadata({
+  title: withBrand("İletişim"),
+  description: DESCRIPTION,
+  path: PATH,
+});
 
 const crumbs = [
   { name: "Ana Sayfa", path: "/" },
@@ -20,7 +26,17 @@ const crumbs = [
 export default function ContactPage() {
   return (
     <>
-      <JsonLd data={breadcrumbSchema(crumbs)} />
+      <JsonLd
+        data={[
+          webPageSchema({
+            path: PATH,
+            name: "İletişim",
+            description: DESCRIPTION,
+            dateModified: UPDATED,
+          }),
+          breadcrumbSchema(crumbs),
+        ]}
+      />
       <div className="pt-20">
         <Breadcrumbs items={crumbs} />
       </div>
@@ -44,6 +60,7 @@ export default function ContactPage() {
         title="Hizmet Verdiğimiz Bölgeler"
         description="Aşağıdaki bölgelerden misafirlerimiz araçlarını Pendik Çamçeşme'deki ofisimizden teslim alıyor."
       />
+      <UpdatedNote date={UPDATED} />
     </>
   );
 }

@@ -102,8 +102,38 @@ export const homePageSchema = {
   publisher: { "@id": `${SITE.url}/#organization` },
 };
 
+/**
+ * Alt sayfalar için WebPage: sayfanın kendi açıklaması, son güncelleme tarihi
+ * (sayfada <UpdatedNote> ile de görünür) ve yayıncı/yazar bilgisi.
+ */
+export function webPageSchema({
+  path,
+  name,
+  description,
+  dateModified,
+}: {
+  path: string;
+  name: string;
+  description: string;
+  dateModified: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${SITE.url}${path}#webpage`,
+    url: `${SITE.url}${path}`,
+    name,
+    description,
+    inLanguage: "tr-TR",
+    dateModified,
+    isPartOf: { "@id": WEBSITE_ID },
+    author: { "@id": `${SITE.url}/#organization` },
+    publisher: { "@id": `${SITE.url}/#organization` },
+  };
+}
+
 /** /hakkimizda için AboutPage. */
-export function aboutPageSchema(description: string) {
+export function aboutPageSchema(description: string, dateModified: string) {
   return {
     "@context": "https://schema.org",
     "@type": "AboutPage",
@@ -112,6 +142,9 @@ export function aboutPageSchema(description: string) {
     name: `Hakkımızda | ${SITE.name}`,
     description,
     inLanguage: "tr-TR",
+    dateModified,
+    author: { "@id": `${SITE.url}/#organization` },
+    publisher: { "@id": `${SITE.url}/#organization` },
     isPartOf: { "@id": WEBSITE_ID },
     about: { "@id": BUSINESS_ID },
     mainEntity: { "@id": `${SITE.url}/#organization` },

@@ -9,7 +9,14 @@ import FleetEmptyState from "@/components/FleetEmptyState";
 import VehicleCard from "@/components/VehicleCard";
 import WhatsAppCta from "@/components/WhatsAppCta";
 import FaqSection from "@/components/FaqSection";
-import { breadcrumbSchema, faqSchema, localServiceSchema } from "@/lib/schema";
+import UpdatedNote from "@/components/UpdatedNote";
+import {
+  breadcrumbSchema,
+  faqSchema,
+  localServiceSchema,
+  webPageSchema,
+} from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo";
 
 import { getLocation, locations } from "@/data/locations";
 import { featuredVehicles, hasVehicles } from "@/data/vehicles";
@@ -34,13 +41,13 @@ export async function generateMetadata(
   const location = getLocation(lokasyon);
   if (!location) return {};
 
-  return {
-    // Kısa marka eki: "| Aydemir Oto Kiralama" şablonu bu başlıkları 65+
-    // karaktere çıkarıp SERP'te kestiriyordu.
-    title: { absolute: `${location.title} | Aydemir` },
+  // Kısa marka eki: "| Aydemir Oto Kiralama" şablonu bu başlıkları 65+
+  // karaktere çıkarıp SERP'te kestiriyordu.
+  return pageMetadata({
+    title: `${location.title} | Aydemir`,
     description: location.description,
-    alternates: { canonical: `/${location.slug}` },
-  };
+    path: `/${location.slug}`,
+  });
 }
 
 export default async function LocationPage(props: PageProps<"/[lokasyon]">) {
@@ -62,6 +69,12 @@ export default async function LocationPage(props: PageProps<"/[lokasyon]">) {
     <>
       <JsonLd
         data={[
+          webPageSchema({
+            path: `/${location.slug}`,
+            name: `${location.name} Araç Kiralama`,
+            description: location.description,
+            dateModified: location.updatedAt,
+          }),
           localServiceSchema(location.name, location.description),
           ...(location.faqs?.length ? [faqSchema(location.faqs)] : []),
           breadcrumbSchema(crumbs),
@@ -256,6 +269,7 @@ export default async function LocationPage(props: PageProps<"/[lokasyon]">) {
           </ul>
         </div>
       </section>
+      <UpdatedNote date={location.updatedAt} className="bg-surface" />
     </>
   );
 }

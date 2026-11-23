@@ -6,7 +6,12 @@ import PriceDisplay from "@/components/PriceDisplay";
 import RelatedPosts from "@/components/RelatedPosts";
 import VehicleSpecs from "@/components/VehicleSpecs";
 import WhatsAppCta from "@/components/WhatsAppCta";
-import { breadcrumbSchema, durationServiceSchema } from "@/lib/schema";
+import UpdatedNote from "@/components/UpdatedNote";
+import {
+  breadcrumbSchema,
+  durationServiceSchema,
+  webPageSchema,
+} from "@/lib/schema";
 import { durations, type Duration } from "@/data/durations";
 import { availableVehicles, vehicleTitle } from "@/data/vehicles";
 
@@ -30,6 +35,12 @@ export default function DurationPage({ duration }: { duration: Duration }) {
     <>
       <JsonLd
         data={[
+          webPageSchema({
+            path: `/${duration.slug}`,
+            name: duration.h1,
+            description: duration.description,
+            dateModified: duration.updatedAt,
+          }),
           durationServiceSchema(duration.name, duration.description),
           breadcrumbSchema(crumbs),
         ]}
@@ -226,6 +237,7 @@ export default function DurationPage({ duration }: { duration: Duration }) {
           </ul>
         </div>
       </section>
+      <UpdatedNote date={duration.updatedAt} className="bg-surface" />
     </>
   );
 }

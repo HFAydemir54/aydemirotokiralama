@@ -3,16 +3,22 @@ import Link from "next/link";
 import { ArrowRight, Clock } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
-import { breadcrumbSchema } from "@/lib/schema";
+import UpdatedNote from "@/components/UpdatedNote";
+import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
+import { BLOG_UPDATED, pageMetadata, withBrand } from "@/lib/seo";
 import { sortedPosts } from "@/data/posts";
 import { formatDate } from "@/lib/date";
 
-export const metadata: Metadata = {
-  title: "Araç Kiralama Rehberi ve Blog",
-  description:
-    "Araç kiralama fiyatları, gerekli belgeler, depozito, yaş sınırı ve havalimanı kiralaması hakkında bilmeniz gereken her şey.",
-  alternates: { canonical: "/blog" },
-};
+const DESCRIPTION =
+  "Araç kiralama fiyatları, gerekli belgeler, depozito, yaş sınırı ve havalimanı kiralaması hakkında bilmeniz gereken her şey.";
+
+const UPDATED = BLOG_UPDATED;
+
+export const metadata: Metadata = pageMetadata({
+  title: withBrand("Araç Kiralama Rehberi ve Blog"),
+  description: DESCRIPTION,
+  path: "/blog",
+});
 
 const crumbs = [
   { name: "Ana Sayfa", path: "/" },
@@ -22,7 +28,17 @@ const crumbs = [
 export default function BlogIndex() {
   return (
     <>
-      <JsonLd data={breadcrumbSchema(crumbs)} />
+      <JsonLd
+        data={[
+          webPageSchema({
+            path: "/blog",
+            name: "Araç Kiralama Rehberi",
+            description: DESCRIPTION,
+            dateModified: UPDATED,
+          }),
+          breadcrumbSchema(crumbs),
+        ]}
+      />
       <div className="pt-20">
         <Breadcrumbs items={crumbs} />
       </div>
@@ -76,6 +92,7 @@ export default function BlogIndex() {
           </ul>
         </div>
       </section>
+      <UpdatedNote date={UPDATED} />
     </>
   );
 }

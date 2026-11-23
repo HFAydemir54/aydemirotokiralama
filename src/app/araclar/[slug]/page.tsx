@@ -9,7 +9,14 @@ import VehicleCard, { VehicleImage } from "@/components/VehicleCard";
 import VehicleSpecs from "@/components/VehicleSpecs";
 import WhatsAppCta from "@/components/WhatsAppCta";
 import FaqSection from "@/components/FaqSection";
-import { breadcrumbSchema, faqSchema, vehicleSchema } from "@/lib/schema";
+import UpdatedNote from "@/components/UpdatedNote";
+import {
+  breadcrumbSchema,
+  faqSchema,
+  vehicleSchema,
+  webPageSchema,
+} from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo";
 import { vehicleFaqs } from "@/data/faq";
 import { locations } from "@/data/locations";
 import {
@@ -17,6 +24,7 @@ import {
   getVehicle,
   similarVehicles,
   vehicleTitle,
+  type Vehicle,
 } from "@/data/vehicles";
 
 /**
@@ -39,6 +47,11 @@ export async function generateMetadata(
   const vehicle = getVehicle(slug);
   if (!vehicle) return {};
 
+  return pageMetadata({ ...vehicleSeo(vehicle), path: `/araclar/${vehicle.slug}` });
+}
+
+/** Araç sayfasının başlığı ve açıklaması (metadata ve WebPage schema ortak). */
+function vehicleSeo(vehicle: Vehicle): { title: string; description: string } {
   const name = vehicleTitle(vehicle);
   // Açıklamaya yalnızca girilmiş özellikler eklenir.
   const specs = [
@@ -58,15 +71,12 @@ export async function generateMetadata(
       : "";
 
   return {
-    title: {
-      absolute: `${vehicle.seoTitle ?? `${name} Kiralama${gear} – Pendik`} | Aydemir`,
-    },
+    title: `${vehicle.seoTitle ?? `${name} Kiralama${gear} – Pendik`} | Aydemir`,
     description: vehicle.seoDescription
       ? vehicle.seoDescription
       : specs
       ? `${name} kiralama — ${specs}. Günlük, haftalık ve aylık kiralama. Pendik ve Sabiha Gökçen Havalimanı teslim.`
       : `${name} kiralama. Günlük, haftalık ve aylık kiralama. Pendik ve Sabiha Gökçen Havalimanı teslim, WhatsApp'tan hızlı rezervasyon.`,
-    alternates: { canonical: `/araclar/${vehicle.slug}` },
   };
 }
 
@@ -88,7 +98,21 @@ export default async function VehiclePage(props: PageProps<"/araclar/[slug]">) {
   return (
     <>
       <JsonLd
-        data={[vehicleSchema(vehicle), faqSchema(faqs), breadcrumbSchema(crumbs)]}
+        data={[
+          ...(vehicle.updatedAt
+            ? [
+                webPageSchema({
+                  path: `/araclar/${vehicle.slug}`,
+                  name: `${name} Kiralama`,
+                  description: vehicleSeo(vehicle).description,
+                  dateModified: vehicle.updatedAt,
+                }),
+              ]
+            : []),
+          vehicleSchema(vehicle),
+          faqSchema(faqs),
+          breadcrumbSchema(crumbs),
+        ]}
       />
       <div className="pt-20">
         <Breadcrumbs items={crumbs} />
@@ -268,6 +292,7 @@ export default async function VehiclePage(props: PageProps<"/araclar/[slug]">) {
           </div>
         </section>
       )}
+      {vehicle.updatedAt && <UpdatedNote date={vehicle.updatedAt} />}
     </>
   );
 }

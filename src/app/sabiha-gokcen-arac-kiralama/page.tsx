@@ -8,11 +8,14 @@ import RelatedPosts from "@/components/RelatedPosts";
 import FleetEmptyState from "@/components/FleetEmptyState";
 import VehicleCard from "@/components/VehicleCard";
 import WhatsAppCta from "@/components/WhatsAppCta";
+import UpdatedNote from "@/components/UpdatedNote";
 import {
   breadcrumbSchema,
   faqSchema,
   localServiceSchema,
+  webPageSchema,
 } from "@/lib/schema";
+import { PAGE_UPDATED, pageMetadata } from "@/lib/seo";
 
 import { airportFaqs } from "@/data/faq";
 import { featuredVehicles, hasVehicles } from "@/data/vehicles";
@@ -20,13 +23,16 @@ import { featuredVehicles, hasVehicles } from "@/data/vehicles";
 const DESCRIPTION =
   "Sabiha Gökçen Havalimanı araç kiralama. Pendik ofisimiz havalimanına 15 dakika mesafede; havalimanına araç getiriyoruz. 7/24 açık, WhatsApp'tan rezervasyon.";
 
-export const metadata: Metadata = {
-  // absolute: marka soneki eklenmesin, başlık SERP'te kesilmesin.
+const PATH = "/sabiha-gokcen-arac-kiralama";
+const UPDATED = PAGE_UPDATED[PATH];
+
+export const metadata: Metadata = pageMetadata({
+  // Marka soneki yok: başlık SERP'te kesilmesin.
   // "sabiha gökçen rent a car" aylık ~1.600 aranıyor (OpenSEO, Kasım 2026).
-  title: { absolute: "Sabiha Gökçen Araç Kiralama, Rent a Car – Havalimanı Teslim" },
+  title: "Sabiha Gökçen Araç Kiralama, Rent a Car – Havalimanı Teslim",
   description: DESCRIPTION,
-  alternates: { canonical: "/sabiha-gokcen-arac-kiralama" },
-};
+  path: PATH,
+});
 
 const crumbs = [
   { name: "Ana Sayfa", path: "/" },
@@ -40,6 +46,12 @@ export default function AirportPage() {
     <>
       <JsonLd
         data={[
+          webPageSchema({
+            path: PATH,
+            name: "Sabiha Gökçen Havalimanı Araç Kiralama",
+            description: DESCRIPTION,
+            dateModified: UPDATED,
+          }),
           localServiceSchema("Sabiha Gökçen Havalimanı", DESCRIPTION),
           faqSchema(airportFaqs),
           breadcrumbSchema(crumbs),
@@ -215,6 +227,7 @@ export default function AirportPage() {
           </ul>
         </div>
       </section>
+      <UpdatedNote date={UPDATED} className="bg-surface" />
     </>
   );
 }

@@ -4,15 +4,21 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import FleetEmptyState from "@/components/FleetEmptyState";
 import JsonLd from "@/components/JsonLd";
 import VehicleCard from "@/components/VehicleCard";
-import { breadcrumbSchema } from "@/lib/schema";
+import UpdatedNote from "@/components/UpdatedNote";
+import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
+import { FLEET_UPDATED, pageMetadata, withBrand } from "@/lib/seo";
 import { availableVehicles, hasVehicles } from "@/data/vehicles";
 
-export const metadata: Metadata = {
-  title: "Kiralık Araç Filomuz",
-  description:
-    "Aydemir Oto Kiralama araç filosu. Günlük, haftalık ve aylık kiralama; Pendik ve Sabiha Gökçen Havalimanı teslim. Güncel araç ve fiyat bilgisi için bize yazın.",
-  alternates: { canonical: "/araclar" },
-};
+const DESCRIPTION =
+  "Aydemir Oto Kiralama araç filosu. Günlük, haftalık ve aylık kiralama; Pendik ve Sabiha Gökçen Havalimanı teslim. Güncel araç ve fiyat bilgisi için bize yazın.";
+
+const UPDATED = FLEET_UPDATED;
+
+export const metadata: Metadata = pageMetadata({
+  title: withBrand("Kiralık Araç Filomuz"),
+  description: DESCRIPTION,
+  path: "/araclar",
+});
 
 const crumbs = [
   { name: "Ana Sayfa", path: "/" },
@@ -22,7 +28,17 @@ const crumbs = [
 export default function VehiclesPage() {
   return (
     <>
-      <JsonLd data={breadcrumbSchema(crumbs)} />
+      <JsonLd
+        data={[
+          webPageSchema({
+            path: "/araclar",
+            name: "Kiralık Araç Filomuz",
+            description: DESCRIPTION,
+            dateModified: UPDATED,
+          }),
+          breadcrumbSchema(crumbs),
+        ]}
+      />
       <div className="pt-20">
         <Breadcrumbs items={crumbs} />
       </div>
@@ -96,6 +112,7 @@ export default function VehiclesPage() {
           </ul>
         </div>
       </section>
+      <UpdatedNote date={UPDATED} className="bg-surface" />
     </>
   );
 }

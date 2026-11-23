@@ -29,16 +29,19 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
   // <meta name="author"> — içeriği kimin yayınladığını belirtir.
   authors: [{ name: SITE.name, url: SITE.url }],
-  alternates: {
-    canonical: "/",
-    types: { "application/rss+xml": "/blog/rss.xml" },
-  },
+  // RSS bağlantısı burada DEĞİL, aşağıda <head> içinde: alt sayfalar kendi
+  // `alternates` (canonical) değerini verdiğinde metadata sığ birleştiği için
+  // buradaki `types` siliniyordu.
+  alternates: { canonical: "/" },
+  // Buradaki openGraph/twitter yalnızca ANA SAYFA içindir. Alt sayfalar
+  // lib/seo.ts → pageMetadata() ile kendi değerlerini verir; vermeyen bir sayfa
+  // ana sayfanın başlık ve URL'ini devralır.
   openGraph: {
     type: "website",
     locale: "tr_TR",
     url: SITE.url,
     siteName: SITE.name,
-    title: "Pendik Araç Kiralama | Aydemir Oto Kiralama",
+    title: "Pendik Araç Kiralama & Rent a Car | Aydemir Oto Kiralama",
     description:
       "Pendik'te araç kiralama. Sabiha Gökçen Havalimanı'na araç getiriyoruz. Günlük, haftalık ve aylık kiralama, depozito yok.",
     images: [
@@ -52,7 +55,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pendik Araç Kiralama | Aydemir Oto Kiralama",
+    title: "Pendik Araç Kiralama & Rent a Car | Aydemir Oto Kiralama",
     description:
       "Pendik'te araç kiralama. Sabiha Gökçen Havalimanı'na araç getiriyoruz. Depozito yok, 7/24 açık.",
     images: ["/og-image.png"],
@@ -72,6 +75,13 @@ export default function RootLayout({
   return (
     <html lang="tr" className={`${geistSans.variable} scroll-smooth`}>
       <head>
+        {/* Blog RSS beslemesi — tüm sayfalarda */}
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title={`${SITE.name} – Araç Kiralama Rehberi`}
+          href="/blog/rss.xml"
+        />
         {/* Structured data — native <script>, ilk HTML yanıtında yer alır */}
         <JsonLd data={[autoRentalSchema, organizationSchema, websiteSchema]} />
 

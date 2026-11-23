@@ -3,7 +3,9 @@ import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
 import WhatsAppCta from "@/components/WhatsAppCta";
+import UpdatedNote from "@/components/UpdatedNote";
 import { aboutPageSchema, breadcrumbSchema } from "@/lib/schema";
+import { PAGE_UPDATED, pageMetadata, withBrand } from "@/lib/seo";
 import { ADDRESS_ONE_LINE, SITE } from "@/lib/site";
 import { availableVehicles } from "@/data/vehicles";
 
@@ -21,11 +23,13 @@ import { availableVehicles } from "@/data/vehicles";
 const DESCRIPTION =
   "Aydemir Oto Kiralama, Pendik Çamçeşme'deki ofisinden 7/24 günlük, haftalık ve aylık araç kiralama hizmeti veren yerel bir işletmedir. Sabiha Gökçen Havalimanı'na araç getiriyoruz.";
 
-export const metadata: Metadata = {
-  title: "Hakkımızda",
+const UPDATED = PAGE_UPDATED["/hakkimizda"];
+
+export const metadata: Metadata = pageMetadata({
+  title: withBrand("Hakkımızda"),
   description: DESCRIPTION,
-  alternates: { canonical: "/hakkimizda" },
-};
+  path: "/hakkimizda",
+});
 
 const crumbs = [
   { name: "Ana Sayfa", path: "/" },
@@ -39,7 +43,9 @@ const fleetModels = [...new Set(availableVehicles.map((v) => `${v.brand} ${v.mod
 export default function AboutPage() {
   return (
     <>
-      <JsonLd data={[aboutPageSchema(DESCRIPTION), breadcrumbSchema(crumbs)]} />
+      <JsonLd
+        data={[aboutPageSchema(DESCRIPTION, UPDATED), breadcrumbSchema(crumbs)]}
+      />
       <div className="pt-20">
         <Breadcrumbs items={crumbs} />
       </div>
@@ -155,6 +161,7 @@ export default function AboutPage() {
           </div>
         </div>
       </article>
+      <UpdatedNote date={UPDATED} />
     </>
   );
 }
