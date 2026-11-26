@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -117,6 +118,10 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <StickyCta />
+        {/* Vercel Web Analytics — çerezsiz ziyaret sayımı. "Referrers"
+            panelinde chatgpt.com, perplexity.ai, gemini.google.com gibi
+            yapay zekâ kaynaklı ziyaretler görünür. */}
+        <Analytics />
       </body>
     </html>
   );
